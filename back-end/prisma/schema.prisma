@@ -47,3 +47,12 @@ enum OrderStatus {
   COMPLETED
   CANCELED
 }
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  role      String   @default("CUSTOMER")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
