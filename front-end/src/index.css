@@ -1,6 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,41 +5,41 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    /* Slate-900 */
+    --foreground: 0 0% 9%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 0 0% 9%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 0 0% 9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    /* Navy/Slate-900 */
-    --primary-foreground: 210 40% 98%;
+    --primary: 330 80% 60%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 350 100% 98%;
-    /* Very light pink/Rose-50 */
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 174 60% 51%;
+    --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    /* Slate-500 */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 350 100% 98%;
-    /* Rose-50 */
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 330 100% 97%;
+    --accent-foreground: 0 0% 9%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    /* Slate-200 */
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 330 80% 60%;
 
-    --radius: 0rem;
-    /* Squarer look for chic feel */
+    --radius: 0.75rem;
+
+    /* Brand Colors */
+    --rosa: #F472B6;
+    --rosa-light: #FBCFE8;
+    --rosa-dark: #EC4899;
+    --turquesa: #2DD4BF;
+    --turquesa-dark: #14B8A6;
   }
 }
 
@@ -52,7 +49,8 @@
   }
 
   body {
-    @apply bg-white text-slate-900 font-sans antialiased;
+    @apply bg-white text-gray-900 antialiased;
+    font-family: 'Poppins', sans-serif;
   }
 
   h1,
@@ -61,14 +59,39 @@
   h4,
   h5,
   h6 {
-    @apply font-serif;
+    font-family: 'Poppins', sans-serif;
   }
 }
 
-.font-serif {
-  font-family: 'Playfair Display', serif;
+/* Marquee animation for AnnouncementBar */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
-.font-sans {
-  font-family: 'Inter', sans-serif;
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 3px;
 }

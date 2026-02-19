@@ -17,6 +17,9 @@ module.exports = {
             },
         },
         extend: {
+            fontFamily: {
+                sans: ['Poppins', 'system-ui', 'sans-serif'],
+            },
             colors: {
                 border: "hsl(var(--border))",
                 input: "hsl(var(--input))",
@@ -51,6 +54,27 @@ module.exports = {
                     DEFAULT: "hsl(var(--card))",
                     foreground: "hsl(var(--card-foreground))",
                 },
+                rosa: {
+                    50: '#FDF2F8',
+                    100: '#FCE7F3',
+                    200: '#FBCFE8',
+                    300: '#F9A8D4',
+                    400: '#F472B6',
+                    500: '#EC4899',
+                    600: '#DB2777',
+                    700: '#BE185D',
+                    DEFAULT: '#F472B6',
+                },
+                turquesa: {
+                    50: '#F0FDFA',
+                    100: '#CCFBF1',
+                    200: '#99F6E4',
+                    300: '#5EEAD4',
+                    400: '#2DD4BF',
+                    500: '#14B8A6',
+                    600: '#0D9488',
+                    DEFAULT: '#2DD4BF',
+                },
             },
             borderRadius: {
                 lg: "var(--radius)",
@@ -66,10 +90,15 @@ module.exports = {
                     from: { height: "var(--radix-accordion-content-height)" },
                     to: { height: "0" },
                 },
+                marquee: {
+                    '0%': { transform: 'translateX(0)' },
+                    '100%': { transform: 'translateX(-50%)' },
+                },
             },
             animation: {
                 "accordion-down": "accordion-down 0.2s ease-out",
                 "accordion-up": "accordion-up 0.2s ease-out",
+                marquee: 'marquee 25s linear infinite',
             },
         },
     },
