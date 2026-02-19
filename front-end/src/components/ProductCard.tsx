@@ -1,5 +1,5 @@
 import { useCart } from '../contexts/CartContext';
-import { Star } from 'lucide-react';
+import { ShieldCheck } from 'lucide-react';
 
 interface Product {
     id: string;
@@ -31,49 +31,52 @@ export default function ProductCard({ product }: ProductCardProps) {
     }).format(Number(product.price));
 
     return (
-        <div className="group cursor-pointer">
-            {/* Image Container - Aspect 4/5 */}
-            <div className="relative aspect-[4/5] overflow-hidden bg-slate-50 mb-4">
+        <div className="group cursor-pointer bg-[#f5f5f5] rounded-xl overflow-hidden transition-shadow duration-300 hover:shadow-lg">
+            {/* Image Container */}
+            <div className="relative aspect-[4/5] overflow-hidden">
                 <img
                     src={product.imageUrl}
                     alt={product.name}
                     className="h-full w-full object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-105"
                 />
 
+                {/* Floating Tags */}
+                <div className="absolute top-3 left-3 flex flex-col gap-1.5">
+                    <span className="inline-flex items-center bg-amber-400 text-gray-900 text-[10px] md:text-xs font-bold px-2.5 py-1 rounded-md shadow-sm">
+                        Frete Grátis
+                    </span>
+                    <span className="inline-flex items-center gap-1 bg-gray-900 text-white text-[10px] md:text-xs font-medium px-2.5 py-1 rounded-md shadow-sm">
+                        <ShieldCheck size={12} />
+                        Parceria Oficial
+                    </span>
+                </div>
+
                 {/* Overlay Button (Desktop) */}
-                <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <div className="absolute inset-x-0 bottom-0 p-3 opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                     <button
                         onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
-                        className="w-full bg-white/90 backdrop-blur text-slate-900 py-3 uppercase tracking-widest text-[10px] font-bold hover:bg-slate-900 hover:text-white transition-colors"
+                        className="w-full bg-white/90 backdrop-blur text-gray-900 py-2.5 rounded-lg uppercase tracking-widest text-[10px] font-bold hover:bg-rosa-500 hover:text-white transition-colors"
                     >
-                        ADICIONAR À SACOLA
+                        Adicionar à Sacola
                     </button>
                 </div>
             </div>
 
             {/* Content */}
-            <div className="text-center space-y-1">
-                {/* Stars (Static 5 star) */}
-                <div className="flex justify-center gap-0.5 text-slate-300 mb-2">
-                    {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={12} fill="currentColor" strokeWidth={0} />
-                    ))}
-                </div>
-
-                <h3 className="font-sans text-sm font-medium text-slate-900 group-hover:text-pink-500 transition-colors">
+            <div className="p-3 md:p-4 text-center space-y-1">
+                <h3 className="font-medium text-sm text-gray-900 group-hover:text-rosa-500 transition-colors truncate">
                     {product.name}
                 </h3>
-
-                <p className="font-serif text-slate-500 italic">
+                <p className="text-rosa-500 font-bold text-base">
                     {formattedPrice}
                 </p>
 
                 {/* Mobile Button */}
                 <button
                     onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
-                    className="md:hidden text-[10px] uppercase tracking-widest border-b border-slate-300 pb-0.5 mt-2 text-slate-600"
+                    className="md:hidden text-[10px] uppercase tracking-widest border border-gray-300 rounded-lg py-2 px-4 mt-2 text-gray-600 hover:bg-rosa-500 hover:text-white hover:border-rosa-500 transition-all w-full"
                 >
-                    ADICIONAR À SACOLA
+                    Adicionar à Sacola
                 </button>
             </div>
         </div>

@@ -4,6 +4,7 @@ import authRoutes from './routes/authRoutes';
 import productRoutes from './routes/productRoutes';
 import orderRoutes from './routes/orderRoutes';
 import settingRoutes from './routes/settingRoutes';
+import categoryRoutes from './routes/categoryRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3333;
@@ -18,6 +19,7 @@ app.use('/auth', authRoutes);
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 app.use('/settings', settingRoutes);
+app.use('/categories', categoryRoutes);
 
 // Health check
 app.get('/', (req, res) => {

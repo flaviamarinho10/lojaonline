@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import api from '../lib/axios';
-import { Loader2, Lock } from 'lucide-react';
+import { Loader2 } from 'lucide-react';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -35,53 +35,59 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-slate-50 px-4">
-            <div className="w-full max-w-md bg-white border border-slate-200 p-8 md:p-10 rounded shadow-lg shadow-slate-200/50">
-                <div className="flex flex-col items-center mb-10 space-y-4">
-                    <div className="h-12 w-12 bg-rose-50 rounded-full flex items-center justify-center text-slate-900 border border-rose-100">
-                        <Lock size={20} strokeWidth={1.5} />
-                    </div>
-                    <div className="text-center space-y-1">
-                        <h1 className="font-serif text-3xl font-bold text-slate-900 tracking-tight">Night Peri</h1>
-                        <p className="text-slate-400 text-xs uppercase tracking-[0.2em] font-medium">Admin Access</p>
-                    </div>
+        <div className="flex items-center justify-center min-h-screen bg-[#f9f9f9] px-4">
+            <div className="w-full max-w-md bg-white rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-8 md:p-10">
+                {/* Logo Header */}
+                <div className="flex flex-col items-center mb-10 space-y-2">
+                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
+                        Flavia <span className="font-light">Beauty</span>
+                    </h1>
+                    <p className="text-gray-400 text-sm">Acesso Administrativo</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">E-mail</label>
+                <form onSubmit={handleSubmit} className="space-y-5">
+                    {/* Email */}
+                    <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                            E-mail
+                        </label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-all text-sm"
-                            placeholder="admin@loja.com"
+                            className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] transition-all text-sm"
+                            placeholder="admin@flaviabeauty.com"
                             required
                         />
                     </div>
 
-                    <div className="space-y-2">
-                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Senha</label>
+                    {/* Password */}
+                    <div className="space-y-1.5">
+                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">
+                            Senha
+                        </label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-all text-sm"
+                            className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] transition-all text-sm"
                             placeholder="••••••••"
                             required
                         />
                     </div>
 
+                    {/* Error */}
                     {error && (
-                        <div className="bg-red-50 border border-red-100 rounded p-3 text-red-600 text-xs text-center font-medium">
+                        <div className="bg-red-50 border border-red-100 rounded-lg p-3 text-red-600 text-xs text-center font-medium">
                             {error}
                         </div>
                     )}
 
+                    {/* Submit */}
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-widest text-xs font-bold"
+                        className="w-full bg-[#66c2bb] hover:bg-[#55b0a9] text-white py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed font-semibold text-sm"
                     >
                         {isLoading ? (
                             <>
@@ -89,14 +95,14 @@ const Login = () => {
                                 Entrando...
                             </>
                         ) : (
-                            'Acessar Painel'
+                            'Entrar no Painel'
                         )}
                     </button>
                 </form>
 
-                <div className="mt-8 text-center border-t border-slate-100 pt-6">
-                    <p className="text-[10px] text-slate-400 uppercase tracking-widest">
-                        &copy; 2026 Night Peri Beauty. Restrito.
+                <div className="mt-8 text-center border-t border-gray-100 pt-6">
+                    <p className="text-[11px] text-gray-400">
+                        &copy; 2026 Flavia Beauty. Acesso restrito.
                     </p>
                 </div>
             </div>

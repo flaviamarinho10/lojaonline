@@ -3,8 +3,10 @@ import Header from '../components/Header';
 import AnnouncementBar from '../components/AnnouncementBar';
 import HeroBanner from '../components/HeroBanner';
 import TrustBadges from '../components/TrustBadges';
+import CategoryCarousel from '../components/CategoryCarousel';
 import ProductCard from '../components/ProductCard';
 import CartSidebar from '../components/CartSidebar';
+import BackToTop from '../components/BackToTop';
 import api from '../lib/axios';
 
 interface Product {
@@ -45,59 +47,28 @@ export default function Home() {
             {/* Trust Badges */}
             <TrustBadges />
 
-            {/* Section: Compre por Categoria */}
-            <section className="py-14 md:py-20">
-                <div className="container mx-auto px-4 text-center">
-                    <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-2">
-                        Compre por Categoria
-                    </h2>
-                    <div className="w-16 h-1 bg-rosa-400 mx-auto rounded-full mb-12" />
+            {/* Compre por Categoria */}
+            <CategoryCarousel />
 
-                    {/* Category quick-links (decorative) */}
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto mb-16">
-                        {[
-                            { name: 'Skincare', emoji: '🧴', color: 'bg-turquesa-50 border-turquesa-100 hover:border-turquesa-300' },
-                            { name: 'Maquiagem', emoji: '💄', color: 'bg-rosa-50 border-rosa-100 hover:border-rosa-300' },
-                            { name: 'Cabelos', emoji: '💇‍♀️', color: 'bg-purple-50 border-purple-100 hover:border-purple-300' },
-                            { name: 'Corpo & Banho', emoji: '🛁', color: 'bg-amber-50 border-amber-100 hover:border-amber-300' },
-                        ].map((cat) => (
-                            <button
-                                key={cat.name}
-                                className={`${cat.color} border-2 rounded-2xl p-6 md:p-8 text-center transition-all duration-300 hover:shadow-lg hover:-translate-y-1 group`}
-                            >
-                                <span className="text-3xl md:text-4xl block mb-3 group-hover:scale-110 transition-transform duration-300">
-                                    {cat.emoji}
-                                </span>
-                                <span className="text-sm md:text-base font-semibold text-gray-800">{cat.name}</span>
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Mais Vendidos */}
-            <section className="bg-gray-50/50 py-14 md:py-20">
+            {/* Lançamentos */}
+            <section className="py-12 md:py-16 bg-[#f9f9f9]">
                 <div className="container mx-auto px-4">
-                    <div className="text-center mb-12 space-y-2">
-                        <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
-                            Mais Vendidos
-                        </h2>
-                        <div className="w-16 h-1 bg-rosa-400 mx-auto rounded-full" />
-                        <p className="text-gray-500 text-sm mt-3">Os favoritos das nossas clientes</p>
-                    </div>
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#333333] text-center mb-10">
+                        Lançamentos
+                    </h2>
 
                     {loading ? (
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                             {[...Array(4)].map((_, i) => (
-                                <div key={i} className="animate-pulse space-y-4">
+                                <div key={i} className="animate-pulse">
                                     <div className="bg-gray-200/60 aspect-[4/5] rounded-xl" />
-                                    <div className="h-4 bg-gray-200/60 w-3/4 mx-auto rounded" />
-                                    <div className="h-3 bg-gray-200/60 w-1/2 mx-auto rounded" />
+                                    <div className="h-4 bg-gray-200/60 w-3/4 mx-auto rounded mt-4" />
+                                    <div className="h-3 bg-gray-200/60 w-1/2 mx-auto rounded mt-2" />
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
                             {products.map((product) => (
                                 <ProductCard key={product.id} product={product} />
                             ))}
@@ -173,6 +144,9 @@ export default function Home() {
                     </div>
                 </div>
             </footer>
+
+            {/* Back to Top */}
+            <BackToTop />
         </div>
     );
 }

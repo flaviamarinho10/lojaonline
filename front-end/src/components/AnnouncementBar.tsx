@@ -1,40 +1,13 @@
 export default function AnnouncementBar() {
-    const messages = [
-        'Frete grátis a partir de R$ 180',
-        'Compre em até 4x sem juros',
-        'Entrega para todo o Brasil',
-        'Frete grátis a partir de R$ 180',
-        'Compre em até 4x sem juros',
-        'Entrega para todo o Brasil',
-    ];
-
     return (
         <div
-            className="w-full bg-turquesa overflow-hidden"
-            role="marquee"
-            aria-label="Informações de benefícios e promoções"
+            className="w-full bg-turquesa py-2.5"
+            role="banner"
+            aria-label="Informações de benefícios"
         >
-            <div className="animate-marquee flex whitespace-nowrap py-2.5">
-                {messages.map((msg, i) => (
-                    <span
-                        key={i}
-                        className="mx-8 text-white text-xs md:text-sm font-medium tracking-wide inline-flex items-center gap-2"
-                    >
-                        <span className="w-1.5 h-1.5 bg-white/60 rounded-full flex-shrink-0" />
-                        {msg}
-                    </span>
-                ))}
-                {/* Duplicate for seamless loop */}
-                {messages.map((msg, i) => (
-                    <span
-                        key={`dup-${i}`}
-                        className="mx-8 text-white text-xs md:text-sm font-medium tracking-wide inline-flex items-center gap-2"
-                    >
-                        <span className="w-1.5 h-1.5 bg-white/60 rounded-full flex-shrink-0" />
-                        {msg}
-                    </span>
-                ))}
-            </div>
+            <p className="text-white text-xs md:text-sm font-medium tracking-wide text-center">
+                Frete grátis a partir de R$ 150 | Parcelamento em até 4x sem juros
+            </p>
         </div>
     );
 }

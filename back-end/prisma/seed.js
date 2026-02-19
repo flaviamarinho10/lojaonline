@@ -32,6 +32,28 @@ async function main() {
         }
     })
     console.log({ banner })
+
+    // Seed Default Categories
+    const defaultCategories = [
+        { name: 'Pele', bgColor: 'bg-green-100', sortOrder: 1 },
+        { name: 'Olhos', bgColor: 'bg-pink-100', sortOrder: 2 },
+        { name: 'Lábios', bgColor: 'bg-rose-200', sortOrder: 3 },
+        { name: 'Sobrancelhas', bgColor: 'bg-teal-100', sortOrder: 4 },
+        { name: 'Corporal', bgColor: 'bg-pink-200', sortOrder: 5 },
+        { name: 'Kits', bgColor: 'bg-amber-100', sortOrder: 6 },
+        { name: 'Acessórios', bgColor: 'bg-blue-100', sortOrder: 7 },
+        { name: 'Cabelos', bgColor: 'bg-purple-100', sortOrder: 8 },
+    ]
+
+    for (const cat of defaultCategories) {
+        const existing = await prisma.category.findFirst({ where: { name: cat.name } })
+        if (!existing) {
+            const created = await prisma.category.create({ data: cat })
+            console.log('Created category:', created.name)
+        } else {
+            console.log('Category already exists:', existing.name)
+        }
+    }
 }
 
 main()
