@@ -1,5 +1,4 @@
 import { useCart } from '../contexts/CartContext';
-import { ShieldCheck } from 'lucide-react';
 
 interface Product {
     id: string;
@@ -39,17 +38,6 @@ export default function ProductCard({ product }: ProductCardProps) {
                     alt={product.name}
                     className="h-full w-full object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-105"
                 />
-
-                {/* Floating Tags */}
-                <div className="absolute top-3 left-3 flex flex-col gap-1.5">
-                    <span className="inline-flex items-center bg-amber-400 text-gray-900 text-[10px] md:text-xs font-bold px-2.5 py-1 rounded-md shadow-sm">
-                        Frete Grátis
-                    </span>
-                    <span className="inline-flex items-center gap-1 bg-gray-900 text-white text-[10px] md:text-xs font-medium px-2.5 py-1 rounded-md shadow-sm">
-                        <ShieldCheck size={12} />
-                        Parceria Oficial
-                    </span>
-                </div>
 
                 {/* Overlay Button (Desktop) */}
                 <div className="absolute inset-x-0 bottom-0 p-3 opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
