@@ -4,7 +4,7 @@ const badges = [
     {
         icon: Package,
         title: 'Frete Grátis',
-        description: 'em compras acima de R$ 180 em produtos',
+        description: 'em compras acima de R$ 150 em produtos',
     },
     {
         icon: QrCode,

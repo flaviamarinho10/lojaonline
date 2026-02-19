@@ -16,13 +16,14 @@ export const getProducts = async (req: Request, res: Response) => {
 
 export const createProduct = async (req: Request, res: Response) => {
     try {
-        const { name, description, price, imageUrl } = req.body;
+        const { name, description, price, imageUrl, colors } = req.body;
         const product = await prisma.product.create({
             data: {
                 name,
                 description,
                 price: Number(price),
                 imageUrl,
+                colors: colors || [],
                 active: true
             }
         });

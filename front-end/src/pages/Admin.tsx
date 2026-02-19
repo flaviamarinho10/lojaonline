@@ -9,6 +9,11 @@ import {
 import AdminOrderList from '../components/AdminOrderList';
 import AdminSettings from '../components/AdminSettings';
 
+interface ProductColor {
+    name: string;
+    hex: string;
+}
+
 interface Product {
     id: string;
     name: string;
@@ -16,6 +21,7 @@ interface Product {
     price: number;
     imageUrl: string;
     active: boolean;
+    colors: ProductColor[];
 }
 
 interface Category {
@@ -51,6 +57,7 @@ const Admin: React.FC = () => {
     const [isEditing, setIsEditing] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [productColors, setProductColors] = useState<ProductColor[]>([]);
 
     // Categories state (API-driven)
     const [categories, setCategories] = useState<Category[]>([]);
@@ -104,7 +111,8 @@ const Admin: React.FC = () => {
                 description: desc,
                 price: parseFloat(price),
                 imageUrl: imageUrl || 'https://placehold.co/400',
-                active: true
+                active: true,
+                colors: productColors
             };
 
             if (isEditing) {
@@ -128,6 +136,7 @@ const Admin: React.FC = () => {
         setPrice(p.price.toString());
         setDesc(p.description);
         setImageUrl(p.imageUrl);
+        setProductColors(Array.isArray(p.colors) ? p.colors : []);
         setIsEditing(p.id);
     };
 
@@ -147,6 +156,7 @@ const Admin: React.FC = () => {
         setPrice('');
         setDesc('');
         setImageUrl('');
+        setProductColors([]);
         setIsEditing(null);
     };
 
@@ -337,6 +347,59 @@ const Admin: React.FC = () => {
                                                 rows={3}
                                                 className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all resize-none text-sm"
                                             />
+                                        </div>
+
+                                        {/* Cores/Variações */}
+                                        <div className="space-y-2">
+                                            <div className="flex items-center justify-between">
+                                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Cores / Variações</label>
+                                                <button
+                                                    type="button"
+                                                    onClick={() => setProductColors([...productColors, { name: '', hex: '#d4a89a' }])}
+                                                    className="flex items-center gap-1 text-[11px] font-semibold text-[#66c2bb] hover:text-[#55b0a9] transition-colors"
+                                                >
+                                                    <Plus size={14} />
+                                                    Adicionar Cor
+                                                </button>
+                                            </div>
+
+                                            {productColors.length > 0 && (
+                                                <div className="space-y-2">
+                                                    {productColors.map((color, idx) => (
+                                                        <div key={idx} className="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
+                                                            <input
+                                                                type="color"
+                                                                value={color.hex}
+                                                                onChange={(e) => {
+                                                                    const updated = [...productColors];
+                                                                    updated[idx] = { ...updated[idx], hex: e.target.value };
+                                                                    setProductColors(updated);
+                                                                }}
+                                                                className="w-8 h-8 rounded-md border border-gray-200 cursor-pointer flex-shrink-0"
+                                                                style={{ padding: 0 }}
+                                                            />
+                                                            <input
+                                                                placeholder="Nome da cor (ex: Bege Claro)"
+                                                                value={color.name}
+                                                                onChange={(e) => {
+                                                                    const updated = [...productColors];
+                                                                    updated[idx] = { ...updated[idx], name: e.target.value };
+                                                                    setProductColors(updated);
+                                                                }}
+                                                                className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none"
+                                                            />
+                                                            <span className="text-[10px] text-gray-400 font-mono w-16 text-center">{color.hex}</span>
+                                                            <button
+                                                                type="button"
+                                                                onClick={() => setProductColors(productColors.filter((_, i) => i !== idx))}
+                                                                className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors"
+                                                            >
+                                                                <Trash2 size={14} />
+                                                            </button>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            )}
                                         </div>
 
                                         <div className="pt-2 flex gap-3">
