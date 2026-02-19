@@ -21,6 +21,17 @@ async function main() {
         },
     })
     console.log({ admin })
+
+    // Seed Default Banner
+    const banner = await prisma.storeSetting.upsert({
+        where: { key: 'homeBannerUrl' },
+        update: {},
+        create: {
+            key: 'homeBannerUrl',
+            value: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1974&auto=format&fit=crop'
+        }
+    })
+    console.log({ banner })
 }
 
 main()

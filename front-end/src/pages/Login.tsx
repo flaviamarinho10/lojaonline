@@ -35,45 +35,45 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-zinc-950 px-4">
-            <div className="w-full max-w-md bg-zinc-900 border border-zinc-800 p-8 rounded-2xl shadow-2xl shadow-black/50">
-                <div className="flex flex-col items-center mb-8 space-y-4">
-                    <div className="h-12 w-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500 border border-emerald-500/20">
-                        <Lock size={24} />
+        <div className="flex items-center justify-center min-h-screen bg-slate-50 px-4">
+            <div className="w-full max-w-md bg-white border border-slate-200 p-8 md:p-10 rounded shadow-lg shadow-slate-200/50">
+                <div className="flex flex-col items-center mb-10 space-y-4">
+                    <div className="h-12 w-12 bg-rose-50 rounded-full flex items-center justify-center text-slate-900 border border-rose-100">
+                        <Lock size={20} strokeWidth={1.5} />
                     </div>
-                    <div className="text-center">
-                        <h1 className="text-2xl font-bold text-white tracking-tight">Painel Administrativo</h1>
-                        <p className="text-zinc-400 text-sm mt-1">Entre com suas credenciais de acesso</p>
+                    <div className="text-center space-y-1">
+                        <h1 className="font-serif text-3xl font-bold text-slate-900 tracking-tight">Night Peri</h1>
+                        <p className="text-slate-400 text-xs uppercase tracking-[0.2em] font-medium">Admin Access</p>
                     </div>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-zinc-300">E-mail</label>
+                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">E-mail</label>
                         <input
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
+                            className="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-all text-sm"
                             placeholder="admin@loja.com"
                             required
                         />
                     </div>
 
                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-zinc-300">Senha</label>
+                        <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Senha</label>
                         <input
                             type="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-zinc-950 border border-zinc-800 rounded-lg px-4 py-3 text-white placeholder-zinc-600 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 transition-all"
+                            className="w-full bg-slate-50 border border-slate-200 rounded px-4 py-3 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-slate-900 focus:border-slate-900 transition-all text-sm"
                             placeholder="••••••••"
                             required
                         />
                     </div>
 
                     {error && (
-                        <div className="bg-red-500/10 border border-red-500/20 rounded-lg p-3 text-red-500 text-sm text-center">
+                        <div className="bg-red-50 border border-red-100 rounded p-3 text-red-600 text-xs text-center font-medium">
                             {error}
                         </div>
                     )}
@@ -81,11 +81,11 @@ const Login = () => {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className="w-full bg-emerald-500 hover:bg-emerald-400 text-black font-bold py-3 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full bg-slate-900 hover:bg-slate-800 text-white py-3.5 rounded flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed uppercase tracking-widest text-xs font-bold"
                     >
                         {isLoading ? (
                             <>
-                                <Loader2 size={20} className="animate-spin" />
+                                <Loader2 size={16} className="animate-spin" />
                                 Entrando...
                             </>
                         ) : (
@@ -94,9 +94,9 @@ const Login = () => {
                     </button>
                 </form>
 
-                <div className="mt-8 text-center">
-                    <p className="text-xs text-zinc-500">
-                        &copy; 2026 SupleStore Admin. Uso restrito.
+                <div className="mt-8 text-center border-t border-slate-100 pt-6">
+                    <p className="text-[10px] text-slate-400 uppercase tracking-widest">
+                        &copy; 2026 Night Peri Beauty. Restrito.
                     </p>
                 </div>
             </div>

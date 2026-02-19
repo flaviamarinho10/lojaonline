@@ -1,76 +1,112 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import ProductCard from '../components/ProductCard';
 import CartSidebar from '../components/CartSidebar';
 import api from '../lib/axios';
-import { Loader2 } from 'lucide-react';
 
 interface Product {
     id: string;
     name: string;
     description: string;
-    price: number;
+    price: string;
     imageUrl: string;
-    active: boolean;
 }
 
 export default function Home() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
+    const [bannerUrl, setBannerUrl] = useState('');
+    const [loadingBanner, setLoadingBanner] = useState(true);
 
     useEffect(() => {
-        const fetchProducts = async () => {
+        const fetchData = async () => {
             try {
-                const response = await api.get('/products');
-                setProducts(response.data);
+                // Fetch Products
+                const prodRes = await api.get('/products');
+                setProducts(prodRes.data);
             } catch (error) {
-                console.error('Error fetching products:', error);
+                console.error('Error fetching data:', error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchProducts();
+        const fetchBanner = async () => {
+            try {
+                // Fetch Banner
+                const bannerRes = await api.get('/settings/banner');
+                setBannerUrl(bannerRes.data.url);
+            } catch (error) {
+                console.error('Error fetching banner:', error);
+            } finally {
+                setLoadingBanner(false);
+            }
+        };
+
+        fetchData();
+        fetchBanner();
     }, []);
 
     return (
-        <div className="min-h-screen bg-zinc-950 text-zinc-100 font-sans selection:bg-emerald-500 selection:text-black">
+        <div className="min-h-screen bg-white text-slate-900">
             <Header />
             <CartSidebar />
 
             {/* Hero Section */}
-            <section className="relative h-[500px] w-full bg-zinc-900 overflow-hidden flex items-center justify-center pt-16">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800 via-zinc-950 to-zinc-950 opacity-50" />
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay" />
+            <section className="relative w-full h-[500px] bg-rose-50 overflow-hidden">
+                {/* Background Image */}
+                <div className="absolute inset-0 w-full h-full">
+                    {loadingBanner ? (
+                        <div className="w-full h-full animate-pulse bg-rose-100/50" />
+                    ) : (
+                        <img
+                            src={bannerUrl || "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1974&auto=format&fit=crop"}
+                            alt="Banner Principal"
+                            className="w-full h-full object-cover object-center"
+                        />
+                    )}
+                    {/* Overlay to ensure text readability */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-rose-50/90 via-rose-50/50 to-transparent" />
+                </div>
 
-                <div className="container relative z-10 px-4 text-center space-y-6">
-                    <span className="inline-block px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-sm font-bold tracking-wider uppercase border border-emerald-500/20">
-                        Nova Coleção 2026
+                {/* Content */}
+                <div className="relative z-10 container mx-auto px-4 h-full flex flex-col justify-center items-start text-left space-y-6">
+                    <span className="inline-block text-xs font-medium tracking-[0.2em] uppercase text-pink-500 bg-white/50 backdrop-blur-sm px-3 py-1 rounded-sm">
+                        NOVA COLEÇÃO
                     </span>
-                    <h1 className="text-5xl md:text-7xl font-bold tracking-tighter text-white">
-                        Performance <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-emerald-600">Máxima</span>
+                    <h1 className="font-serif text-5xl md:text-7xl text-slate-900 leading-tight max-w-2xl">
+                        O Brilho <br /> Perfeito
                     </h1>
-                    <p className="max-w-xl mx-auto text-lg text-zinc-400">
-                        Suplementos de alta qualidade para levar seu treino ao próximo nível. Tecnologia e sabor, juntos.
+                    <p className="max-w-md text-slate-700 text-lg font-light leading-relaxed drop-shadow-sm">
+                        Descubra o novo padrão de beleza. Fórmulas limpas, aplicação fácil e um acabamento natural que realça a sua pele.
                     </p>
-                    <button className="bg-emerald-500 hover:bg-emerald-400 text-black font-bold px-8 py-4 rounded-full text-lg transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-emerald-500/20">
-                        Explorar Produtos
+                    <button className="bg-slate-900 text-white px-10 py-4 uppercase tracking-widest text-xs font-medium hover:bg-slate-800 transition-transform active:scale-95 shadow-lg">
+                        COMPRAR AGORA
                     </button>
                 </div>
             </section>
 
-            {/* Products Grid */}
-            <main className="container mx-auto px-4 py-16">
-                <h2 className="text-3xl font-bold mb-10 border-l-4 border-emerald-500 pl-4">
-                    Destaques
-                </h2>
+            {/* Best Sellers */}
+            <main className="container mx-auto px-4 py-24">
+                <div className="text-center mb-16 space-y-2">
+                    <h2 className="font-serif text-3xl md:text-4xl text-slate-900">
+                        MAIS VENDIDOS
+                    </h2>
+                    <div className="w-12 h-0.5 bg-pink-200 mx-auto" />
+                </div>
 
                 {loading ? (
-                    <div className="flex justify-center items-center h-64">
-                        <Loader2 className="animate-spin text-emerald-500" size={48} />
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
+                        {[...Array(4)].map((_, i) => (
+                            <div key={i} className="animate-pulse space-y-4">
+                                <div className="bg-slate-100 aspect-[4/5]" />
+                                <div className="h-4 bg-slate-100 w-3/4 mx-auto" />
+                                <div className="h-3 bg-slate-100 w-1/2 mx-auto" />
+                            </div>
+                        ))}
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-12">
                         {products.map((product) => (
                             <ProductCard key={product.id} product={product} />
                         ))}
@@ -78,9 +114,25 @@ export default function Home() {
                 )}
             </main>
 
+            {/* Newsletter */}
+            <section className="bg-slate-50 py-24 border-t border-slate-100">
+                <div className="container mx-auto px-4 text-center max-w-xl mx-auto space-y-6">
+                    <h3 className="font-serif text-2xl text-slate-900">Entre para a lista</h3>
+                    <p className="text-slate-500 font-light">Cadastre-se para receber 15% de desconto na primeira compra e acesso exclusivo aos lançamentos.</p>
+                    <div className="flex gap-0 border-b border-slate-300 pb-2">
+                        <input
+                            type="email"
+                            placeholder="Seu endereço de e-mail"
+                            className="flex-1 bg-transparent outline-none placeholder:text-slate-400 text-slate-900"
+                        />
+                        <button className="text-xs uppercase tracking-widest text-slate-900 font-medium">INSCREVER</button>
+                    </div>
+                </div>
+            </section>
+
             {/* Footer */}
-            <footer className="bg-zinc-950 border-t border-zinc-900 py-12 text-center text-zinc-600">
-                <p>&copy; 2026 SupleStore. Todos os direitos reservados.</p>
+            <footer className="bg-white border-t border-slate-100 py-12 text-center">
+                <p className="text-xs text-slate-400 tracking-widest uppercase">&copy; 2026 flavia beauty.</p>
             </footer>
         </div>
     );

@@ -1,11 +1,11 @@
 import { useCart } from '../contexts/CartContext';
-import { Plus } from 'lucide-react';
+import { Star } from 'lucide-react';
 
 interface Product {
     id: string;
     name: string;
     description: string;
-    price: string | number; // Handling string/number from API
+    price: string | number;
     imageUrl: string;
 }
 
@@ -31,33 +31,50 @@ export default function ProductCard({ product }: ProductCardProps) {
     }).format(Number(product.price));
 
     return (
-        <div className="group relative overflow-hidden rounded-xl bg-zinc-900 border border-zinc-800 hover:border-zinc-700 transition-all hover:shadow-lg hover:shadow-emerald-500/10">
-            <div className="aspect-[4/5] w-full overflow-hidden bg-zinc-950 relative">
+        <div className="group cursor-pointer">
+            {/* Image Container - Aspect 4/5 */}
+            <div className="relative aspect-[4/5] overflow-hidden bg-slate-50 mb-4">
                 <img
                     src={product.imageUrl}
                     alt={product.name}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-105"
                 />
-                {/* Overlay gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-zinc-900 via-transparent to-transparent opacity-60" />
-            </div>
 
-            <div className="p-4 space-y-3">
-                <div>
-                    <h3 className="text-lg font-bold text-white truncate">{product.name}</h3>
-                    <p className="text-sm text-zinc-400 line-clamp-2 min-h-[40px]">{product.description}</p>
-                </div>
-
-                <div className="flex items-center justify-between pt-2">
-                    <span className="text-xl font-bold text-emerald-400">{formattedPrice}</span>
+                {/* Overlay Button (Desktop) */}
+                <div className="absolute inset-x-0 bottom-0 p-4 opacity-0 translate-y-full group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
                     <button
-                        onClick={handleAddToCart}
-                        className="flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-black hover:bg-emerald-400 hover:scale-105 active:scale-95 transition-all"
+                        onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
+                        className="w-full bg-white/90 backdrop-blur text-slate-900 py-3 uppercase tracking-widest text-[10px] font-bold hover:bg-slate-900 hover:text-white transition-colors"
                     >
-                        <Plus size={16} />
-                        Adicionar
+                        ADICIONAR À SACOLA
                     </button>
                 </div>
+            </div>
+
+            {/* Content */}
+            <div className="text-center space-y-1">
+                {/* Stars (Static 5 star) */}
+                <div className="flex justify-center gap-0.5 text-slate-300 mb-2">
+                    {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={12} fill="currentColor" strokeWidth={0} />
+                    ))}
+                </div>
+
+                <h3 className="font-sans text-sm font-medium text-slate-900 group-hover:text-pink-500 transition-colors">
+                    {product.name}
+                </h3>
+
+                <p className="font-serif text-slate-500 italic">
+                    {formattedPrice}
+                </p>
+
+                {/* Mobile Button */}
+                <button
+                    onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
+                    className="md:hidden text-[10px] uppercase tracking-widest border-b border-slate-300 pb-0.5 mt-2 text-slate-600"
+                >
+                    ADICIONAR À SACOLA
+                </button>
             </div>
         </div>
     );

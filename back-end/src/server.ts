@@ -3,6 +3,7 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import productRoutes from './routes/productRoutes';
 import orderRoutes from './routes/orderRoutes';
+import settingRoutes from './routes/settingRoutes';
 
 const app = express();
 const PORT = process.env.PORT || 3333;
@@ -16,6 +17,7 @@ app.use(cors({
 app.use('/auth', authRoutes);
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use('/settings', settingRoutes);
 
 // Health check
 app.get('/', (req, res) => {
