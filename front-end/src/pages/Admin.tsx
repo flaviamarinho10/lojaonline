@@ -19,9 +19,11 @@ interface Product {
     name: string;
     description: string;
     price: number;
+    comparePrice?: number;
     imageUrl: string;
     active: boolean;
     colors: ProductColor[];
+    badges: string[];
 }
 
 interface Category {
@@ -50,14 +52,18 @@ const Admin: React.FC = () => {
 
     // Products state
     const [products, setProducts] = useState<Product[]>([]);
+    const [reviews, setReviews] = useState([]);
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
+    const [comparePrice, setComparePrice] = useState('');
     const [desc, setDesc] = useState('');
     const [imageUrl, setImageUrl] = useState('');
+    const [productColors, setProductColors] = useState<ProductColor[]>([]);
+    const [badges, setBadges] = useState<string[]>([]);
+    const [isActive, setIsActive] = useState(true);
     const [isEditing, setIsEditing] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
-    const [productColors, setProductColors] = useState<ProductColor[]>([]);
 
     // Categories state (API-driven)
     const [categories, setCategories] = useState<Category[]>([]);
@@ -110,9 +116,11 @@ const Admin: React.FC = () => {
                 name,
                 description: desc,
                 price: parseFloat(price),
+                comparePrice: comparePrice ? parseFloat(comparePrice) : null,
                 imageUrl: imageUrl || 'https://placehold.co/400',
-                active: true,
-                colors: productColors
+                active: isActive,
+                colors: productColors,
+                badges: badges
             };
 
             if (isEditing) {
@@ -134,9 +142,12 @@ const Admin: React.FC = () => {
     const handleEdit = (p: Product) => {
         setName(p.name);
         setPrice(p.price.toString());
+        setComparePrice(p.comparePrice ? p.comparePrice.toString() : '');
         setDesc(p.description);
         setImageUrl(p.imageUrl);
+        setIsActive(p.active);
         setProductColors(Array.isArray(p.colors) ? p.colors : []);
+        setBadges(Array.isArray(p.badges) ? p.badges : []);
         setIsEditing(p.id);
     };
 
@@ -154,9 +165,12 @@ const Admin: React.FC = () => {
     const resetProductForm = () => {
         setName('');
         setPrice('');
+        setComparePrice('');
         setDesc('');
         setImageUrl('');
+        setIsActive(true);
         setProductColors([]);
+        setBadges([]);
         setIsEditing(null);
     };
 
@@ -312,17 +326,30 @@ const Admin: React.FC = () => {
                                             />
                                         </div>
 
-                                        <div className="space-y-1.5">
-                                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Preço (R$)</label>
-                                            <input
-                                                type="number"
-                                                step="0.01"
-                                                placeholder="0.00"
-                                                value={price}
-                                                onChange={e => setPrice(e.target.value)}
-                                                required
-                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
-                                            />
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <div className="space-y-1.5">
+                                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Preço (R$)</label>
+                                                <input
+                                                    type="number"
+                                                    step="0.01"
+                                                    placeholder="0.00"
+                                                    value={price}
+                                                    onChange={e => setPrice(e.target.value)}
+                                                    required
+                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                />
+                                            </div>
+                                            <div className="space-y-1.5">
+                                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Preço Promocional (Opcional)</label>
+                                                <input
+                                                    type="number"
+                                                    step="0.01"
+                                                    placeholder="0.00"
+                                                    value={comparePrice}
+                                                    onChange={e => setComparePrice(e.target.value)}
+                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                />
+                                            </div>
                                         </div>
 
                                         <div className="space-y-1.5">
@@ -400,6 +427,45 @@ const Admin: React.FC = () => {
                                                     ))}
                                                 </div>
                                             )}
+                                        </div>
+
+                                        {/* Badges e Status */}
+                                        <div className="space-y-4 pt-2 border-t border-gray-100">
+                                            <div className="space-y-2">
+                                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide block">Tags / Badges</label>
+                                                <div className="flex flex-wrap gap-3">
+                                                    {['Frete Grátis', 'Parceria Oficial', 'Lançamento', 'Esgotado'].map(tag => (
+                                                        <label key={tag} className="inline-flex items-center cursor-pointer">
+                                                            <input
+                                                                type="checkbox"
+                                                                checked={badges.includes(tag)}
+                                                                onChange={(e) => {
+                                                                    if (e.target.checked) setBadges([...badges, tag]);
+                                                                    else setBadges(badges.filter(b => b !== tag));
+                                                                }}
+                                                                className="sr-only peer"
+                                                            />
+                                                            <div className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 text-gray-600 peer-checked:bg-[#66c2bb] peer-checked:text-white peer-checked:border-[#66c2bb] transition-all select-none">
+                                                                {tag}
+                                                            </div>
+                                                        </label>
+                                                    ))}
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center justify-between bg-gray-50 rounded-lg p-3">
+                                                <span className="text-sm font-medium text-gray-700">Visibilidade do Produto</span>
+                                                <label className="relative inline-flex items-center cursor-pointer">
+                                                    <input
+                                                        type="checkbox"
+                                                        checked={isActive}
+                                                        onChange={(e) => setIsActive(e.target.checked)}
+                                                        className="sr-only peer"
+                                                    />
+                                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#66c2bb]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#66c2bb]"></div>
+                                                    <span className="ml-3 text-sm font-medium text-gray-700">{isActive ? 'Ativo' : 'Rascunho'}</span>
+                                                </label>
+                                            </div>
                                         </div>
 
                                         <div className="pt-2 flex gap-3">

@@ -42,3 +42,56 @@ export const updateBanner = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Error updating banner' });
     }
 };
+
+export const getAppearance = async (req: Request, res: Response) => {
+    try {
+        const setting = await prisma.storeSetting.findUnique({
+            where: { key: 'appearance' }
+        });
+
+        const defaultAppearance = {
+            topBar: {
+                active: true,
+                message: 'Frete Grátis para todo o Brasil',
+                bgColor: '#66c2bb'
+            },
+            hero: {
+                desktopImage: '/Banner/Banner.png',
+                mobileImage: '',
+                title: '',
+                subtitle: '',
+                buttonText: '',
+                buttonLink: ''
+            }
+        };
+
+        if (!setting) {
+            return res.json(defaultAppearance);
+        }
+
+        res.json(JSON.parse(setting.value));
+    } catch (error) {
+        console.error('Error fetching appearance:', error);
+        res.status(500).json({ error: 'Error fetching appearance' });
+    }
+};
+
+export const updateAppearance = async (req: Request, res: Response) => {
+    try {
+        const appearanceDisplay = req.body;
+
+        await prisma.storeSetting.upsert({
+            where: { key: 'appearance' },
+            update: { value: JSON.stringify(appearanceDisplay) },
+            create: {
+                key: 'appearance',
+                value: JSON.stringify(appearanceDisplay)
+            }
+        });
+
+        res.json(appearanceDisplay);
+    } catch (error) {
+        console.error('Error updating appearance:', error);
+        res.status(500).json({ error: 'Error updating appearance' });
+    }
+};

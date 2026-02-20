@@ -16,14 +16,16 @@ export const getProducts = async (req: Request, res: Response) => {
 
 export const createProduct = async (req: Request, res: Response) => {
     try {
-        const { name, description, price, imageUrl, colors } = req.body;
+        const { name, description, price, comparePrice, imageUrl, colors, badges } = req.body;
         const product = await prisma.product.create({
             data: {
                 name,
                 description,
                 price: Number(price),
+                comparePrice: comparePrice ? Number(comparePrice) : null,
                 imageUrl,
                 colors: colors || [],
+                badges: badges || [],
                 active: true
             }
         });
@@ -36,13 +38,14 @@ export const createProduct = async (req: Request, res: Response) => {
 
 export const updateProduct = async (req: Request, res: Response) => {
     const { id } = req.params as { id: string };
-    const { price, ...rest } = req.body;
+    const { price, comparePrice, ...rest } = req.body;
     try {
         const product = await prisma.product.update({
             where: { id },
             data: {
                 ...rest,
-                ...(price && { price: Number(price) })
+                ...(price && { price: Number(price) }),
+                ...(comparePrice !== undefined && { comparePrice: comparePrice ? Number(comparePrice) : null })
             }
         });
         res.json(product);

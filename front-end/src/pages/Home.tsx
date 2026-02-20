@@ -19,8 +19,25 @@ interface Product {
     colors?: { name: string; hex: string }[];
 }
 
+interface Appearance {
+    topBar: {
+        active: boolean;
+        message: string;
+        bgColor: string;
+    };
+    hero: {
+        desktopImage: string;
+        mobileImage: string;
+        title: string;
+        subtitle: string;
+        buttonText: string;
+        buttonLink: string;
+    };
+}
+
 export default function Home() {
     const [products, setProducts] = useState<Product[]>([]);
+    const [appearance, setAppearance] = useState<Appearance | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -28,6 +45,9 @@ export default function Home() {
             try {
                 const prodRes = await api.get('/products');
                 setProducts(prodRes.data);
+
+                const appRes = await api.get('/settings/appearance');
+                setAppearance(appRes.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -40,11 +60,11 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-white text-gray-900">
             <Header />
-            <AnnouncementBar />
+            {appearance && <AnnouncementBar settings={appearance.topBar} />}
             <CartSidebar />
 
             {/* Hero Banner */}
-            <HeroBanner />
+            {appearance && <HeroBanner settings={appearance.hero} />}
 
             {/* Trust Badges */}
             <TrustBadges />
