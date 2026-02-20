@@ -1,58 +1,120 @@
-import { useState } from 'react';
-import { ShoppingBag, Search, User, Heart, Menu, X, ChevronDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { ShoppingBag, Search, User, Heart, Menu, X, ChevronDown, ChevronRight } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import api from '../lib/axios';
+
+interface Category {
+    id: string;
+    name: string;
+    imageUrl?: string;
+}
 
 const navLinks = [
     { label: 'Todos os Produtos', href: '#', hasDropdown: true },
     { label: 'Mais Vendidos', href: '#' },
     { label: 'Lançamentos', href: '#' },
     { label: 'Kits', href: '#' },
-    { label: 'Quem Somos', href: '#', hasDropdown: true },
+    { label: 'Quem Somos', href: '#', hasDropdown: false }, // Only 'Todos os Produtos' requested as mega menu for now
 ];
 
 export default function Header() {
     const { items, setIsCartOpen } = useCart();
-    const navigate = useNavigate();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false);
 
+    // Category Data
+    const [categories, setCategories] = useState<Category[]>([]);
+
+    // Dropdown States
+    const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
+    const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
+
     const itemCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const res = await api.get('/categories');
+                setCategories(res.data);
+            } catch (error) {
+                console.error('Error fetching categories for header:', error);
+            }
+        };
+        fetchCategories();
+    }, []);
+
+    const handleMobileExpand = (label: string) => {
+        setMobileExpanded(mobileExpanded === label ? null : label);
+    };
+
     return (
-        <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 transition-all duration-300">
+        <header className="sticky top-0 z-50 w-full bg-white border-b border-gray-100 transition-all duration-300 shadow-sm">
             <div className="container mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between gap-4">
 
                 {/* Left: Logo */}
                 <div className="flex items-center flex-shrink-0">
-                    <div
+                    <Link
+                        to="/"
                         className="cursor-pointer group"
-                        onClick={() => navigate('/')}
-                        role="link"
                         aria-label="Ir para página inicial"
                     >
                         <h1 className="text-xl md:text-2xl font-bold tracking-tight text-gray-900 group-hover:text-rosa-500 transition-colors duration-200">
                             Flavia <span className="font-light">Beauty</span>
                         </h1>
-                    </div>
+                    </Link>
                 </div>
 
                 {/* Center: Nav (Desktop) */}
-                <nav className="hidden lg:flex items-center gap-1" aria-label="Navegação principal">
+                <nav className="hidden lg:flex items-center gap-6" aria-label="Navegação principal">
                     {navLinks.map((link) => (
-                        <a
+                        <div
                             key={link.label}
-                            href={link.href}
-                            className="relative px-3 py-2 text-sm text-gray-500 hover:text-gray-900 transition-colors duration-200 flex items-center gap-1 group"
+                            className="relative group" // Wrapper for dropdown positioning
+                            onMouseEnter={() => link.hasDropdown && setDesktopDropdownOpen(true)}
+                            onMouseLeave={() => link.hasDropdown && setDesktopDropdownOpen(false)}
                         >
-                            <span className="relative">
+                            <a
+                                href={link.href}
+                                className="relative py-2 text-sm font-medium text-gray-600 hover:text-rosa-500 transition-colors duration-200 flex items-center gap-1"
+                            >
                                 {link.label}
+                                {link.hasDropdown && (
+                                    <ChevronDown size={14} className={`transition-transform duration-300 ${desktopDropdownOpen && link.label === 'Todos os Produtos' ? 'rotate-180 text-rosa-500' : 'text-gray-400'}`} />
+                                )}
                                 <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-rosa-400 group-hover:w-full transition-all duration-300" />
-                            </span>
-                            {link.hasDropdown && (
-                                <ChevronDown size={14} className="text-gray-400 group-hover:text-gray-600 transition-colors" />
+                            </a>
+
+                            {/* Mega Menu Dropdown */}
+                            {link.hasDropdown && link.label === 'Todos os Produtos' && (
+                                <div
+                                    className={`absolute top-full left-0 w-64 pt-2 transition-all duration-300 origin-top-left ${desktopDropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}
+                                >
+                                    <div className="bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden">
+                                        <div className={`p-4 ${categories.length > 5 ? 'grid grid-cols-2 gap-x-6 gap-y-2' : 'flex flex-col gap-2'}`}>
+                                            {categories.map((category) => (
+                                                <Link
+                                                    key={category.id}
+                                                    to={`/categoria/${category.id}`}
+                                                    className="block text-sm text-gray-600 hover:text-[#66c2bb] hover:bg-gray-50 px-3 py-2 rounded-lg transition-all"
+                                                >
+                                                    {category.name}
+                                                </Link>
+                                            ))}
+                                        </div>
+                                        <div className="bg-gray-50 p-3 border-t border-gray-100">
+                                            <Link
+                                                to="/produtos"
+                                                className="flex items-center justify-between text-sm font-bold text-gray-800 hover:text-rosa-500 transition-colors px-2"
+                                            >
+                                                Ver todos
+                                                <ChevronRight size={14} />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </div>
                             )}
-                        </a>
+                        </div>
                     ))}
                 </nav>
 
@@ -130,18 +192,59 @@ export default function Header() {
 
             {/* Mobile Menu */}
             {mobileMenuOpen && (
-                <div className="lg:hidden bg-white border-t border-gray-100 animate-in slide-in-from-top duration-300">
+                <div className="lg:hidden bg-white border-t border-gray-100 animate-in slide-in-from-top duration-300 h-[calc(100vh-64px)] overflow-y-auto">
                     <nav className="container mx-auto px-4 py-4 space-y-1" aria-label="Navegação mobile">
                         {navLinks.map((link) => (
-                            <a
-                                key={link.label}
-                                href={link.href}
-                                className="flex items-center justify-between px-4 py-3 text-gray-700 hover:text-rosa-500 hover:bg-rosa-50 rounded-xl text-sm font-medium transition-all"
-                                onClick={() => setMobileMenuOpen(false)}
-                            >
-                                {link.label}
-                                {link.hasDropdown && <ChevronDown size={16} className="text-gray-400" />}
-                            </a>
+                            <div key={link.label}>
+                                <div
+                                    className="flex items-center justify-between px-4 py-3 text-gray-700 hover:text-rosa-500 hover:bg-rosa-50 rounded-xl text-sm font-medium transition-all cursor-pointer"
+                                    onClick={() => {
+                                        if (link.hasDropdown) {
+                                            handleMobileExpand(link.label);
+                                        } else {
+                                            setMobileMenuOpen(false);
+                                            // Handle navigation if needed
+                                        }
+                                    }}
+                                >
+                                    {link.label}
+                                    {link.hasDropdown && (
+                                        <ChevronDown
+                                            size={16}
+                                            className={`text-gray-400 transition-transform duration-300 ${mobileExpanded === link.label ? 'rotate-180' : ''}`}
+                                        />
+                                    )}
+                                </div>
+
+                                {/* Mobile Accordion */}
+                                {link.hasDropdown && link.label === 'Todos os Produtos' && (
+                                    <div
+                                        className={`overflow-hidden transition-all duration-300 ${mobileExpanded === link.label ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
+                                    >
+                                        <div className="bg-gray-50 rounded-lg mx-2 mt-1 p-2 space-y-1">
+                                            {categories.map((category) => (
+                                                <Link
+                                                    key={category.id}
+                                                    to={`/categoria/${category.id}`}
+                                                    className="block px-4 py-2.5 text-sm text-gray-600 hover:text-rosa-500 rounded-lg"
+                                                    onClick={() => setMobileMenuOpen(false)}
+                                                >
+                                                    {category.name}
+                                                </Link>
+                                            ))}
+                                            <div className="border-t border-gray-200 mt-2 pt-2">
+                                                <Link
+                                                    to="/produtos"
+                                                    className="block px-4 py-2.5 text-sm font-bold text-gray-800 hover:text-rosa-500 rounded-lg"
+                                                    onClick={() => setMobileMenuOpen(false)}
+                                                >
+                                                    Ver todos os produtos
+                                                </Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         ))}
                         <div className="pt-3 border-t border-gray-100 mt-2 flex gap-3">
                             <button className="flex-1 flex items-center justify-center gap-2 bg-rosa-50 text-rosa-600 py-3 rounded-xl text-sm font-medium border border-rosa-100">
