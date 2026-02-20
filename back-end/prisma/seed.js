@@ -28,7 +28,7 @@ async function main() {
         update: {},
         create: {
             key: 'homeBannerUrl',
-            value: 'https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?q=80&w=1974&auto=format&fit=crop'
+            value: 'front-end\public\Banner\Banner.png'
         }
     })
     console.log({ banner })
