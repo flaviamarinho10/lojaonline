@@ -15,14 +15,45 @@ const prisma = new client_1.PrismaClient();
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, items } = req.body; // items: { productId, quantity }[]
-        // Calculate total and formatted items would go here
-        // For now simplistic implementation
-        // We need to fetch products to get prices
-        // This is a simplified version
-        // const order = await prisma.order.create({ ... });
-        res.status(201).json({ message: "Order created successfully" });
+        if (!items || items.length === 0) {
+            return res.status(400).json({ error: 'No items in order' });
+        }
+        // Fetch products to get current prices
+        const productIds = items.map((item) => item.productId);
+        const products = yield prisma.product.findMany({
+            where: { id: { in: productIds } }
+        });
+        let total = 0;
+        const orderItemsData = items.map((item) => {
+            const product = products.find(p => p.id === item.productId);
+            if (!product) {
+                throw new Error(`Product ${item.productId} not found`);
+            }
+            const itemTotal = Number(product.price) * item.quantity;
+            total += itemTotal;
+            return {
+                productId: item.productId,
+                quantity: item.quantity,
+                price: product.price // Snapshot price at time of order
+            };
+        });
+        const order = yield prisma.order.create({
+            data: {
+                customerEmail: email,
+                total: total,
+                status: 'PENDING',
+                items: {
+                    create: orderItemsData
+                }
+            },
+            include: {
+                items: true
+            }
+        });
+        res.status(201).json(order);
     }
     catch (error) {
+        console.error('Error creating order:', error);
         res.status(500).json({ error: 'Error creating order' });
     }
 });
@@ -30,12 +61,17 @@ exports.createOrder = createOrder;
 const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const orders = yield prisma.order.findMany({
-            include: { items: { include: { product: true } } },
+            include: {
+                items: {
+                    include: { product: true }
+                }
+            },
             orderBy: { createdAt: 'desc' }
         });
         res.json(orders);
     }
     catch (error) {
+        console.error(error);
         res.status(500).json({ error: 'Error fetching orders' });
     }
 });

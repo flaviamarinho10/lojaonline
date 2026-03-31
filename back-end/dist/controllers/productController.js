@@ -26,8 +26,10 @@ const prisma = new client_1.PrismaClient();
 const getProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const products = yield prisma.product.findMany({
-            where: { active: true }
+            where: { active: true },
+            orderBy: { createdAt: 'desc' }
         });
+        console.log('Sending products:', products.map(p => ({ id: p.id, createdAt: p.createdAt })));
         res.json(products);
     }
     catch (error) {
@@ -37,13 +39,16 @@ const getProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 exports.getProducts = getProducts;
 const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, description, price, imageUrl } = req.body;
+        const { name, description, price, comparePrice, imageUrl, colors, badges } = req.body;
         const product = yield prisma.product.create({
             data: {
                 name,
                 description,
                 price: Number(price),
+                comparePrice: comparePrice ? Number(comparePrice) : null,
                 imageUrl,
+                colors: colors || [],
+                badges: badges || [],
                 active: true
             }
         });
@@ -56,11 +61,11 @@ const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.createProduct = createProduct;
 const updateProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const _a = req.body, { price } = _a, rest = __rest(_a, ["price"]);
+    const _a = req.body, { price, comparePrice } = _a, rest = __rest(_a, ["price", "comparePrice"]);
     try {
         const product = yield prisma.product.update({
             where: { id },
-            data: Object.assign(Object.assign({}, rest), (price && { price: Number(price) }))
+            data: Object.assign(Object.assign(Object.assign({}, rest), (price && { price: Number(price) })), (comparePrice !== undefined && { comparePrice: comparePrice ? Number(comparePrice) : null }))
         });
         res.json(product);
     }

@@ -8,6 +8,8 @@ const cors_1 = __importDefault(require("cors"));
 const authRoutes_1 = __importDefault(require("./routes/authRoutes"));
 const productRoutes_1 = __importDefault(require("./routes/productRoutes"));
 const orderRoutes_1 = __importDefault(require("./routes/orderRoutes"));
+const settingRoutes_1 = __importDefault(require("./routes/settingRoutes"));
+const categoryRoutes_1 = __importDefault(require("./routes/categoryRoutes"));
 const app = (0, express_1.default)();
 const PORT = process.env.PORT || 3333;
 app.use(express_1.default.json());
@@ -18,6 +20,8 @@ app.use((0, cors_1.default)({
 app.use('/auth', authRoutes_1.default);
 app.use('/products', productRoutes_1.default);
 app.use('/orders', orderRoutes_1.default);
+app.use('/settings', settingRoutes_1.default);
+app.use('/categories', categoryRoutes_1.default);
 // Health check
 app.get('/', (req, res) => {
     res.send('API is running');
