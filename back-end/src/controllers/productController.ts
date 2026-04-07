@@ -4,11 +4,15 @@ import fs from 'fs';
 import path from 'path';
 
 const prisma = new PrismaClient();
-const LOG_FILE = 'c:/Users/Flavi/Documents/GitHub/lojaonline/back-end/debug_error.log';
+const LOG_FILE = path.join(__dirname, '../../debug_error.log');
 
 const log = (msg: string) => {
-    const timestamp = new Date().toISOString();
-    fs.appendFileSync(LOG_FILE, `[${timestamp}] ${msg}\n`);
+    try {
+        const timestamp = new Date().toISOString();
+        fs.appendFileSync(LOG_FILE, `[${timestamp}] ${msg}\n`);
+    } catch (e) {
+        // ignore log error
+    }
     console.log(msg);
 };
 
@@ -22,8 +26,15 @@ const parsePrice = (value: any): number | null => {
 
 export const getProducts = async (req: Request, res: Response) => {
     try {
+        const { category } = req.query;
+        const whereClause: any = { active: true };
+        
+        if (category) {
+            whereClause.categoryId = String(category);
+        }
+
         const products = await prisma.product.findMany({
-            where: { active: true }
+            where: whereClause
         });
         res.json(products);
     } catch (error: any) {
@@ -35,7 +46,7 @@ export const getProducts = async (req: Request, res: Response) => {
 export const createProduct = async (req: Request, res: Response) => {
     log(`Creating product with body: ${JSON.stringify(req.body)}`);
     try {
-        const { name, description, price, comparePrice, imageUrl, colors, badges } = req.body;
+        const { name, description, price, comparePrice, imageUrl, colors, badges, categoryId } = req.body;
 
         const numericPrice = parsePrice(price);
         if (numericPrice === null) {
@@ -52,6 +63,7 @@ export const createProduct = async (req: Request, res: Response) => {
                 imageUrl: imageUrl || 'https://placehold.co/400',
                 colors: colors || [],
                 badges: badges || [],
+                categoryId: categoryId || null,
                 active: true
             }
         });
@@ -66,7 +78,7 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
     const { id } = req.params as { id: string };
     log(`Updating product ${id} with body: ${JSON.stringify(req.body)}`);
-    const { price, comparePrice, ...rest } = req.body;
+    const { price, comparePrice, categoryId, ...rest } = req.body;
     try {
         const data: any = { ...rest };
 
@@ -79,6 +91,10 @@ export const updateProduct = async (req: Request, res: Response) => {
 
         if (comparePrice !== undefined) {
             data.comparePrice = parsePrice(comparePrice);
+        }
+
+        if (categoryId !== undefined) {
+            data.categoryId = categoryId;
         }
 
         const product = await prisma.product.update({

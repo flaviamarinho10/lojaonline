@@ -40,7 +40,7 @@ const Login = () => {
                 {/* Logo Header */}
                 <div className="flex flex-col items-center mb-10 space-y-2">
                     <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-                        Flavia <span className="font-light">Beauty</span>
+                        Shine <span className="font-light">Glam</span>
                     </h1>
                     <p className="text-gray-400 text-sm">Acesso Administrativo</p>
                 </div>
@@ -56,7 +56,7 @@ const Login = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] transition-all text-sm"
-                            placeholder="admin@flaviabeauty.com"
+                            placeholder="admin@shineglam.com"
                             required
                         />
                     </div>
@@ -102,7 +102,7 @@ const Login = () => {
 
                 <div className="mt-8 text-center border-t border-gray-100 pt-6">
                     <p className="text-[11px] text-gray-400">
-                        &copy; 2026 Flavia Beauty. Acesso restrito.
+                        &copy; 2026 Shine Glam. Acesso restrito.
                     </p>
                 </div>
             </div>

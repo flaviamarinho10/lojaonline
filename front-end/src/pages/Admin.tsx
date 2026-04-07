@@ -24,6 +24,7 @@ interface Product {
     active: boolean;
     colors: ProductColor[];
     badges: string[];
+    categoryId?: string | null;
 }
 
 interface Category {
@@ -60,6 +61,7 @@ const Admin: React.FC = () => {
     const [imageUrl, setImageUrl] = useState('');
     const [productColors, setProductColors] = useState<ProductColor[]>([]);
     const [badges, setBadges] = useState<string[]>([]);
+    const [categoryId, setCategoryId] = useState('');
     const [isActive, setIsActive] = useState(true);
     const [isEditing, setIsEditing] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -101,6 +103,7 @@ const Admin: React.FC = () => {
     useEffect(() => {
         if (activeTab === 'products') {
             fetchProducts();
+            fetchCategories(); // Need categories for the select dropdown
         }
         if (activeTab === 'categories') {
             fetchCategories();
@@ -120,7 +123,8 @@ const Admin: React.FC = () => {
                 imageUrl: imageUrl || 'https://placehold.co/400',
                 active: isActive,
                 colors: productColors,
-                badges: badges
+                badges: badges,
+                categoryId: categoryId || null
             };
 
             if (isEditing) {
@@ -148,6 +152,7 @@ const Admin: React.FC = () => {
         setIsActive(p.active);
         setProductColors(Array.isArray(p.colors) ? p.colors : []);
         setBadges(Array.isArray(p.badges) ? p.badges : []);
+        setCategoryId(p.categoryId || '');
         setIsEditing(p.id);
     };
 
@@ -168,9 +173,10 @@ const Admin: React.FC = () => {
         setComparePrice('');
         setDesc('');
         setImageUrl('');
-        setIsActive(true);
         setProductColors([]);
         setBadges([]);
+        setCategoryId('');
+        setIsActive(true);
         setIsEditing(null);
     };
 
@@ -248,7 +254,7 @@ const Admin: React.FC = () => {
             <aside className={`fixed lg:static inset-y-0 left-0 z-40 w-64 bg-white border-r border-gray-100 flex flex-col shadow-sm transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}`}>
                 <div className="p-6 border-b border-gray-100">
                     <h1 className="text-xl font-bold text-gray-900 tracking-tight">
-                        Flavia <span className="font-light">Beauty</span>
+                        Shine <span className="font-light">Glam</span>
                     </h1>
                     <p className="text-[11px] text-gray-400 mt-0.5">Painel Administrativo</p>
                 </div>
@@ -295,7 +301,7 @@ const Admin: React.FC = () => {
                         <MenuIcon size={22} />
                     </button>
                     <h1 className="text-base font-bold text-gray-900">
-                        Flavia <span className="font-light">Beauty</span>
+                        Shine <span className="font-light">Glam</span>
                     </h1>
                     <div className="w-10" />
                 </div>
@@ -363,6 +369,20 @@ const Admin: React.FC = () => {
                                                     className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
                                                 />
                                             </div>
+                                        </div>
+
+                                        <div className="space-y-1.5">
+                                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Categoria</label>
+                                            <select
+                                                value={categoryId}
+                                                onChange={e => setCategoryId(e.target.value)}
+                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm appearance-none"
+                                            >
+                                                <option value="">Selecione uma categoria (opcional)</option>
+                                                {categories.map(cat => (
+                                                    <option key={cat.id} value={cat.id}>{cat.name}</option>
+                                                ))}
+                                            </select>
                                         </div>
 
                                         <div className="space-y-1.5">

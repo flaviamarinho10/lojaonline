@@ -1,4 +1,5 @@
 import { useCart } from '../contexts/CartContext';
+import { ShoppingBag } from 'lucide-react';
 
 interface ProductColor {
     name: string;
@@ -49,96 +50,102 @@ export default function ProductCard({ product }: ProductCardProps) {
     const isSoldOut = product.badges?.includes('Esgotado');
 
     return (
-        <div className="group cursor-pointer bg-white rounded-2xl overflow-hidden transition-all duration-300 hover:shadow-xl flex-shrink-0 w-[200px] md:w-[250px]">
+        <div className="group cursor-pointer bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-lg flex-shrink-0 w-[175px] md:w-[240px] border border-gray-100/80">
             {/* Image Container */}
-            <div className={`relative bg-[#f3f4f6] rounded-xl m-2 overflow-hidden ${isSoldOut ? 'opacity-75 grayscale' : ''}`}>
-                <div className="aspect-[4/5] flex items-center justify-center p-4">
+            <div className={`relative bg-gradient-to-b from-rosa-50/40 to-white rounded-2xl m-2 overflow-hidden ${isSoldOut ? 'opacity-60 grayscale' : ''}`}>
+                <div className="aspect-square flex items-center justify-center p-3">
                     <img
                         src={product.imageUrl}
                         alt={product.name}
-                        className="max-h-full max-w-full object-contain transition-transform duration-500 ease-out group-hover:scale-110"
+                        className="max-h-full max-w-full object-contain transition-transform duration-500 ease-out group-hover:scale-105"
                     />
                 </div>
 
                 {/* Badges */}
-                <div className="absolute top-3 left-3 flex flex-col gap-1.5 z-10">
-                    {product.badges?.map(badge => (
-                        <span key={badge} className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm ${badge === 'Esgotado' ? 'bg-gray-900 text-white' :
-                            badge === 'Frete Grátis' ? 'bg-amber-300 text-gray-900' :
-                                badge === 'Lançamento' ? 'bg-purple-100 text-purple-700' :
-                                    'bg-white/90 text-gray-700 backdrop-blur-md'
-                            }`}>
+                <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
+                    {product.badges?.filter(b => b !== 'Esgotado').map(badge => (
+                        <span key={badge} className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm ${
+                            badge === 'Frete Grátis' ? 'bg-rosa-100 text-rosa-600' :
+                            badge === 'Lançamento' ? 'bg-purple-50 text-purple-600' :
+                            'bg-white/90 text-gray-600 backdrop-blur-md'
+                        }`}>
                             {badge}
                         </span>
                     ))}
                     {discount > 0 && (
-                        <span className="inline-flex items-center bg-red-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-md shadow-sm animate-pulse">
-                            -{discount}% OFF
+                        <span className="inline-flex items-center bg-rosa-400 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                            -{discount}%
+                        </span>
+                    )}
+                    {isSoldOut && (
+                        <span className="inline-flex items-center bg-gray-800 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                            Esgotado
+                        </span>
+                    )}
+                </div>
+            </div>
+
+            {/* Text Content */}
+            <div className="px-3.5 pb-3.5 pt-1 space-y-1">
+                <h3 className="font-semibold text-sm text-gray-800 leading-snug line-clamp-2 group-hover:text-rosa-500 transition-colors">
+                    {product.name}
+                </h3>
+                <p className="text-xs text-gray-400 line-clamp-1">{product.description}</p>
+
+                <div className="h-px bg-gray-100 my-1.5" />
+
+                <div className="flex items-center justify-between gap-2">
+                    <div>
+                        <p className="text-gray-900 font-bold text-base leading-tight">
+                            {formattedPrice}
+                        </p>
+                        {discount > 0 && (
+                            <p className="text-[11px] text-gray-400 line-through">
+                                {formattedComparePrice}
+                            </p>
+                        )}
+                    </div>
+
+                    {/* Add to cart button */}
+                    {!isSoldOut ? (
+                        <button
+                            onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
+                            className="flex items-center gap-1.5 bg-rosa-400 hover:bg-rosa-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 active:scale-95 shadow-sm hover:shadow-md"
+                        >
+                            <ShoppingBag size={13} />
+                            <span className="hidden md:inline">Adicionar</span>
+                            <span className="md:hidden">Add</span>
+                        </button>
+                    ) : (
+                        <span className="text-xs text-gray-400 font-medium bg-gray-100 px-3 py-2 rounded-full">
+                            Indisponível
                         </span>
                     )}
                 </div>
 
-                {/* Hover Add-to-Cart */}
-                {!isSoldOut && (
-                    <div className="absolute inset-x-0 bottom-0 p-3 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                        <button
-                            onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
-                            className="w-full bg-white/90 backdrop-blur-sm text-gray-900 py-2.5 rounded-lg uppercase tracking-widest text-[10px] font-bold hover:bg-[#66c2bb] hover:text-white transition-colors shadow-sm"
-                        >
-                            Adicionar à Sacola
-                        </button>
-                    </div>
-                )}
-            </div>
-
-            {/* Text Content */}
-            <div className="px-4 pb-4 pt-3 space-y-1.5">
-                <h3 className="font-medium text-sm text-gray-800 leading-snug line-clamp-2 group-hover:text-[#66c2bb] transition-colors">
-                    {product.name}
-                </h3>
-                <div className="flex items-baseline gap-2">
-                    <p className="text-gray-900 font-bold text-base">
-                        {formattedPrice}
-                    </p>
-                    {discount > 0 && (
-                        <p className="text-xs text-gray-400 line-through decoration-gray-400">
-                            {formattedComparePrice}
-                        </p>
-                    )}
-                </div>
-
-                {/* Dynamic Color Swatches */}
+                {/* Color Swatches */}
                 {product.colors && Array.isArray(product.colors) && product.colors.length > 0 && (() => {
-                    const MAX_VISIBLE = 3;
+                    const MAX_VISIBLE = 4;
                     const visible = product.colors.slice(0, MAX_VISIBLE);
                     const remaining = product.colors.length - MAX_VISIBLE;
                     return (
-                        <div className="flex items-center gap-1.5 pt-1">
+                        <div className="flex items-center gap-1 pt-1">
                             {visible.map((color, i) => (
                                 <span
                                     key={i}
-                                    className="w-4 h-4 rounded-full border border-gray-200"
+                                    className="w-3.5 h-3.5 rounded-full border border-gray-200 shadow-sm"
                                     style={{ backgroundColor: color.hex }}
                                     title={color.name}
                                 />
                             ))}
                             {remaining > 0 && (
-                                <span className="text-[11px] text-gray-400 ml-1">
-                                    + {remaining} {remaining === 1 ? 'cor' : 'cores'}
+                                <span className="text-[10px] text-gray-400 ml-0.5">
+                                    +{remaining}
                                 </span>
                             )}
                         </div>
                     );
                 })()}
-
-                {/* Mobile Button */}
-                <button
-                    onClick={(e) => { e.stopPropagation(); !isSoldOut && handleAddToCart(); }}
-                    disabled={isSoldOut}
-                    className={`md:hidden text-[10px] uppercase tracking-widest border border-gray-300 rounded-lg py-2 px-4 mt-1 transition-all w-full ${isSoldOut ? 'bg-gray-100 text-gray-400 cursor-not-allowed' : 'text-gray-600 hover:bg-[#66c2bb] hover:text-white hover:border-[#66c2bb]'}`}
-                >
-                    {isSoldOut ? 'Esgotado' : 'Adicionar à Sacola'}
-                </button>
             </div>
         </div>
     );

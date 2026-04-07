@@ -114,7 +114,7 @@ export default function CartSidebar() {
                                 <CheckCircle size={32} strokeWidth={1.5} />
                             </div>
                             <h3 className="text-xl font-bold text-gray-900">Pedido Confirmado!</h3>
-                            <p className="text-gray-500 text-sm">Obrigada por comprar na Flavia Beauty.</p>
+                            <p className="text-gray-500 text-sm">Obrigada por comprar na Shine Glam.</p>
                         </div>
                     ) : items.length === 0 ? (
                         /* Empty State */
