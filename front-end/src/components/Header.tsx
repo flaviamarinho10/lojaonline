@@ -8,6 +8,7 @@ interface Category {
     id: string;
     name: string;
     imageUrl?: string;
+    active?: boolean;
 }
 
 export default function Header() {
@@ -31,8 +32,8 @@ export default function Header() {
     }, []);
 
     return (
-        <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur-md border-b border-rosa-100/50 transition-all duration-300">
-            <div className="container mx-auto px-4 md:px-6 h-16 md:h-[72px] flex items-center justify-between gap-4">
+        <header className="sticky top-0 z-[100] w-full glass-light transition-all duration-500">
+            <div className="max-w-[1700px] mx-auto px-4 md:px-10 lg:px-16 h-20 md:h-[88px] flex items-center justify-between gap-8">
 
                 {/* Left: Logo */}
                 <div className="flex items-center flex-shrink-0">
@@ -41,8 +42,9 @@ export default function Header() {
                         className="cursor-pointer group"
                         aria-label="Ir para página inicial"
                     >
-                        <h1 className="text-xl md:text-2xl font-bold tracking-tight text-gray-800 group-hover:text-rosa-400 transition-colors duration-200">
-                            Shine <span className="font-light text-rosa-400">Glam</span>
+                        <h1 className="text-2xl md:text-3xl font-black tracking-tighter text-gray-900 group-hover:text-rosa-500 transition-all duration-500 flex items-center gap-1">
+                            Shine <span className="font-light italic bg-clip-text bg-gradient-to-r from-rosa-400 to-purple-500">Glam</span>
+                            <div className="w-1.5 h-1.5 rounded-full bg-rosa-400 ml-1"></div>
                         </h1>
                     </Link>
                 </div>
@@ -66,8 +68,8 @@ export default function Header() {
                             className={`absolute top-full left-1/2 -translate-x-1/2 w-56 pt-2 transition-all duration-300 origin-top ${dropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}
                         >
                             <div className="bg-white rounded-2xl shadow-xl border border-rosa-100/60 overflow-hidden">
-                                <div className="p-3 space-y-0.5">
-                                    {categories.map((category) => (
+                                <div className="py-2">
+                                    {categories.filter(cat => cat.active !== false).map((category) => (
                                         <Link
                                             key={category.id}
                                             to={`/categoria/${category.id}`}
@@ -86,27 +88,27 @@ export default function Header() {
                 <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
                     {/* Search */}
                     <button
-                        className="text-gray-400 hover:text-rosa-500 p-2.5 rounded-full hover:bg-rosa-50 transition-all"
+                        className="text-gray-900 hover:text-rosa-500 p-3 rounded-2xl hover:bg-white/60 transition-all duration-300 border border-transparent hover:border-white/40 shadow-sm md:shadow-none"
                         aria-label="Pesquisar"
                     >
-                        <Search size={20} strokeWidth={1.5} />
+                        <Search size={22} strokeWidth={2.5} />
                     </button>
 
                     {/* Login */}
-                    <button className="hidden md:flex items-center gap-2 text-gray-500 hover:text-rosa-500 px-3 py-2 rounded-full hover:bg-rosa-50 transition-all text-sm font-medium">
-                        <User size={18} strokeWidth={1.5} />
-                        <span>Entrar</span>
+                    <button className="hidden md:flex items-center gap-3 text-gray-900 hover:text-rosa-500 px-5 py-3 rounded-2xl hover:bg-white/60 transition-all duration-300 text-xs font-black uppercase tracking-widest border border-transparent hover:border-white/40">
+                        <User size={18} strokeWidth={2.5} />
+                        <span>Minha Conta</span>
                     </button>
 
                     {/* Cart */}
                     <button
-                        className="relative text-gray-400 hover:text-rosa-500 p-2.5 rounded-full hover:bg-rosa-50 transition-all duration-200"
+                        className="relative text-gray-900 hover:text-rosa-500 p-3 rounded-2xl hover:bg-white/60 transition-all duration-300 border border-transparent hover:border-white/40 shadow-sm md:shadow-none"
                         onClick={() => setIsCartOpen(true)}
                         aria-label={`Carrinho com ${itemCount} itens`}
                     >
-                        <ShoppingBag size={20} strokeWidth={1.5} />
+                        <ShoppingBag size={22} strokeWidth={2.5} />
                         {itemCount > 0 && (
-                            <span className="absolute -top-0.5 -right-0.5 flex h-5 w-5 items-center justify-center rounded-full bg-rosa-400 text-[10px] font-bold text-white shadow-sm ring-2 ring-white">
+                            <span className="absolute top-1 right-1 flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-[10px] font-black text-white shadow-lg ring-2 ring-white">
                                 {itemCount}
                             </span>
                         )}
@@ -114,12 +116,12 @@ export default function Header() {
 
                     {/* Mobile menu toggle */}
                     <button
-                        className="lg:hidden text-gray-500 hover:text-rosa-500 p-2 rounded-full hover:bg-rosa-50 transition-all"
+                        className="lg:hidden text-gray-900 p-2"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                         aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
                         aria-expanded={mobileMenuOpen}
                     >
-                        {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+                        {mobileMenuOpen ? <X size={24} strokeWidth={2} /> : <Menu size={24} strokeWidth={2} />}
                     </button>
                 </div>
             </div>
@@ -127,28 +129,27 @@ export default function Header() {
             {/* Mobile Menu */}
             {mobileMenuOpen && (
                 <div className="lg:hidden bg-white border-t border-rosa-100/50 animate-in slide-in-from-top duration-300">
-                    <nav className="container mx-auto px-4 py-4 space-y-1" aria-label="Navegação mobile">
-                        {/* Categories as pills */}
-                        <div className="pb-3">
-                            <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3 px-2">Categorias</p>
-                            <div className="flex flex-wrap gap-2 px-1">
-                                {categories.map((cat) => (
+                    <nav className="container mx-auto px-4 py-6 space-y-6" aria-label="Navegação mobile">
+                        <div className="space-y-4">
+                            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 px-1">Categorias</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {categories.filter(cat => cat.active !== false).map((category) => (
                                     <Link
-                                        key={cat.id}
-                                        to={`/categoria/${cat.id}`}
+                                        key={category.id}
+                                        to={`/categoria/${category.id}`}
                                         onClick={() => setMobileMenuOpen(false)}
                                         className="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-rosa-50 hover:bg-rosa-100 hover:text-rosa-600 transition-all border border-rosa-100"
                                     >
-                                        {cat.name}
+                                        {category.name}
                                     </Link>
                                 ))}
                             </div>
                         </div>
 
-                        <div className="pt-3 border-t border-rosa-100/50 flex gap-3">
-                            <button className="flex-1 flex items-center justify-center gap-2 bg-rosa-50 text-rosa-500 py-3 rounded-2xl text-sm font-medium border border-rosa-100">
-                                <User size={16} />
-                                Entrar / Cadastrar
+                        <div className="pt-2 border-t border-rosa-100/50">
+                            <button className="w-full flex items-center justify-center gap-2 bg-rosa-500 text-white py-3.5 rounded-2xl text-sm font-bold shadow-lg shadow-rosa-200 transition-transform active:scale-95">
+                                <User size={18} />
+                                Minha Conta
                             </button>
                         </div>
                     </nav>

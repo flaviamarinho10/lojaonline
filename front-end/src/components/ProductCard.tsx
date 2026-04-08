@@ -1,5 +1,4 @@
 import { useCart } from '../contexts/CartContext';
-import { ShoppingBag } from 'lucide-react';
 
 interface ProductColor {
     name: string;
@@ -23,6 +22,15 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
     const { addToCart } = useCart();
+
+    const formatImageUrl = (url: string | undefined) => {
+        if (!url) return "https://placehold.co/200x200/ffe4e6/be185d?text=Produto";
+        const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (driveMatch && driveMatch[1]) {
+            return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+        }
+        return url;
+    };
 
     const handleAddToCart = () => {
         addToCart({
@@ -50,102 +58,71 @@ export default function ProductCard({ product }: ProductCardProps) {
     const isSoldOut = product.badges?.includes('Esgotado');
 
     return (
-        <div className="group cursor-pointer bg-white rounded-3xl overflow-hidden transition-all duration-300 hover:shadow-lg flex-shrink-0 w-[175px] md:w-[240px] border border-gray-100/80">
-            {/* Image Container */}
-            <div className={`relative bg-gradient-to-b from-rosa-50/40 to-white rounded-2xl m-2 overflow-hidden ${isSoldOut ? 'opacity-60 grayscale' : ''}`}>
-                <div className="aspect-square flex items-center justify-center p-3">
-                    <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        className="max-h-full max-w-full object-contain transition-transform duration-500 ease-out group-hover:scale-105"
-                    />
-                </div>
+        <div className="group cursor-pointer flex-shrink-0 w-[170px] md:w-[280px] flex flex-col h-full animate-entrance">
+            {/* Image Container flutuante */}
+            <div className={`relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-white shadow-sm transition-all duration-300 group-hover:shadow-xl group-hover:shadow-rosa-100/20 group-hover:-translate-y-1 border border-white flex items-center justify-center p-6 ${isSoldOut ? 'opacity-60 grayscale' : ''}`}>
+                <img
+                    src={formatImageUrl(product.imageUrl)}
+                    alt={product.name}
+                    className="max-h-full max-w-full object-contain transition-all duration-1000 ease-out group-hover:scale-110"
+                />
 
-                {/* Badges */}
-                <div className="absolute top-2.5 left-2.5 flex flex-col gap-1.5 z-10">
+                {/* Badges de Luxo */}
+                <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
                     {product.badges?.filter(b => b !== 'Esgotado').map(badge => (
-                        <span key={badge} className={`inline-flex items-center text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm ${
-                            badge === 'Frete Grátis' ? 'bg-rosa-100 text-rosa-600' :
-                            badge === 'Lançamento' ? 'bg-purple-50 text-purple-600' :
-                            'bg-white/90 text-gray-600 backdrop-blur-md'
+                        <span key={badge} className={`text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm backdrop-blur-md ${
+                            badge === 'Frete Grátis' ? 'bg-rosa-400/90 text-white' :
+                            badge === 'Lançamento' ? 'bg-purple-500/90 text-white' :
+                            'bg-white/80 text-gray-800'
                         }`}>
                             {badge}
                         </span>
                     ))}
                     {discount > 0 && (
-                        <span className="inline-flex items-center bg-rosa-400 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
-                            -{discount}%
+                        <span className="bg-gray-900 text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">
+                            -{discount}% OFF
                         </span>
                     )}
-                    {isSoldOut && (
-                        <span className="inline-flex items-center bg-gray-800 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
-                            Esgotado
-                        </span>
-                    )}
+                </div>
+
+                {/* Overlay de Ação Rápida (Desktop) */}
+                <div className="hidden md:flex absolute inset-0 bg-rosa-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 items-end justify-center pb-8 p-4">
+                     <button
+                        onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
+                        className="w-full glass text-gray-900 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 hover:bg-gray-900 hover:text-white"
+                    >
+                        Adicionar
+                    </button>
                 </div>
             </div>
 
-            {/* Text Content */}
-            <div className="px-3.5 pb-3.5 pt-1 space-y-1">
-                <h3 className="font-semibold text-sm text-gray-800 leading-snug line-clamp-2 group-hover:text-rosa-500 transition-colors">
-                    {product.name}
-                </h3>
-                <p className="text-xs text-gray-400 line-clamp-1">{product.description}</p>
+            {/* Conteúdo Textual minimalista */}
+            <div className="px-2 pt-6 pb-2 space-y-2 flex-1 flex flex-col text-center md:text-left">
+                <div className="flex flex-col gap-1">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-rosa-300">Special Selection</p>
+                    <h3 className="font-extrabold text-sm md:text-lg text-gray-900 leading-tight line-clamp-2 min-h-[2.5rem]">
+                        {product.name}
+                    </h3>
+                </div>
 
-                <div className="h-px bg-gray-100 my-1.5" />
-
-                <div className="flex items-center justify-between gap-2">
-                    <div>
-                        <p className="text-gray-900 font-bold text-base leading-tight">
-                            {formattedPrice}
-                        </p>
-                        {discount > 0 && (
-                            <p className="text-[11px] text-gray-400 line-through">
-                                {formattedComparePrice}
-                            </p>
-                        )}
-                    </div>
-
-                    {/* Add to cart button */}
-                    {!isSoldOut ? (
-                        <button
-                            onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
-                            className="flex items-center gap-1.5 bg-rosa-400 hover:bg-rosa-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all duration-200 active:scale-95 shadow-sm hover:shadow-md"
-                        >
-                            <ShoppingBag size={13} />
-                            <span className="hidden md:inline">Adicionar</span>
-                            <span className="md:hidden">Add</span>
-                        </button>
-                    ) : (
-                        <span className="text-xs text-gray-400 font-medium bg-gray-100 px-3 py-2 rounded-full">
-                            Indisponível
+                <div className="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-3 pt-2">
+                    <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tighter">
+                        {formattedPrice}
+                    </span>
+                    {formattedComparePrice && (
+                        <span className="text-xs text-gray-400 line-through font-medium">
+                            {formattedComparePrice}
                         </span>
                     )}
                 </div>
 
-                {/* Color Swatches */}
-                {product.colors && Array.isArray(product.colors) && product.colors.length > 0 && (() => {
-                    const MAX_VISIBLE = 4;
-                    const visible = product.colors.slice(0, MAX_VISIBLE);
-                    const remaining = product.colors.length - MAX_VISIBLE;
-                    return (
-                        <div className="flex items-center gap-1 pt-1">
-                            {visible.map((color, i) => (
-                                <span
-                                    key={i}
-                                    className="w-3.5 h-3.5 rounded-full border border-gray-200 shadow-sm"
-                                    style={{ backgroundColor: color.hex }}
-                                    title={color.name}
-                                />
-                            ))}
-                            {remaining > 0 && (
-                                <span className="text-[10px] text-gray-400 ml-0.5">
-                                    +{remaining}
-                                </span>
-                            )}
-                        </div>
-                    );
-                })()}
+                {/* Botão Mobile */}
+                <button
+                    onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
+                    className="md:hidden w-full bg-gray-900 text-white py-3.5 rounded-2xl text-[10px] font-black uppercase tracking-widest mt-4 active:scale-95 transition-transform"
+                >
+                    Comprar
+                </button>
             </div>
         </div>
     );

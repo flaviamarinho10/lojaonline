@@ -4,7 +4,7 @@ import api from '../lib/axios';
 import {
     Package, ShoppingCart, LogOut, Trash2, Plus, Edit, Save, X, Loader2,
     Image as ImageIcon, Settings, LayoutGrid, Menu as MenuIcon,
-    ChevronRight
+    ChevronRight, ChevronUp, ChevronDown, Eye, EyeOff
 } from 'lucide-react';
 import AdminOrderList from '../components/AdminOrderList';
 import AdminSettings from '../components/AdminSettings';
@@ -30,8 +30,10 @@ interface Product {
 interface Category {
     id: string;
     name: string;
-    imageUrl: string;
+    imageUrl?: string;
     bgColor: string;
+    sortOrder?: number;
+    active?: boolean;
 }
 
 const BG_COLOR_OPTIONS = [
@@ -207,7 +209,7 @@ const Admin: React.FC = () => {
 
     const handleEditCategory = (cat: Category) => {
         setCatName(cat.name);
-        setCatImageUrl(cat.imageUrl);
+        setCatImageUrl(cat.imageUrl || '');
         setCatBgColor(cat.bgColor);
         setEditingCatId(cat.id);
     };
@@ -220,6 +222,55 @@ const Admin: React.FC = () => {
         } catch (error) {
             console.error('Error deleting category:', error);
             alert('Erro ao excluir categoria.');
+        }
+    };
+
+    const handleMoveCategory = async (index: number, direction: 'up' | 'down') => {
+        if (direction === 'up' && index === 0) return;
+        if (direction === 'down' && index === categories.length - 1) return;
+
+        const newCats = [...categories];
+        const swapIndex = direction === 'up' ? index - 1 : index + 1;
+        const temp = newCats[index];
+        newCats[index] = newCats[swapIndex];
+        newCats[swapIndex] = temp;
+
+        setCategories(newCats); // Optimistic UI
+
+        try {
+            const promises = newCats.map((cat, i) => 
+                api.put(`/categories/${cat.id}`, {
+                    name: cat.name,
+                    imageUrl: cat.imageUrl,
+                    bgColor: cat.bgColor,
+                    sortOrder: i
+                })
+            );
+            await Promise.all(promises);
+        } catch (error) {
+            console.error('Error reordering', error);
+            alert('Falha ao reordenar categorias.');
+            fetchCategories(); // rollback
+        }
+    };
+
+    const handleToggleVisibility = async (cat: Category) => {
+        const newStatus = cat.active === false ? true : false;
+        
+        // Optimistic update
+        setCategories(prev => prev.map(c => c.id === cat.id ? { ...c, active: newStatus } : c));
+
+        try {
+            await api.put(`/categories/${cat.id}`, {
+                name: cat.name,
+                imageUrl: cat.imageUrl,
+                bgColor: cat.bgColor,
+                active: newStatus
+            });
+        } catch (error) {
+            console.error('Error toggling visibility', error);
+            alert('Erro ao alterar visibilidade.');
+            fetchCategories(); // rollback
         }
     };
 
@@ -598,9 +649,9 @@ const Admin: React.FC = () => {
                             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                                 {/* Add/Edit Category Form */}
                                 <div className="bg-white border border-gray-100 rounded-xl p-6 h-fit shadow-sm">
-                                    <h2 className="text-base font-semibold text-gray-900 mb-5 flex items-center gap-2">
-                                        {editingCatId ? <Edit size={18} className="text-[#66c2bb]" /> : <Plus size={18} className="text-[#66c2bb]" />}
-                                        {editingCatId ? 'Editar Categoria' : 'Nova Categoria'}
+                                    <h2 className="text-base font-semibold text-gray-900 mb-5 flex flex-col">
+                                        {editingCatId ? 'Editando Categoria' : 'Preencha os novos dados'}
+                                        {!editingCatId && <span className="text-xs font-normal text-gray-400 mt-1">Preencha abaixo para cadastrar</span>}
                                     </h2>
 
                                     <form onSubmit={handleSaveCategory} className="space-y-4">
@@ -680,23 +731,24 @@ const Admin: React.FC = () => {
                                         </div>
 
                                         {/* Actions */}
-                                        <div className="pt-2 flex gap-3">
+                                        <div className="pt-2 flex flex-col gap-3">
                                             <button
                                                 type="submit"
                                                 disabled={isCatSaving}
-                                                className="flex-1 bg-[#66c2bb] hover:bg-[#55b0a9] text-white font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed text-sm"
+                                                className="w-full bg-[#66c2bb] hover:bg-[#55b0a9] text-white font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed text-sm"
                                             >
                                                 {isCatSaving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
-                                                {editingCatId ? 'Atualizar' : 'Adicionar Categoria'}
+                                                {editingCatId ? 'Salvar Alterações' : 'Adicionar Categoria'}
                                             </button>
 
                                             {editingCatId && (
                                                 <button
                                                     type="button"
                                                     onClick={resetCatForm}
-                                                    className="px-4 bg-white border border-gray-200 hover:bg-gray-50 text-gray-600 font-medium py-2.5 rounded-lg transition-all"
+                                                    className="w-full bg-red-50 hover:bg-red-100 text-red-600 border border-red-100 font-semibold py-2 text-sm rounded-lg transition-all flex items-center justify-center gap-2"
                                                 >
                                                     <X size={16} />
+                                                    Cancelar e Criar Nova
                                                 </button>
                                             )}
                                         </div>
@@ -736,7 +788,7 @@ const Admin: React.FC = () => {
                                                             </td>
                                                         </tr>
                                                     ) : (
-                                                        categories.map((cat) => (
+                                                        categories.map((cat, catIndex) => (
                                                             <tr key={cat.id} className="hover:bg-[#e8f7f6]/30 transition-colors group">
                                                                 <td className="px-6 py-3">
                                                                     <div
@@ -753,20 +805,49 @@ const Admin: React.FC = () => {
                                                                     </div>
                                                                 </td>
                                                                 <td className="px-6 py-3">
-                                                                    <span className="font-medium text-gray-900 text-sm">{cat.name}</span>
+                                                                    <span className={`font-medium text-sm ${cat.active !== false ? 'text-gray-900' : 'text-gray-400 line-through'}`}>
+                                                                        {cat.name} {cat.active === false && <span className="ml-2 text-[10px] bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full font-bold uppercase tracking-wider not-italic no-underline">Oculto</span>}
+                                                                    </span>
                                                                 </td>
                                                                 <td className="px-6 py-3 text-right">
-                                                                    <div className="flex justify-end gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                                    <div className="flex justify-end gap-1">
+                                                                        {/* Ordem Buttons */}
+                                                                        <div className="flex flex-col justify-center mr-2 bg-gray-50 border border-gray-100 rounded-lg overflow-hidden">
+                                                                            <button 
+                                                                                disabled={catIndex === 0}
+                                                                                onClick={() => handleMoveCategory(catIndex, 'up')}
+                                                                                className="px-1.5 py-0.5 text-gray-400 hover:text-gray-700 hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                                                                                title="Mover para cima"
+                                                                            >
+                                                                                <ChevronUp size={14} strokeWidth={3} />
+                                                                            </button>
+                                                                            <button 
+                                                                                disabled={catIndex === categories.length - 1}
+                                                                                onClick={() => handleMoveCategory(catIndex, 'down')}
+                                                                                className="px-1.5 py-0.5 text-gray-400 hover:text-gray-700 hover:bg-gray-200 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                                                                                title="Mover para baixo"
+                                                                            >
+                                                                                <ChevronDown size={14} strokeWidth={3} />
+                                                                            </button>
+                                                                        </div>
+
+                                                                        <button
+                                                                            onClick={() => handleToggleVisibility(cat)}
+                                                                            className={`p-2 rounded-lg transition-colors border border-transparent ${cat.active !== false ? 'text-gray-500 hover:text-orange-600 hover:bg-orange-50 hover:border-orange-100' : 'text-orange-500 bg-orange-50 hover:bg-orange-100 border-orange-200'}`}
+                                                                            title={cat.active !== false ? "Ocultar" : "Mostrar"}
+                                                                        >
+                                                                            {cat.active !== false ? <Eye size={16} /> : <EyeOff size={16} />}
+                                                                        </button>
                                                                         <button
                                                                             onClick={() => handleEditCategory(cat)}
-                                                                            className="p-2 text-gray-400 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors"
+                                                                            className="p-2 text-gray-500 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors border border-transparent hover:border-blue-100"
                                                                             title="Editar"
                                                                         >
                                                                             <Edit size={16} />
                                                                         </button>
                                                                         <button
                                                                             onClick={() => handleDeleteCategory(cat.id)}
-                                                                            className="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                                                                            className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors border border-transparent hover:border-red-100"
                                                                             title="Excluir"
                                                                         >
                                                                             <Trash2 size={16} />

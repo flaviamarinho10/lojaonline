@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, LayoutGrid } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import api from '../lib/axios';
 
 interface Category {
@@ -8,6 +8,7 @@ interface Category {
     imageUrl: string;
     bgColor: string;
     sortOrder: number;
+    active?: boolean;
 }
 
 const BG_COLOR_MAP: Record<string, string> = {
@@ -80,33 +81,57 @@ export default function CategoryCarousel({ onSelectCategory, activeCategory }: C
     if (categories.length === 0) return null;
 
     return (
-        <section className="py-10 md:py-14 bg-white" aria-label="Compre por Categoria">
+        <section className="py-10 md:py-20 bg-white relative overflow-hidden" aria-label="Compre por Categoria">
+            {/* Elemento de fundo estético para desktop */}
+            <div className="hidden md:block absolute right-0 top-0 w-1/3 h-full bg-gradient-to-l from-rosa-50/50 to-transparent -z-10 pointer-events-none rounded-l-full blur-3xl mix-blend-multiply"></div>
+
             <div className="max-w-7xl mx-auto px-4">
-                {/* Title */}
-                <div className="flex items-center gap-2 mb-8">
-                    <LayoutGrid size={20} className="text-rosa-400" />
-                    <h2 className="text-xl md:text-2xl font-bold text-gray-800" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                        Categorias
-                    </h2>
-                </div>
+                <div className="flex flex-col md:flex-row md:items-center gap-8 md:gap-16">
+                    
+                    {/* Bloco de Título (Agora em um "canto" no desktop) */}
+                    <div className="md:w-[35%] flex flex-col items-center md:items-start text-center md:text-left shrink-0">
+                        {/* Tag estilosa visível apenas no desktop */}
+                        <div className="hidden md:inline-flex items-center justify-center px-4 py-2 rounded-full bg-pink-50 border border-pink-100 text-rosa-500 font-bold text-[10px] tracking-widest uppercase mb-6 shadow-sm">
+                            <span className="w-2 h-2 rounded-full bg-rosa-400 mr-2 animate-pulse"></span>
+                            Descubra
+                        </div>
+                        
+                        <h2 className="text-2xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-gray-900 via-gray-700 to-gray-800 tracking-tight leading-[1.1] mb-2 md:mb-6">
+                            Nossas <br className="hidden md:block" />
+                            <span className="bg-clip-text bg-gradient-to-r from-rosa-400 to-pink-300">Categorias</span>
+                        </h2>
+                        
+                        <p className="hidden md:block text-gray-500 text-lg leading-relaxed max-w-sm mb-8 font-medium">
+                            Navegue por coleções exclusivas criadas para realçar cada detalhe da sua beleza.
+                        </p>
 
-                {/* Carousel wrapper */}
-                <div className="relative">
-                    {/* Prev arrow */}
-                    <button
-                        onClick={() => scroll('left')}
-                        className="hidden md:flex absolute -left-3 top-[calc(50%-16px)] -translate-y-1/2 z-10 w-9 h-9 bg-white rounded-full shadow-md items-center justify-center text-gray-500 hover:text-rosa-500 hover:shadow-lg transition-all duration-200 active:scale-90 border border-rosa-100/50"
-                        aria-label="Categorias anteriores"
-                    >
-                        <ChevronLeft size={18} />
-                    </button>
+                        {/* Indicadores de seta apenas no desktop para mostrar que é rolável */}
+                        <div className="hidden md:flex gap-3">
+                            <button
+                                onClick={() => scroll('left')}
+                                className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center text-gray-500 hover:border-rosa-300 hover:text-rosa-500 hover:bg-rosa-50 transition-all duration-300 active:scale-90"
+                                aria-label="Categorias anteriores"
+                            >
+                                <ChevronLeft size={20} />
+                            </button>
+                            <button
+                                onClick={() => scroll('right')}
+                                className="w-12 h-12 rounded-full border-2 border-gray-100 flex items-center justify-center text-gray-500 hover:border-rosa-300 hover:text-rosa-500 hover:bg-rosa-50 transition-all duration-300 active:scale-90"
+                                aria-label="Próximas categorias"
+                            >
+                                <ChevronRight size={20} />
+                            </button>
+                        </div>
+                    </div>
 
-                    {/* Scrollable list */}
-                    <div
-                        ref={scrollRef}
-                        className="flex gap-5 md:gap-7 overflow-x-auto scroll-smooth snap-x snap-mandatory px-2 pb-4 no-scrollbar"
-                    >
-                        {categories.map((cat) => (
+                    {/* Carousel wrapper (Lado Direto no desktop, Centralizado no Mobile) */}
+                    <div className="relative w-full md:w-[65%]">
+                        {/* Scrollable list */}
+                        <div
+                            ref={scrollRef}
+                            className="flex justify-center md:justify-start gap-5 md:gap-8 overflow-x-auto scroll-smooth snap-x snap-mandatory px-2 md:px-4 pb-8 md:pb-4 no-scrollbar [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                        >
+                        {categories.filter(cat => cat.active !== false).map((cat) => (
                             <button
                                 key={cat.id}
                                 onClick={() => {
@@ -115,7 +140,7 @@ export default function CategoryCarousel({ onSelectCategory, activeCategory }: C
                                     }
                                 }}
                                 className={`flex flex-col items-center gap-2.5 flex-shrink-0 group snap-start transition-all duration-300 ${
-                                    activeCategory && activeCategory !== cat.id ? 'opacity-60 scale-95 hover:opacity-100 hover:scale-100' : 'scale-100'
+                                    activeCategory && activeCategory !== cat.id ? 'scale-95 hover:scale-100' : 'scale-100'
                                 }`}
                                 aria-label={`Categoria ${cat.name}`}
                             >
@@ -130,7 +155,7 @@ export default function CategoryCarousel({ onSelectCategory, activeCategory }: C
                                         <img
                                             src={cat.imageUrl}
                                             alt={cat.name}
-                                            className="w-full h-full object-cover"
+                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                             onError={(e) => {
                                                 (e.target as HTMLImageElement).style.display = 'none';
                                             }}
@@ -147,16 +172,8 @@ export default function CategoryCarousel({ onSelectCategory, activeCategory }: C
                                 </span>
                             </button>
                         ))}
+                        </div>
                     </div>
-
-                    {/* Next arrow */}
-                    <button
-                        onClick={() => scroll('right')}
-                        className="hidden md:flex absolute -right-3 top-[calc(50%-16px)] -translate-y-1/2 z-10 w-9 h-9 bg-white rounded-full shadow-md items-center justify-center text-gray-500 hover:text-rosa-500 hover:shadow-lg transition-all duration-200 active:scale-90 border border-rosa-100/50"
-                        aria-label="Próximas categorias"
-                    >
-                        <ChevronRight size={18} />
-                    </button>
                 </div>
             </div>
         </section>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../lib/axios';
-import { Loader2, Save, Image as ImageIcon, LayoutTemplate, Megaphone, Type } from 'lucide-react';
+import { Loader2, Save, Image as ImageIcon, LayoutTemplate, Megaphone } from 'lucide-react';
 
 const AdminSettings = () => {
     const [settings, setSettings] = useState({
@@ -16,6 +16,11 @@ const AdminSettings = () => {
             subtitle: '',
             buttonText: '',
             buttonLink: ''
+        },
+        storePhoto: {
+            active: true,
+            url: '',
+            size: 96
         }
     });
     const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +31,13 @@ const AdminSettings = () => {
         const fetchSettings = async () => {
             try {
                 const res = await api.get('/settings/appearance');
-                setSettings(res.data);
+                setSettings(prev => ({
+                    ...prev,
+                    ...(res.data || {}),
+                    topBar: { ...prev.topBar, ...(res.data?.topBar || {}) },
+                    hero: { ...prev.hero, ...(res.data?.hero || {}) },
+                    storePhoto: { ...prev.storePhoto, ...(res.data?.storePhoto || {}) }
+                }));
             } catch (error) {
                 console.error(error);
             } finally {
@@ -57,6 +68,10 @@ const AdminSettings = () => {
 
     const updateHero = (field: string, value: any) => {
         setSettings(prev => ({ ...prev, hero: { ...prev.hero, [field]: value } }));
+    };
+
+    const updateStorePhoto = (field: string, value: any) => {
+        setSettings(prev => ({ ...prev, storePhoto: { ...prev.storePhoto, [field]: value } }));
     };
 
     if (isLoading) {
@@ -181,6 +196,89 @@ const AdminSettings = () => {
                                     className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
                                     placeholder="/colecao-x"
                                 />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Foto da Loja */}
+                <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                    <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
+                        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                            <ImageIcon size={20} className="text-gray-400" /> Foto da Loja (Home)
+                        </h3>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={settings.storePhoto?.active ?? true}
+                                onChange={(e) => updateStorePhoto('active', e.target.checked)}
+                                className="sr-only peer"
+                            />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#66c2bb]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#66c2bb]"></div>
+                            <span className="ml-3 text-sm font-medium text-gray-700">Visível</span>
+                        </label>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Imagem da Logo</label>
+                            
+                            <div className="flex gap-2">
+                                <label className="flex-1 bg-white border border-gray-200 border-dashed hover:bg-gray-50 hover:border-[#66c2bb] transition-all rounded-lg text-sm text-gray-500 font-medium cursor-pointer flex items-center justify-center gap-2 group p-2">
+                                    <input 
+                                        type="file" 
+                                        className="hidden" 
+                                        accept="image/*"
+                                        onChange={(e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) {
+                                                const reader = new FileReader();
+                                                reader.onloadend = () => {
+                                                    if (typeof reader.result === 'string') {
+                                                        updateStorePhoto('url', reader.result);
+                                                    }
+                                                };
+                                                reader.readAsDataURL(file);
+                                            }
+                                        }}
+                                    />
+                                    <span className="group-hover:text-[#66c2bb] transition-colors">Fazer Upload</span>
+                                </label>
+                                {settings.storePhoto?.url && (
+                                    <button 
+                                        type="button"
+                                        onClick={() => updateStorePhoto('url', '')}
+                                        className="bg-red-50 text-red-500 hover:bg-red-100 rounded-lg px-3 text-sm font-medium transition-colors"
+                                    >
+                                        Remover
+                                    </button>
+                                )}
+                            </div>
+
+                            <input
+                                value={settings.storePhoto?.url || ''}
+                                onChange={(e) => updateStorePhoto('url', e.target.value)}
+                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-xs"
+                                placeholder="Ou cole a URL da imagem aqui..."
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide flex justify-between">
+                                <span>Tamanho (px)</span>
+                                <span className="text-[#66c2bb] font-bold">{settings.storePhoto?.size || 96}px</span>
+                            </label>
+                            <input
+                                type="range"
+                                min="48"
+                                max="256"
+                                step="8"
+                                value={settings.storePhoto?.size || 96}
+                                onChange={(e) => updateStorePhoto('size', parseInt(e.target.value))}
+                                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#66c2bb]"
+                            />
+                            <div className="flex justify-between text-[10px] text-gray-400 font-medium">
+                                <span>Pequeno</span>
+                                <span>Grande</span>
                             </div>
                         </div>
                     </div>

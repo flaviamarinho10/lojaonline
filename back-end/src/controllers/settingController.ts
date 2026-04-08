@@ -62,6 +62,11 @@ export const getAppearance = async (req: Request, res: Response) => {
                 subtitle: '',
                 buttonText: '',
                 buttonLink: ''
+            },
+            storePhoto: {
+                active: true,
+                url: 'https://placehold.co/200x200/ffe4e6/be185d?text=Logo',
+                size: 96 // size in pixels (equivalent to w-24, h-24)
             }
         };
 
@@ -90,8 +95,9 @@ export const updateAppearance = async (req: Request, res: Response) => {
         });
 
         res.json(appearanceDisplay);
-    } catch (error) {
+    } catch (error: any) {
         console.error('Error updating appearance:', error);
-        res.status(500).json({ error: 'Error updating appearance' });
+        require('fs').appendFileSync(require('path').join(__dirname, '../../debug_error.log'), new Date().toISOString() + ' Error updating appearance: ' + (error?.stack || error?.message || String(error)) + '\n');
+        res.status(500).json({ error: 'Error updating appearance', details: error?.message });
     }
 };

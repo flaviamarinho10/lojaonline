@@ -16,13 +16,14 @@ export const getAllCategories = async (req: Request, res: Response) => {
 
 export const createCategory = async (req: Request, res: Response) => {
     try {
-        const { name, imageUrl, bgColor, sortOrder } = req.body;
+        const { name, imageUrl, bgColor, sortOrder, active } = req.body;
         const category = await prisma.category.create({
             data: {
                 name,
                 imageUrl: imageUrl || '',
                 bgColor: bgColor || 'bg-green-100',
                 sortOrder: sortOrder ? Number(sortOrder) : 0,
+                active: active !== undefined ? active : true,
             },
         });
         res.status(201).json(category);
@@ -33,7 +34,7 @@ export const createCategory = async (req: Request, res: Response) => {
 
 export const updateCategory = async (req: Request, res: Response) => {
     const { id } = req.params as { id: string };
-    const { name, imageUrl, bgColor, sortOrder } = req.body;
+    const { name, imageUrl, bgColor, sortOrder, active } = req.body;
     try {
         const category = await prisma.category.update({
             where: { id },
@@ -41,7 +42,8 @@ export const updateCategory = async (req: Request, res: Response) => {
                 name,
                 imageUrl: imageUrl ?? '',
                 bgColor: bgColor ?? 'bg-green-100',
-                sortOrder: sortOrder ? Number(sortOrder) : 0,
+                sortOrder: sortOrder !== undefined ? Number(sortOrder) : undefined,
+                active: active !== undefined ? active : undefined,
             },
         });
         res.json(category);

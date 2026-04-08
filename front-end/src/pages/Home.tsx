@@ -1,7 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Search, Star, Phone, Mail, Instagram, Lock, ShieldCheck } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Search, Star, Phone, Mail, Instagram, Lock, ShieldCheck, Sparkles } from 'lucide-react';
 import Header from '../components/Header';
 import CategoryCarousel from '../components/CategoryCarousel';
+import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
 import CartSidebar from '../components/CartSidebar';
 import BackToTop from '../components/BackToTop';
@@ -22,6 +23,7 @@ export default function Home() {
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const [appearance, setAppearance] = useState<any>(null);
     const productsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -29,8 +31,12 @@ export default function Home() {
             setLoading(true);
             try {
                 const url = activeCategory ? `/products?category=${activeCategory}` : '/products';
-                const prodRes = await api.get(url);
+                const [prodRes, appRes] = await Promise.all([
+                    api.get(url),
+                    api.get('/settings/appearance')
+                ]);
                 setProducts(prodRes.data);
+                setAppearance(appRes.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
@@ -49,42 +55,123 @@ export default function Home() {
         });
     };
 
+    const formatImageUrl = (url: string | undefined) => {
+        if (!url) return "https://placehold.co/200x200/ffe4e6/be185d?text=Logo";
+        const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+        if (driveMatch && driveMatch[1]) {
+            return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+        }
+        return url;
+    };
+
     return (
-        <div className="min-h-screen bg-[#fefcfb] text-gray-900">
+        <div className="min-h-screen mesh-gradient selection:bg-rosa-100 selection:text-rosa-600">
             <Header />
             <CartSidebar />
 
-            {/* Search Bar */}
-            <div className="bg-gradient-to-b from-rosa-50/60 to-transparent py-4 px-4">
-                <div className="max-w-2xl mx-auto">
-                    <div className="flex items-center bg-white rounded-2xl border border-rosa-100 px-4 py-3 shadow-sm hover:shadow-md transition-shadow">
-                        <Search size={18} className="text-gray-400 flex-shrink-0" />
-                        <input
-                            type="text"
-                            placeholder="Buscar produtos ou categorias..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="flex-1 bg-transparent outline-none text-sm text-gray-700 placeholder-gray-400 ml-3"
-                            aria-label="Campo de pesquisa"
+            <div className="max-w-[1700px] mx-auto w-full px-4 md:px-10 lg:px-16 flex flex-col lg:flex-row gap-12 pt-6 md:pt-12">
+
+                {/* Sidebar com Carrossel Vertical (Desktop Only) */}
+                <aside className="hidden lg:block w-[140px] shrink-0">
+                    <div className="sticky top-28">
+                        <CategorySidebar 
+                            activeCategory={activeCategory} 
+                            onSelectCategory={setActiveCategory} 
                         />
                     </div>
-                </div>
-            </div>
+                </aside>
 
-            {/* Compre por Categoria */}
-            <CategoryCarousel 
-                activeCategory={activeCategory} 
-                onSelectCategory={setActiveCategory} 
-            />
+                {/* Conteúdo Principal Fluid */}
+                <main className="flex-1 min-w-0 pb-24 space-y-16">
+
+                    {/* Billboard Hero: Integrada e Impactante */}
+                    <div className="relative group overflow-visible pt-4 md:pt-6">
+
+                        <div className="relative z-10 grid grid-cols-1 md:grid-cols-[1fr_auto] items-center gap-12 md:gap-20">
+                            
+                            {/* Texto de Impacto Billboard */}
+                            <div className="text-center md:text-left animate-entrance">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/50 backdrop-blur-sm border border-white/40 shadow-sm mb-6">
+                                    <Sparkles size={14} className="text-rosa-400" />
+                                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gray-500">Coleção Premium 2024</span>
+                                </div>
+                                <h1 className="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[0.95] text-gray-900 mb-8">
+                                    Compre a sua <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-rosa-400 via-pink-400 to-rosa-500 drop-shadow-sm italic font-serif">Maquiagem</span>
+                                    <br />
+                                    <span className="text-gray-900">Perfeita</span>
+                                </h1>
+                                <p className="text-gray-500 text-lg md:text-xl max-w-lg font-medium leading-relaxed mb-10 opacity-80">
+                                    Curadoria exclusiva das melhores marcas para realçar o que você tem de único. Brilhe todos os dias com a Shine Glam.
+                                </p>
+
+                                {/* Pesquisa Premium Billboard style */}
+                                <div className="max-w-xl flex items-center bg-white/70 backdrop-blur-md rounded-[2rem] border border-white/60 p-2 shadow-2xl shadow-rosa-100/30 focus-within:ring-4 focus-within:ring-rosa-100/50 transition-all duration-500">
+                                    <div className="pl-6 text-rosa-400">
+                                        <Search size={22} strokeWidth={2.5} />
+                                    </div>
+                                    <input
+                                        type="text"
+                                        placeholder="O que você deseja encontrar hoje?"
+                                        value={searchQuery}
+                                        onChange={(e) => setSearchQuery(e.target.value)}
+                                        className="flex-1 bg-transparent border-none outline-none text-base text-gray-800 placeholder:text-gray-400 ml-4 font-semibold h-12"
+                                    />
+                                    <button className="bg-gray-900 text-white text-xs font-black px-8 py-4 rounded-[1.5rem] hover:bg-rosa-500 hover:scale-105 transition-all duration-300 shadow-lg tracking-widest uppercase">
+                                        Explorar
+                                    </button>
+                                </div>
+                            </div>
+
+                            {/* Logo/Imagem Hero com moldura de luz */}
+                            <div className="hidden md:flex justify-center animate-entrance" style={{ animationDelay: '0.2s' }}>
+                                <div className="relative">
+                                    <div className="relative w-[320px] h-[320px] lg:w-[420px] lg:h-[420px] rounded-full p-2 bg-white/80 border border-white shadow-xl flex items-center justify-center overflow-hidden">
+                                        <div className="w-[96%] h-[96%] rounded-full overflow-hidden border-[8px] border-white shadow-inner">
+                                            <img 
+                                                src={formatImageUrl(appearance?.storePhoto?.url)} 
+                                                alt="Logo" 
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                    </div>
+                                    
+                                    {/* Tag flutuante */}
+                                    <div className="absolute -bottom-4 -left-4 glass px-6 py-4 rounded-3xl shadow-xl animate-float">
+                                        <div className="flex items-center gap-3">
+                                            <div className="w-10 h-10 rounded-full bg-rosa-400 flex items-center justify-center text-white font-bold">SG</div>
+                                            <div>
+                                                <p className="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Qualidade</p>
+                                                <p className="text-sm font-black text-gray-800">100% Original</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Seção de Categorias em Carrossel (Horizontal - Mobile Only agora) */}
+                    <div className="w-full pt-4 md:pt-0 lg:hidden">
+                        <CategoryCarousel 
+                            activeCategory={activeCategory} 
+                            onSelectCategory={setActiveCategory} 
+                        />
+                    </div>
 
             {/* Destaques Section */}
-            <section className="py-10 md:py-14">
-                <div className="max-w-7xl mx-auto px-4">
-                    <div className="flex items-center gap-2 mb-8">
-                        <Star size={20} className="text-rosa-400" fill="currentColor" />
-                        <h2 className="text-xl md:text-2xl font-bold text-gray-800" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                            Destaques
-                        </h2>
+            <section className="w-full animate-entrance" style={{ animationDelay: '0.4s' }}>
+                <div className="w-full">
+                    <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+                        <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                            <div className="inline-flex items-center justify-center px-4 py-1.5 rounded-full bg-rosa-50 text-rosa-500 font-bold text-[10px] tracking-widest uppercase mb-3 border border-transparent">
+                                <Star size={12} className="mr-2 text-rosa-400" fill="currentColor" />
+                                Mais Desejados
+                            </div>
+                            <h2 className="text-2xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-gray-700 to-gray-800 tracking-tight leading-[1.1]">
+                                Nossos Destaques
+                            </h2>
+                        </div>
                     </div>
 
                     {loading ? (
@@ -142,6 +229,10 @@ export default function Home() {
                     )}
                 </div>
             </section>
+                    {/* Espaço final */}
+                    <div className="h-10" />
+                </main>
+            </div>
 
             {/* Newsletter */}
             <section className="py-14 md:py-20 bg-gradient-to-br from-rosa-50 via-white to-rosa-50/30">
