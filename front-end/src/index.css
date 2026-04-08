@@ -40,6 +40,12 @@
     --rosa-dark: #EC4899;
     --turquesa: #2DD4BF;
     --turquesa-dark: #14B8A6;
+
+    /* Nina-style palette */
+    --nina-pink: #f8e8ec;
+    --nina-dark: #1a1a1a;
+    --nina-gray: #666;
+    --nina-light-bg: #fdf2f5;
   }
 }
 
@@ -50,7 +56,7 @@
 
   body {
     @apply bg-white text-gray-900 antialiased;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 
   h1,
@@ -59,7 +65,7 @@
   h4,
   h5,
   h6 {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Montserrat', sans-serif;
   }
 }
 
@@ -75,7 +81,7 @@
 }
 
 .animate-marquee {
-  animation: marquee 25s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 .animate-marquee:hover {
@@ -103,18 +109,9 @@
 }
 
 .glass-light {
-  background: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.mesh-gradient {
-  background-color: #ffffff;
-  background-image: 
-    radial-gradient(at top left, hsla(330, 90%, 94%, 1) 0, transparent 50%),
-    radial-gradient(at top right, hsla(174, 80%, 94%, 1) 0, transparent 50%),
-    radial-gradient(at bottom center, hsla(330, 100%, 96%, 1) 0, transparent 60%);
-  background-attachment: fixed;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 @keyframes float {
@@ -144,4 +141,64 @@
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Star rating */
+@keyframes star-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* Ticker marquee for benefits bar */
+@keyframes ticker-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 35s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Fade-in for sections on scroll */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.7s ease-out forwards;
+}
+
+/* Product card hover lift */
+.product-card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* Gradient text utility */
+.text-gradient-pink {
+  background: linear-gradient(135deg, #e84393, #fd79a8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom selection */
+::selection {
+  background-color: #fce4ec;
+  color: #c2185b;
 }

@@ -1,1 +1,469 @@
 [2026-04-07T21:52:56.811Z] Updating product a950ba58-81ef-4bba-9235-00942bc8ea7d with body: {"name":"Base Líquida Matte","description":"Alta cobertura com acabamento matte natural. Longa duração de até 24h.","price":89.9,"comparePrice":119.9,"imageUrl":"https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?w=400&h=500&fit=crop","active":true,"colors":[{"hex":"#f5deb3","name":"Bege Claro"},{"hex":"#d4a574","name":"Bege Médio"},{"hex":"#a0785a","name":"Bege Escuro"}],"badges":["Frete Grátis"],"categoryId":"37754e11-f39b-4271-9fce-82701ef949ce"}
+[2026-04-08T12:09:28.460Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:09:28.471Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:27:03.474Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:28:16.120Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:28:16.138Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:30:39.160Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:30:39.174Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:31:08.182Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:31:08.203Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:32:16.481Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:32:16.499Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:41:07.104Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-08T12:41:07.114Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:36:47
+
+  33     whereClause.categoryId = String(category);
+  34 }
+  35 
+→ 36 const products = await prisma.product.findMany(
+error: Environment variable not found: DATABASE_URL.
+  -->  schema.prisma:10
+   | 
+ 9 |   provider = "postgresql"
+10 |   url      = env("DATABASE_URL")
+   | 
+
+Validation Error Count: 1
+    at ei.handleRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\70354825470\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)

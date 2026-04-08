@@ -1,4 +1,5 @@
 import { useCart } from '../contexts/CartContext';
+import { Star } from 'lucide-react';
 
 interface ProductColor {
     name: string;
@@ -51,78 +52,61 @@ export default function ProductCard({ product }: ProductCardProps) {
         currency: 'BRL',
     }).format(Number(product.comparePrice)) : null;
 
-    const discount = product.comparePrice && Number(product.comparePrice) > Number(product.price)
-        ? Math.round(((Number(product.comparePrice) - Number(product.price)) / Number(product.comparePrice)) * 100)
-        : 0;
+    const installmentPrice = new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+    }).format(Number(product.price) / 4);
 
     const isSoldOut = product.badges?.includes('Esgotado');
 
     return (
-        <div className="group cursor-pointer flex-shrink-0 w-[170px] md:w-[280px] flex flex-col h-full animate-entrance">
-            {/* Image Container flutuante */}
-            <div className={`relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-white shadow-sm transition-all duration-300 group-hover:shadow-xl group-hover:shadow-rosa-100/20 group-hover:-translate-y-1 border border-white flex items-center justify-center p-6 ${isSoldOut ? 'opacity-60 grayscale' : ''}`}>
+        <div className="group flex-shrink-0 w-[180px] md:w-[240px] flex flex-col cursor-pointer bg-transparent">
+            {/* Image Container */}
+            <div className={`relative aspect-square overflow-hidden flex items-center justify-center transition-all duration-300 ${isSoldOut ? 'opacity-60' : ''}`}>
                 <img
                     src={formatImageUrl(product.imageUrl)}
                     alt={product.name}
-                    className="max-h-full max-w-full object-contain transition-all duration-1000 ease-out group-hover:scale-110"
+                    className="w-full h-full object-cover"
                 />
 
-                {/* Badges de Luxo */}
-                <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
+                {/* Badges */}
+                <div className="absolute top-2 left-2 flex flex-col gap-1">
+                    {isSoldOut && (
+                        <span className="bg-gray-400 text-white text-[9px] font-medium tracking-wide px-2 py-0.5 rounded-sm">
+                            Esgotado
+                        </span>
+                    )}
                     {product.badges?.filter(b => b !== 'Esgotado').map(badge => (
-                        <span key={badge} className={`text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm backdrop-blur-md ${
-                            badge === 'Frete Grátis' ? 'bg-rosa-400/90 text-white' :
-                            badge === 'Lançamento' ? 'bg-purple-500/90 text-white' :
-                            'bg-white/80 text-gray-800'
-                        }`}>
+                        <span key={badge} className="bg-gray-200 text-gray-700 text-[9px] font-medium tracking-wide px-2 py-0.5 rounded-sm">
                             {badge}
                         </span>
                     ))}
-                    {discount > 0 && (
-                        <span className="bg-gray-900 text-white text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">
-                            -{discount}% OFF
-                        </span>
-                    )}
-                </div>
-
-                {/* Overlay de Ação Rápida (Desktop) */}
-                <div className="hidden md:flex absolute inset-0 bg-rosa-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 items-end justify-center pb-8 p-4">
-                     <button
-                        onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
-                        className="w-full glass text-gray-900 py-4 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 hover:bg-gray-900 hover:text-white"
-                    >
-                        Adicionar
-                    </button>
                 </div>
             </div>
 
-            {/* Conteúdo Textual minimalista */}
-            <div className="px-2 pt-6 pb-2 space-y-2 flex-1 flex flex-col text-center md:text-left">
-                <div className="flex flex-col gap-1">
-                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-rosa-300">Special Selection</p>
-                    <h3 className="font-extrabold text-sm md:text-lg text-gray-900 leading-tight line-clamp-2 min-h-[2.5rem]">
-                        {product.name}
-                    </h3>
-                </div>
+            {/* Content */}
+            <div className="pt-3 pb-2 flex-1 flex flex-col text-center">
+                {/* Product Name */}
+                <h3 className="font-light text-[10px] md:text-[11px] text-gray-500 leading-snug uppercase tracking-widest mb-1.5">
+                    {product.name}
+                </h3>
 
-                <div className="flex flex-col md:flex-row md:items-baseline gap-1 md:gap-3 pt-2">
-                    <span className="text-xl md:text-2xl font-black text-gray-900 tracking-tighter">
-                        {formattedPrice}
-                    </span>
-                    {formattedComparePrice && (
-                        <span className="text-xs text-gray-400 line-through font-medium">
-                            {formattedComparePrice}
-                        </span>
-                    )}
-                </div>
-
-                {/* Botão Mobile */}
-                <button
-                    onClick={(e) => { e.stopPropagation(); handleAddToCart(); }}
-                    className="md:hidden w-full bg-gray-900 text-white py-3.5 rounded-2xl text-[10px] font-black uppercase tracking-widest mt-4 active:scale-95 transition-transform"
-                >
-                    Comprar
-                </button>
+                {/* Color swatches - Centered */}
+                {product.colors && product.colors.length > 0 && (
+                    <div className="flex items-center justify-center gap-1.5 ">
+                        {product.colors.slice(0, 4).map((color, i) => (
+                            <div
+                                key={i}
+                                className="w-2.5 h-2.5 rounded-full border border-gray-100 shadow-sm"
+                                style={{ backgroundColor: color.hex }}
+                                title={color.name}
+                            />
+                        ))}
+                        {product.colors.length > 4 && (
+                            <span className="text-[10px] text-gray-400 font-light">+{product.colors.length - 4}</span>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     );

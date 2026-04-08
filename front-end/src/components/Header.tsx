@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ShoppingBag, Search, User, Menu, X, ChevronDown } from 'lucide-react';
+import { ShoppingBag, Search, User, Heart, Menu, X, Bell } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import { Link } from 'react-router-dom';
 import api from '../lib/axios';
@@ -15,7 +15,7 @@ export default function Header() {
     const { items, setIsCartOpen } = useCart();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [categories, setCategories] = useState<Category[]>([]);
-    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const itemCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -32,125 +32,122 @@ export default function Header() {
     }, []);
 
     return (
-        <header className="sticky top-0 z-[100] w-full glass-light transition-all duration-500">
-            <div className="max-w-[1700px] mx-auto px-4 md:px-10 lg:px-16 h-20 md:h-[88px] flex items-center justify-between gap-8">
-
-                {/* Left: Logo */}
-                <div className="flex items-center flex-shrink-0">
+        <header className="w-full bg-[#fce4ec] relative z-[100]">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 pt-4 pb-2">
+                <div className="flex items-start justify-between gap-4 md:gap-8">
+                    
+                    {/* Left: Logo */}
                     <Link
                         to="/"
-                        className="cursor-pointer group"
+                        className="flex-shrink-0 flex flex-col justify-center mt-1"
                         aria-label="Ir para página inicial"
                     >
-                        <h1 className="text-2xl md:text-3xl font-black tracking-tighter text-gray-900 group-hover:text-rosa-500 transition-all duration-500 flex items-center gap-1">
-                            Shine <span className="font-light italic bg-clip-text bg-gradient-to-r from-rosa-400 to-purple-500">Glam</span>
-                            <div className="w-1.5 h-1.5 rounded-full bg-rosa-400 ml-1"></div>
+                        <h1 className="text-4xl md:text-5xl font-black tracking-tighter text-[#4a4a4a] leading-none mb-0.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                            shine.
                         </h1>
+                        <span className="text-[11px] md:text-xs text-[#4a4a4a] uppercase tracking-widest pl-1 font-medium">
+                            glam
+                        </span>
                     </Link>
-                </div>
 
-                {/* Center: Todos os Produtos dropdown (Desktop) */}
-                <nav className="hidden lg:flex items-center" aria-label="Navegação principal">
-                    <div
-                        className="relative group"
-                        onMouseEnter={() => setDropdownOpen(true)}
-                        onMouseLeave={() => setDropdownOpen(false)}
-                    >
-                        <button
-                            className="flex items-center gap-1.5 px-4 py-2 text-sm font-medium text-gray-600 hover:text-rosa-500 transition-colors duration-200 rounded-full hover:bg-rosa-50"
-                        >
-                            Todos os Produtos
-                            <ChevronDown size={14} className={`transition-transform duration-300 ${dropdownOpen ? 'rotate-180 text-rosa-500' : 'text-gray-400'}`} />
-                        </button>
+                    {/* Center: Search Bar & Nav */}
+                    <div className="hidden md:flex flex-1 flex-col mx-4 md:mx-8 max-w-3xl mt-2">
+                        {/* Search Bar */}
+                        <div className="w-full flex items-center bg-white rounded-full shadow-sm overflow-hidden mb-4">
+                            <input
+                                type="text"
+                                placeholder="BUSCAR"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="flex-1 bg-transparent outline-none text-xs text-gray-600 placeholder:text-gray-400 px-6 py-2.5 font-medium"
+                            />
+                            <button
+                                className="bg-black text-white px-6 py-2.5 rounded-full mr-0.5 hover:bg-gray-800 transition-colors"
+                                aria-label="Buscar"
+                            >
+                                <Search size={16} strokeWidth={2.5} />
+                            </button>
+                        </div>
 
-                        {/* Dropdown */}
-                        <div
-                            className={`absolute top-full left-1/2 -translate-x-1/2 w-56 pt-2 transition-all duration-300 origin-top ${dropdownOpen ? 'opacity-100 scale-100 visible' : 'opacity-0 scale-95 invisible'}`}
-                        >
-                            <div className="bg-white rounded-2xl shadow-xl border border-rosa-100/60 overflow-hidden">
-                                <div className="py-2">
-                                    {categories.filter(cat => cat.active !== false).map((category) => (
+                        {/* Navigation Menu */}
+                        <nav aria-label="Navegação principal">
+                            <ul className="flex items-center justify-center gap-6">
+                                {categories.filter(cat => cat.active !== false).slice(0, 7).map((category) => (
+                                    <li key={category.id}>
                                         <Link
-                                            key={category.id}
-                                            to={`/categoria/${category.id}`}
-                                            className="block text-sm text-gray-600 hover:text-rosa-500 hover:bg-rosa-50 px-4 py-2.5 rounded-xl transition-all"
+                                            to={`/?category=${category.id}`}
+                                            className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-[#4a4a4a] hover:text-rosa-500 transition-colors whitespace-nowrap"
                                         >
                                             {category.name}
                                         </Link>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                        </nav>
                     </div>
-                </nav>
 
-                {/* Right: Actions */}
-                <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
-                    {/* Search */}
-                    <button
-                        className="text-gray-900 hover:text-rosa-500 p-3 rounded-2xl hover:bg-white/60 transition-all duration-300 border border-transparent hover:border-white/40 shadow-sm md:shadow-none"
-                        aria-label="Pesquisar"
-                    >
-                        <Search size={22} strokeWidth={2.5} />
-                    </button>
+                    {/* Right: Actions */}
+                    <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0 mt-3">
+                        {/* Search (Mobile) */}
+                        <button className="md:hidden text-[#4a4a4a] p-1" aria-label="Pesquisar">
+                            <Search size={22} strokeWidth={1.5} />
+                        </button>
 
-                    {/* Login */}
-                    <button className="hidden md:flex items-center gap-3 text-gray-900 hover:text-rosa-500 px-5 py-3 rounded-2xl hover:bg-white/60 transition-all duration-300 text-xs font-black uppercase tracking-widest border border-transparent hover:border-white/40">
-                        <User size={18} strokeWidth={2.5} />
-                        <span>Minha Conta</span>
-                    </button>
+                        {/* Notifications */}
+                        <button className="relative text-[#4a4a4a] hover:text-rosa-500 p-1 transition-colors" aria-label="Notificações">
+                            <Bell size={22} strokeWidth={1.5} />
+                            <span className="absolute top-1 right-1 flex h-2 w-2 items-center justify-center rounded-full bg-red-500 shadow-sm border border-[#fce4ec]"></span>
+                        </button>
 
-                    {/* Cart */}
-                    <button
-                        className="relative text-gray-900 hover:text-rosa-500 p-3 rounded-2xl hover:bg-white/60 transition-all duration-300 border border-transparent hover:border-white/40 shadow-sm md:shadow-none"
-                        onClick={() => setIsCartOpen(true)}
-                        aria-label={`Carrinho com ${itemCount} itens`}
-                    >
-                        <ShoppingBag size={22} strokeWidth={2.5} />
-                        {itemCount > 0 && (
-                            <span className="absolute top-1 right-1 flex h-5 w-5 items-center justify-center rounded-full bg-gray-900 text-[10px] font-black text-white shadow-lg ring-2 ring-white">
+                        {/* User */}
+                        <button className="text-[#4a4a4a] hover:text-rosa-500 p-1 transition-colors hidden sm:block" aria-label="Minha conta">
+                            <User size={22} strokeWidth={1.5} />
+                        </button>
+
+                        {/* Wishlist */}
+                        <button className="text-[#4a4a4a] hover:text-rosa-500 p-1 transition-colors hidden sm:block" aria-label="Lista de desejos">
+                            <Heart size={22} strokeWidth={1.5} />
+                        </button>
+
+                        {/* Cart */}
+                        <button
+                            className="relative text-[#4a4a4a] hover:text-rosa-500 p-1 transition-colors flex items-center gap-1"
+                            onClick={() => setIsCartOpen(true)}
+                            aria-label={`Carrinho com ${itemCount} itens`}
+                        >
+                            <ShoppingBag size={22} strokeWidth={1.5} />
+                            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-black text-[9px] font-bold text-white">
                                 {itemCount}
                             </span>
-                        )}
-                    </button>
+                        </button>
 
-                    {/* Mobile menu toggle */}
-                    <button
-                        className="lg:hidden text-gray-900 p-2"
-                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                        aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
-                        aria-expanded={mobileMenuOpen}
-                    >
-                        {mobileMenuOpen ? <X size={24} strokeWidth={2} /> : <Menu size={24} strokeWidth={2} />}
-                    </button>
+                        {/* Mobile menu toggle */}
+                        <button
+                            className="md:hidden text-[#4a4a4a] p-1 ml-1"
+                            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                            aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+                        >
+                            {mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            {/* Mobile Menu */}
+            {/* Mobile Menu Content */}
             {mobileMenuOpen && (
-                <div className="lg:hidden bg-white border-t border-rosa-100/50 animate-in slide-in-from-top duration-300">
-                    <nav className="container mx-auto px-4 py-6 space-y-6" aria-label="Navegação mobile">
-                        <div className="space-y-4">
-                            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 px-1">Categorias</h3>
-                            <div className="flex flex-wrap gap-2">
-                                {categories.filter(cat => cat.active !== false).map((category) => (
-                                    <Link
-                                        key={category.id}
-                                        to={`/categoria/${category.id}`}
-                                        onClick={() => setMobileMenuOpen(false)}
-                                        className="px-4 py-2 rounded-full text-sm font-medium text-gray-600 bg-rosa-50 hover:bg-rosa-100 hover:text-rosa-600 transition-all border border-rosa-100"
-                                    >
-                                        {category.name}
-                                    </Link>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="pt-2 border-t border-rosa-100/50">
-                            <button className="w-full flex items-center justify-center gap-2 bg-rosa-500 text-white py-3.5 rounded-2xl text-sm font-bold shadow-lg shadow-rosa-200 transition-transform active:scale-95">
-                                <User size={18} />
-                                Minha Conta
-                            </button>
+                <div className="md:hidden bg-white border-t border-gray-100 absolute w-full left-0 top-full shadow-lg">
+                    <nav className="px-4 py-4 space-y-4">
+                        <div className="flex flex-col gap-3">
+                            {categories.filter(cat => cat.active !== false).map((category) => (
+                                <Link
+                                    key={category.id}
+                                    to={`/?category=${category.id}`}
+                                    onClick={() => setMobileMenuOpen(false)}
+                                    className="py-2 text-sm font-semibold text-gray-700 uppercase tracking-widest border-b border-gray-50"
+                                >
+                                    {category.name}
+                                </Link>
+                            ))}
                         </div>
                     </nav>
                 </div>
