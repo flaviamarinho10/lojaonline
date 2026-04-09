@@ -10,7 +10,7 @@ export interface CartItem {
 
 interface CartContextType {
     items: CartItem[];
-    addToCart: (item: Omit<CartItem, 'quantity'>) => void;
+    addToCart: (item: Omit<CartItem, 'quantity'>, quantity?: number) => void;
     removeFromCart: (id: string) => void;
     updateQuantity: (id: string, type: 'increase' | 'decrease') => void;
     clearCart: () => void;
@@ -26,15 +26,15 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [notification, setNotification] = useState<string | null>(null);
 
-    const addToCart = (newItem: Omit<CartItem, 'quantity'>) => {
+    const addToCart = (newItem: Omit<CartItem, 'quantity'>, quantity = 1) => {
         setItems((prev) => {
             const existing = prev.find((i) => i.id === newItem.id);
             if (existing) {
                 return prev.map((i) =>
-                    i.id === newItem.id ? { ...i, quantity: i.quantity + 1 } : i
+                    i.id === newItem.id ? { ...i, quantity: i.quantity + quantity } : i
                 );
             }
-            return [...prev, { ...newItem, quantity: 1 }];
+            return [...prev, { ...newItem, quantity }];
         });
         showNotification(`Adicionado: ${newItem.name}`);
         setIsCartOpen(true);

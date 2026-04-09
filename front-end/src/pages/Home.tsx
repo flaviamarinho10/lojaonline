@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Phone, Mail, Instagram, Lock, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Mail, Instagram, Lock, ShieldCheck, Heart } from 'lucide-react';
 import Header from '../components/Header';
 import AnnouncementBar from '../components/AnnouncementBar';
 import BenefitsTicker from '../components/BenefitsTicker';
@@ -7,6 +7,7 @@ import HeroBanner from '../components/HeroBanner';
 import CategoryCarousel from '../components/CategoryCarousel';
 import ProductCard from '../components/ProductCard';
 import CartSidebar from '../components/CartSidebar';
+import SecondaryPinkBar from '../components/SecondaryPinkBar';
 
 import BackToTop from '../components/BackToTop';
 import api from '../lib/axios';
@@ -22,47 +23,75 @@ interface Product {
 
 
 export default function Home() {
-    const [products, setProducts] = useState<Product[]>([]);
+    const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+    const [allProducts, setAllProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
-    const [activeTab, setActiveTab] = useState('todos');
+    const [categories, setCategories] = useState<any[]>([]);
     const [appearance, setAppearance] = useState<any>(null);
     const productsRef = useRef<HTMLDivElement>(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [startX, setStartX] = useState(0);
+    const [scrollLeft, setScrollLeft] = useState(0);
+    const [dragMoved, setDragMoved] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
+        const fetchHomeData = async () => {
             setLoading(true);
             try {
-                const url = activeCategory ? `/products?category=${activeCategory}` : '/products';
-                const [prodRes, appRes] = await Promise.all([
-                    api.get(url),
-                    api.get('/settings/appearance')
+                // Featured products (all categories, default order)
+                // Catalog products (filtered by category, manual sort order)
+                const catalogUrl = activeCategory ? `/products?category=${activeCategory}&sort=manual` : '/products?sort=manual';
+                
+                const [featuredRes, catalogRes, appRes, catRes] = await Promise.all([
+                    api.get('/products?featured=true'),
+                    api.get(catalogUrl),
+                    api.get('/settings/appearance'),
+                    api.get('/categories')
                 ]);
-                setProducts(prodRes.data);
+                
+                setFeaturedProducts(featuredRes.data);
+                setAllProducts(catalogRes.data);
                 setAppearance(appRes.data);
+                setCategories(catRes.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {
                 setLoading(false);
             }
         };
-        fetchData();
+        fetchHomeData();
     }, [activeCategory]);
 
-    const scrollProducts = (direction: 'left' | 'right') => {
+    const handleMouseDown = (e: React.MouseEvent) => {
         if (!productsRef.current) return;
-        const scrollAmount = productsRef.current.clientWidth * 0.6;
-        productsRef.current.scrollBy({
-            left: direction === 'left' ? -scrollAmount : scrollAmount,
-            behavior: 'smooth',
-        });
+        setIsDragging(true);
+        setDragMoved(false);
+        setStartX(e.pageX - productsRef.current.offsetLeft);
+        setScrollLeft(productsRef.current.scrollLeft);
     };
 
-    const tabs = [
-        { id: 'todos', label: 'Queridinhos da Internet' },
-        { id: 'lancamentos', label: 'Lançamentos' },
-        { id: 'descontos', label: 'Melhores Descontos' },
-    ];
+    const handleMouseLeave = () => {
+        setIsDragging(false);
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (!isDragging || !productsRef.current) return;
+        e.preventDefault();
+        const x = e.pageX - productsRef.current.offsetLeft;
+        const walk = (x - startX) * 2.5; // Increased sensitivity
+        const diff = x - startX;
+        if (Math.abs(diff) > 30) {
+            setDragMoved(true);
+        }
+        productsRef.current.scrollLeft = scrollLeft - walk;
+    };
+
+
 
     return (
         <div className="min-h-screen bg-white selection:bg-rosa-100 selection:text-rosa-600">
@@ -76,97 +105,118 @@ export default function Home() {
             <CartSidebar />
 
             {/* Hero Banner */}
-            <HeroBanner settings={appearance?.heroBanner} />
+            {!activeCategory && <HeroBanner settings={appearance?.heroBanner} />}
 
             {/* Benefits Ticker */}
-            <BenefitsTicker />
-
-            {/* Category Carousel */}
+            {!activeCategory && <BenefitsTicker />}
+            
+            {/* Category Carousel (Always visible for easy switching) */}
             <CategoryCarousel
                 activeCategory={activeCategory}
                 onSelectCategory={setActiveCategory}
             />
 
-            {/* Products Section */}
-            <section id="produtos" className="py-12 md:py-16 bg-white">
+            {/* Products Section (Featured) */}
+            {!activeCategory && (
+                <section id="produtos" className="py-6 md:py-8 bg-white">
+                    <div className="max-w-7xl mx-auto px-4">
+                        {/* Section Title */}
+                        <h2 className="text-center text-[16px] md:text-[20px] font-bold text-[#1a1a1a] mb-6">
+                            Mais Vendidos
+                        </h2>
+
+
+                        {/* Products Carousel */}
+                        {loading ? (
+                            <div className="flex gap-5 overflow-hidden">
+                                {[...Array(5)].map((_, i) => (
+                                    <div key={i} className="flex-shrink-0 w-[180px] md:w-[240px] animate-pulse">
+                                        <div className="aspect-square bg-gray-50 rounded-xl mb-3" />
+                                        <div className="space-y-2 px-1">
+                                            <div className="h-3 bg-gray-100 w-3/4 rounded" />
+                                            <div className="h-3 bg-gray-100 w-1/2 rounded" />
+                                            <div className="h-5 bg-gray-100 w-2/3 rounded mt-2" />
+                                            <div className="h-9 bg-gray-100 w-full rounded-lg mt-3" />
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : (
+                            <div className="relative">
+
+                                {/* Products */}
+                                <div
+                                    ref={productsRef}
+                                    onMouseDown={handleMouseDown}
+                                    onMouseLeave={handleMouseLeave}
+                                    onMouseUp={handleMouseUp}
+                                    onMouseMove={handleMouseMove}
+                                    onClickCapture={(e) => {
+                                        if (dragMoved) {
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                        }
+                                    }}
+                                    className={`flex gap-4 md:gap-5 overflow-x-auto pb-4 no-scrollbar ${
+                                        isDragging 
+                                            ? 'cursor-grabbing select-none scroll-auto' 
+                                            : 'cursor-grab scroll-smooth snap-x snap-mandatory'
+                                    }`}
+                                >
+                                     {featuredProducts.map((product) => (
+                                        <ProductCard key={product.id} product={product} />
+                                    ))}
+                                    {featuredProducts.length === 0 && (
+                                        <div className="w-full text-center py-10 text-gray-400 text-sm italic">
+                                            Nenhum produto em destaque no momento.
+                                        </div>
+                                    )}
+                                </div>
+
+                            </div>
+                        )}
+                    </div>
+                </section>
+            )}
+
+            {/* Secondary Pink Bar */}
+            {!activeCategory && <SecondaryPinkBar />}
+
+            {/* All Products Grid Section */}
+            <section className="py-12 md:py-16 bg-white">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* Section Title */}
-                    <h2 className="text-center text-[13px] md:text-[15px] font-black uppercase tracking-[0.3em] text-[#1a1a1a] mb-12">
-                        Mais Vendidos
-                    </h2>
-
-                    {/* Tabs */}
-                    <div className="flex items-center justify-center gap-6 md:gap-10 mb-12">
-                        {tabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`text-[10px] md:text-[11px] font-bold uppercase tracking-[0.2em] pb-1.5 transition-all duration-300 relative ${
-                                    activeTab === tab.id
-                                        ? 'text-black'
-                                        : 'text-gray-400 hover:text-gray-600'
-                                }`}
-                            >
-                                {tab.label}
-                                {activeTab === tab.id && (
-                                    <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-black" />
-                                )}
-                            </button>
-                        ))}
+                    <div className="flex flex-col items-center mb-12">
+                        <h2 className="text-[18px] md:text-[24px] font-bold text-[#1a1a1a] mb-2 uppercase tracking-[0.1em]">
+                            {activeCategory 
+                                ? categories.find(c => c.id === activeCategory)?.name || 'Produtos'
+                                : 'Todos os Produtos'
+                            }
+                        </h2>
+                        <div className="w-16 h-1 bg-rosa-400 rounded-full" />
                     </div>
 
-                    {/* Products Carousel */}
                     {loading ? (
-                        <div className="flex gap-5 overflow-hidden">
-                            {[...Array(5)].map((_, i) => (
-                                <div key={i} className="flex-shrink-0 w-[180px] md:w-[240px] animate-pulse">
+                        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                            {[...Array(10)].map((_, i) => (
+                                <div key={i} className="animate-pulse">
                                     <div className="aspect-square bg-gray-50 rounded-xl mb-3" />
-                                    <div className="space-y-2 px-1">
+                                    <div className="space-y-2">
                                         <div className="h-3 bg-gray-100 w-3/4 rounded" />
-                                        <div className="h-3 bg-gray-100 w-1/2 rounded" />
-                                        <div className="h-5 bg-gray-100 w-2/3 rounded mt-2" />
-                                        <div className="h-9 bg-gray-100 w-full rounded-lg mt-3" />
+                                        <div className="h-5 bg-gray-100 w-1/2 rounded" />
                                     </div>
                                 </div>
                             ))}
                         </div>
                     ) : (
-                        <div className="relative">
-                            {/* Prev Arrow */}
-                            <button
-                                onClick={() => scrollProducts('left')}
-                                className="hidden md:flex absolute -left-4 top-[35%] -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-md items-center justify-center text-gray-400 hover:text-rosa-500 hover:shadow-lg transition-all border border-gray-100"
-                                aria-label="Produtos anteriores"
-                            >
-                                <ChevronLeft size={20} />
-                            </button>
-
-                            {/* Products */}
-                            <div
-                                ref={productsRef}
-                                className="flex gap-4 md:gap-5 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-4 no-scrollbar"
-                            >
-                                {products.map((product) => (
-                                    <ProductCard key={product.id} product={product} />
-                                ))}
-                            </div>
-
-                            {/* Next Arrow */}
-                            <button
-                                onClick={() => scrollProducts('right')}
-                                className="hidden md:flex absolute -right-4 top-[35%] -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-md items-center justify-center text-gray-400 hover:text-rosa-500 hover:shadow-lg transition-all border border-gray-100"
-                                aria-label="Próximos produtos"
-                            >
-                                <ChevronRight size={20} />
-                            </button>
+                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-12 md:gap-x-6">
+                            {allProducts.map((product) => (
+                                <ProductCard key={product.id} product={product} />
+                            ))}
                         </div>
                     )}
                 </div>
             </section>
-
-
-
-
 
             {/* Footer */}
             <footer className="bg-white pt-14 pb-6 border-t border-gray-100">

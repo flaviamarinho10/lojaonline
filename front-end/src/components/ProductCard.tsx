@@ -1,5 +1,6 @@
 import { useCart } from '../contexts/CartContext';
 import { Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface ProductColor {
     name: string;
@@ -33,7 +34,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         return url;
     };
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (e: React.MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
         addToCart({
             id: product.id,
             name: product.name,
@@ -57,16 +60,20 @@ export default function ProductCard({ product }: ProductCardProps) {
         currency: 'BRL',
     }).format(Number(product.price) / 4);
 
+    const discountPercentage = product.comparePrice 
+        ? Math.round((1 - (Number(product.price) / Number(product.comparePrice))) * 100)
+        : 0;
+
     const isSoldOut = product.badges?.includes('Esgotado');
 
     return (
-        <div className="group flex-shrink-0 w-[180px] md:w-[240px] flex flex-col cursor-pointer bg-transparent">
+        <Link to={`/product/${product.id}`} className="group flex-shrink-0 w-[180px] md:w-[240px] flex flex-col cursor-pointer bg-transparent no-underline decoration-transparent">
             {/* Image Container */}
             <div className={`relative aspect-square overflow-hidden flex items-center justify-center transition-all duration-300 ${isSoldOut ? 'opacity-60' : ''}`}>
                 <img
                     src={formatImageUrl(product.imageUrl)}
                     alt={product.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
 
                 {/* Badges */}
@@ -85,29 +92,50 @@ export default function ProductCard({ product }: ProductCardProps) {
             </div>
 
             {/* Content */}
-            <div className="pt-3 pb-2 flex-1 flex flex-col text-center">
+            <div className="pt-4 pb-3 flex-1 flex flex-col items-center text-center">
                 {/* Product Name */}
-                <h3 className="font-light text-[10px] md:text-[11px] text-gray-500 leading-snug uppercase tracking-widest mb-1.5">
+                <h3 className="font-medium text-[11px] md:text-[12px] text-gray-800 leading-snug uppercase tracking-[0.05em] min-h-[32px] mb-2 group-hover:text-rosa-500 transition-colors line-clamp-2 px-2">
                     {product.name}
                 </h3>
 
-                {/* Color swatches - Centered */}
-                {product.colors && product.colors.length > 0 && (
-                    <div className="flex items-center justify-center gap-1.5 ">
-                        {product.colors.slice(0, 4).map((color, i) => (
-                            <div
-                                key={i}
-                                className="w-2.5 h-2.5 rounded-full border border-gray-100 shadow-sm"
-                                style={{ backgroundColor: color.hex }}
-                                title={color.name}
-                            />
-                        ))}
-                        {product.colors.length > 4 && (
-                            <span className="text-[10px] text-gray-400 font-light">+{product.colors.length - 4}</span>
+                {/* Rating Stars */}
+                <div className="flex text-yellow-400 mb-3">
+                    {[...Array(5)].map((_, i) => (
+                        <Star key={i} size={12} fill="currentColor" />
+                    ))}
+                </div>
+
+                {/* Prices */}
+                <div className="flex flex-col items-center gap-1 mb-4">
+                    <div className="flex items-center gap-2">
+                        {formattedComparePrice && (
+                            <span className="text-[11px] text-gray-400 line-through font-light">
+                                {formattedComparePrice}
+                            </span>
+                        )}
+                        <span className="text-[14px] font-bold text-gray-900 tracking-tight">
+                            {formattedPrice}
+                        </span>
+                        {discountPercentage > 0 && (
+                            <span className="bg-rosa-400 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-sm transform -translate-y-1">
+                                -{discountPercentage}%
+                            </span>
                         )}
                     </div>
-                )}
+                    <p className="text-[10px] text-gray-400 font-medium italic">
+                        ou em até 4x de {installmentPrice}
+                    </p>
+                </div>
+
+                {/* Buy Button */}
+                <button
+                    onClick={handleAddToCart}
+                    className="w-full max-w-[140px] md:max-w-[180px] bg-black text-white text-[11px] font-bold uppercase tracking-[0.2em] py-3 px-4 rounded-full transition-all duration-300 hover:bg-rosa-500 hover:shadow-lg hover:translate-y-[-2px] active:scale-[0.98] mt-auto"
+                >
+                    Adicionar
+                </button>
+
             </div>
-        </div>
+        </Link>
     );
 }

@@ -26,15 +26,25 @@ const parsePrice = (value: any): number | null => {
 
 export const getProducts = async (req: Request, res: Response) => {
     try {
-        const { category } = req.query;
+        const { category, featured, sort } = req.query;
         const whereClause: any = { active: true };
         
         if (category) {
             whereClause.categoryId = String(category);
         }
 
+        if (featured === 'true') {
+            whereClause.isFeatured = true;
+        }
+
+        let orderBy: any = [{ createdAt: 'desc' }];
+        if (sort === 'manual') {
+            orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+        }
+
         const products = await prisma.product.findMany({
-            where: whereClause
+            where: whereClause,
+            orderBy
         });
         res.json(products);
     } catch (error: any) {
@@ -43,10 +53,31 @@ export const getProducts = async (req: Request, res: Response) => {
     }
 };
 
+export const getProductById = async (req: Request, res: Response) => {
+    const { id } = req.params as { id: string };
+    try {
+        const product = await prisma.product.findUnique({
+            where: { id },
+            include: {
+                category: true
+            }
+        });
+
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        res.json(product);
+    } catch (error: any) {
+        log(`Error fetching product ${id}: ${error.message}\n${error.stack}`);
+        res.status(500).json({ error: 'Error fetching product' });
+    }
+};
+
 export const createProduct = async (req: Request, res: Response) => {
     log(`Creating product with body: ${JSON.stringify(req.body)}`);
     try {
-        const { name, description, price, comparePrice, imageUrl, colors, badges, categoryId } = req.body;
+        const { name, description, price, comparePrice, imageUrl, colors, badges, categoryId, sortOrder, isFeatured } = req.body;
 
         const numericPrice = parsePrice(price);
         if (numericPrice === null) {
@@ -64,6 +95,8 @@ export const createProduct = async (req: Request, res: Response) => {
                 colors: colors || [],
                 badges: badges || [],
                 categoryId: categoryId || null,
+                sortOrder: sortOrder ? parseInt(String(sortOrder)) : 0,
+                isFeatured: isFeatured === true || isFeatured === 'true',
                 active: true
             }
         });
@@ -78,7 +111,7 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
     const { id } = req.params as { id: string };
     log(`Updating product ${id} with body: ${JSON.stringify(req.body)}`);
-    const { price, comparePrice, categoryId, ...rest } = req.body;
+    const { price, comparePrice, categoryId, sortOrder, isFeatured, ...rest } = req.body;
     try {
         const data: any = { ...rest };
 
@@ -95,6 +128,14 @@ export const updateProduct = async (req: Request, res: Response) => {
 
         if (categoryId !== undefined) {
             data.categoryId = categoryId;
+        }
+        
+        if (sortOrder !== undefined) {
+            data.sortOrder = parseInt(String(sortOrder));
+        }
+
+        if (isFeatured !== undefined) {
+            data.isFeatured = isFeatured === true || isFeatured === 'true';
         }
 
         const product = await prisma.product.update({

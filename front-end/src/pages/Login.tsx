@@ -35,75 +35,92 @@ const Login = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-[#f9f9f9] px-4">
-            <div className="w-full max-w-md bg-white rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-8 md:p-10">
-                {/* Logo Header */}
-                <div className="flex flex-col items-center mb-10 space-y-2">
-                    <h1 className="text-3xl font-bold text-gray-900 tracking-tight">
-                        Shine <span className="font-light">Glam</span>
-                    </h1>
-                    <p className="text-gray-400 text-sm">Acesso Administrativo</p>
+        <div className="flex items-center justify-center min-h-screen bg-[#fce4ec]/30 selection:bg-rosa-200 selection:text-rosa-700 font-['Outfit']">
+            {/* Decorative Background Elements */}
+            <div className="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 bg-white">
+                <div className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#fce4ec] rounded-full blur-[120px] opacity-40" />
+                <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-[#e3f2fd] rounded-full blur-[100px] opacity-30" />
+            </div>
+
+            <div className="w-full max-w-md px-6 animate-in fade-in zoom-in duration-500">
+                {/* Logo Section */}
+                <div className="flex flex-col items-center mb-12">
+                    <div className="flex flex-col items-center mb-1">
+                        <h1 className="text-5xl md:text-6xl font-black tracking-tighter text-[#4a4a4a] leading-none" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                            shine.
+                        </h1>
+                        <span className="text-xs text-[#4a4a4a] uppercase tracking-[0.3em] font-medium mt-1">
+                            glam
+                        </span>
+                    </div>
+                    <div className="w-8 h-1 bg-rosa-400 rounded-full mt-6" />
+                    <p className="text-gray-400 text-[11px] uppercase tracking-widest mt-4 font-semibold">Painel Administrativo</p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-5">
-                    {/* Email */}
-                    <div className="space-y-1.5">
-                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">
-                            E-mail
-                        </label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] transition-all text-sm"
-                            placeholder="admin@shineglam.com"
-                            required
-                        />
-                    </div>
-
-                    {/* Password */}
-                    <div className="space-y-1.5">
-                        <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">
-                            Senha
-                        </label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            className="w-full bg-white border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] transition-all text-sm"
-                            placeholder="••••••••"
-                            required
-                        />
-                    </div>
-
-                    {/* Error */}
-                    {error && (
-                        <div className="bg-red-50 border border-red-100 rounded-lg p-3 text-red-600 text-xs text-center font-medium">
-                            {error}
+                {/* Login Card */}
+                <div className="bg-white/80 backdrop-blur-xl border border-white rounded-[32px] p-8 md:p-10 shadow-[0_20px_50px_rgba(252,228,236,0.3)]">
+                    <h2 className="text-xl font-bold text-gray-800 mb-8 text-center italic">Bem-vinda de volta</h2>
+                    
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        {/* Email */}
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
+                                E-mail de Acesso
+                            </label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl px-5 py-4 text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-rosa-200 focus:border-rosa-400 focus:bg-white transition-all text-sm"
+                                placeholder="exemplo@shineglam.com"
+                                required
+                            />
                         </div>
-                    )}
 
-                    {/* Submit */}
-                    <button
-                        type="submit"
-                        disabled={isLoading}
-                        className="w-full bg-[#66c2bb] hover:bg-[#55b0a9] text-white py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all duration-200 active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed font-semibold text-sm"
-                    >
-                        {isLoading ? (
-                            <>
-                                <Loader2 size={16} className="animate-spin" />
-                                Entrando...
-                            </>
-                        ) : (
-                            'Entrar no Painel'
+                        {/* Password */}
+                        <div className="space-y-2">
+                            <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest ml-1">
+                                Senha Secreta
+                            </label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full bg-gray-50/50 border border-gray-100 rounded-2xl px-5 py-4 text-gray-900 placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-rosa-200 focus:border-rosa-400 focus:bg-white transition-all text-sm"
+                                placeholder="••••••••"
+                                required
+                            />
+                        </div>
+
+                        {/* Error Message */}
+                        {error && (
+                            <div className="bg-red-50/50 border border-red-100 text-red-500 text-[11px] font-semibold p-4 rounded-xl text-center animate-in slide-in-from-top-2">
+                                {error}
+                            </div>
                         )}
-                    </button>
-                </form>
 
-                <div className="mt-8 text-center border-t border-gray-100 pt-6">
-                    <p className="text-[11px] text-gray-400">
-                        &copy; 2026 Shine Glam. Acesso restrito.
-                    </p>
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="w-full bg-gray-900 hover:bg-black text-white py-4 rounded-2xl flex items-center justify-center gap-3 transition-all duration-300 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed font-bold text-sm shadow-lg shadow-gray-200"
+                        >
+                            {isLoading ? (
+                                <>
+                                    <Loader2 size={18} className="animate-spin" />
+                                    Autenticando...
+                                </>
+                            ) : (
+                                'Acessar Painel'
+                            )}
+                        </button>
+                    </form>
+
+                    <div className="mt-10 text-center">
+                        <p className="text-[10px] text-gray-300 uppercase tracking-widest font-medium">
+                            &copy; 2026 Shine Glam &bull; Todos os direitos reservados
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
