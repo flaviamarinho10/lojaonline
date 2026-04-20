@@ -52,8 +52,8 @@ export const getAppearance = async (req: Request, res: Response) => {
         const defaultAppearance = {
             topBar: {
                 active: true,
-                message: 'Frete Grátis para todo o Brasil',
-                bgColor: '#66c2bb'
+                message: '✨ FRETE GRÁTIS BRASIL A PARTIR DE R$ 129,90 ✨',
+                bgColor: '#1a1a1a'
             },
             hero: {
                 desktopImage: '/Banner/Banner.png',
@@ -67,6 +67,18 @@ export const getAppearance = async (req: Request, res: Response) => {
                 active: true,
                 url: 'https://placehold.co/200x200/ffe4e6/be185d?text=Logo',
                 size: 96 // size in pixels (equivalent to w-24, h-24)
+            },
+            benefitsTicker: {
+                active: true,
+                bgColor: '#fce0e5',
+                text1: 'Frete grátis a partir de R$ 129,90',
+                icon1: 'Truck',
+                text2: 'Parcelamento em até 6x sem juros',
+                icon2: 'Tag',
+                text3: 'Desconto de 5% via PIX',
+                icon3: 'Flower',
+                text4: 'Cupom de 1ª compra NINAE10',
+                icon4: 'Percent',
             }
         };
 

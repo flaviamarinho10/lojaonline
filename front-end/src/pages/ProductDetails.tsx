@@ -34,6 +34,9 @@ interface Product {
     imageUrl: string;
     colors?: ProductColor[];
     badges?: string[];
+    howToUse?: string;
+    whyLoveIt?: string;
+    composition?: string;
 }
 
 export default function ProductDetails() {
@@ -44,7 +47,27 @@ export default function ProductDetails() {
     const [quantity, setQuantity] = useState(1);
     const [selectedColor, setSelectedColor] = useState<ProductColor | null>(null);
     const [activeTab, setActiveTab] = useState('description');
+    const [viewers, setViewers] = useState(12);
     const { addToCart } = useCart();
+
+    useEffect(() => {
+        if (!product) return;
+        
+        // Base viewers calc based on ID so it's consistentish per product
+        const baseViewers = Math.floor(product.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 25) + 8;
+        setViewers(baseViewers);
+
+        // Fluctuate every few seconds
+        const interval = setInterval(() => {
+            setViewers(prev => {
+                const change = Math.floor(Math.random() * 5) - 2; // -2 to +2
+                const newViewers = prev + change;
+                return newViewers < 5 ? 5 : (newViewers > 45 ? 45 : newViewers);
+            });
+        }, 6000);
+
+        return () => clearInterval(interval);
+    }, [product]);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -160,14 +183,6 @@ export default function ProductDetails() {
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-20">
                     {/* Left: Images */}
                     <div className="w-full lg:w-[55%] flex flex-col md:flex-row gap-4">
-                        {/* Thumbnails (Desktop) */}
-                        <div className="hidden md:flex flex-col gap-3 min-w-[80px]">
-                            {[1, 2, 3, 4].map((i) => (
-                                <div key={i} className="w-20 h-20 border border-gray-100 rounded-lg overflow-hidden cursor-pointer hover:border-rosa-300 transition-all p-1 bg-white">
-                                    <img src={formatImageUrl(product.imageUrl)} alt="" className="w-full h-full object-cover rounded-md" />
-                                </div>
-                            ))}
-                        </div>
 
                         {/* Main Image */}
                         <div className="relative group flex-1 bg-gray-50 rounded-3xl overflow-hidden flex items-center justify-center min-h-[400px] md:min-h-[500px]">
@@ -186,24 +201,6 @@ export default function ProductDetails() {
                                 ))}
                             </div>
 
-                            {/* Floating Action Buttons */}
-                            <div className="absolute bottom-6 right-6 flex flex-col gap-3">
-                                <button className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-400 hover:text-rosa-500 transition-all">
-                                    <Heart size={18} />
-                                </button>
-                                <button className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center text-gray-400 hover:text-rosa-500 transition-all">
-                                    <Share2 size={18} />
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Thumbnails (Mobile) */}
-                        <div className="flex md:hidden gap-2 overflow-x-auto no-scrollbar pb-2">
-                            {[1, 2, 3, 4].map((i) => (
-                                <div key={i} className="flex-shrink-0 w-20 h-20 border border-gray-100 rounded-lg overflow-hidden">
-                                    <img src={formatImageUrl(product.imageUrl)} alt="" className="w-full h-full object-cover" />
-                                </div>
-                            ))}
                         </div>
                     </div>
 
@@ -299,33 +296,8 @@ export default function ProductDetails() {
                                 <Eye size={16} />
                             </div>
                             <p className="text-[11px] text-gray-500 font-medium">
-                                <span className="text-gray-900 font-bold">12 clientes</span> estão visualizando este produto agora
+                                <span className="text-gray-900 font-bold">{viewers} clientes</span> estão visualizando este produto agora
                             </p>
-                        </div>
-
-                        {/* Delivery Info */}
-                        <div className="space-y-4 border-t border-gray-100 pt-8">
-                            <div className="flex items-start gap-4">
-                                <Truck size={18} className="text-gray-400" />
-                                <div>
-                                    <p className="text-[11px] font-bold uppercase tracking-widest text-gray-900 mb-1">Frete Grátis</p>
-                                    <p className="text-[11px] text-gray-400">Em compras acima de R$ 199,00 para todo o Nordeste.</p>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <CreditCard size={18} className="text-gray-400" />
-                                <div>
-                                    <p className="text-[11px] font-bold uppercase tracking-widest text-gray-900 mb-1">Pagamento Seguro</p>
-                                    <p className="text-[11px] text-gray-400">Pague via PIX ou em até 10x no cartão com total segurança.</p>
-                                </div>
-                            </div>
-                            <div className="flex items-start gap-4">
-                                <ShieldCheck size={18} className="text-gray-400" />
-                                <div>
-                                    <p className="text-[11px] font-bold uppercase tracking-widest text-gray-900 mb-1">Garantia Shine Glam</p>
-                                    <p className="text-[11px] text-gray-400">Produtos 100% originais e garantia de satisfação ou seu dinheiro de volta.</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -355,48 +327,65 @@ export default function ProductDetails() {
                                 <p className="text-sm text-gray-500 leading-relaxed font-light">
                                     {product.description || "Este produto foi desenvolvido com a mais alta tecnologia para proporcionar resultados incríveis. Sua fórmula exclusiva garante durabilidade e conforto durante todo o dia."}
                                 </p>
-                                <p className="text-sm text-gray-500 leading-relaxed font-light">
-                                    Ideal para quem busca sofisticação e praticidade, nossa linha Premium combina elegância com performance profissional.
+                                <p className="text-sm text-gray-400 font-light italic border-l-2 border-rosa-300 pl-4 py-1">
+                                    "Descubra o poder que existe em você. Na Shine Glam, cada detalhe é pensado para realçar a sua beleza autêntica e confiante."
                                 </p>
                             </div>
                         )}
                         {activeTab === 'usage' && (
                             <div className="space-y-4">
                                 <h3 className="text-sm font-bold uppercase tracking-widest mb-4">Passo a Passo</h3>
-                                <ul className="space-y-4">
-                                    <li className="flex gap-4 items-start">
-                                        <span className="w-6 h-6 rounded-full bg-rosa-50 text-rosa-500 flex items-center justify-center text-[10px] font-bold shrink-0">1</span>
-                                        <p className="text-sm text-gray-500 font-light">Prepare a área de aplicação garantindo que esteja limpa e seca.</p>
-                                    </li>
-                                    <li className="flex gap-4 items-start">
-                                        <span className="w-6 h-6 rounded-full bg-rosa-50 text-rosa-500 flex items-center justify-center text-[10px] font-bold shrink-0">2</span>
-                                        <p className="text-sm text-gray-500 font-light">Aplique suavemente o produto do centro para as extremidades.</p>
-                                    </li>
-                                    <li className="flex gap-4 items-start">
-                                        <span className="w-6 h-6 rounded-full bg-rosa-50 text-rosa-500 flex items-center justify-center text-[10px] font-bold shrink-0">3</span>
-                                        <p className="text-sm text-gray-500 font-light">Aguarde alguns segundos para a secagem completa e acabamento perfeito.</p>
-                                    </li>
-                                </ul>
+                                {product.howToUse ? (
+                                    <p className="text-sm text-gray-500 font-light leading-relaxed whitespace-pre-wrap">
+                                        {product.howToUse}
+                                    </p>
+                                ) : (
+                                    <ul className="space-y-4">
+                                        <li className="flex gap-4 items-start">
+                                            <span className="w-6 h-6 rounded-full bg-rosa-50 text-rosa-500 flex items-center justify-center text-[10px] font-bold shrink-0">1</span>
+                                            <p className="text-sm text-gray-500 font-light">Prepare a área de aplicação garantindo que esteja limpa e seca.</p>
+                                        </li>
+                                        <li className="flex gap-4 items-start">
+                                            <span className="w-6 h-6 rounded-full bg-rosa-50 text-rosa-500 flex items-center justify-center text-[10px] font-bold shrink-0">2</span>
+                                            <p className="text-sm text-gray-500 font-light">Aplique suavemente o produto do centro para as extremidades.</p>
+                                        </li>
+                                        <li className="flex gap-4 items-start">
+                                            <span className="w-6 h-6 rounded-full bg-rosa-50 text-rosa-500 flex items-center justify-center text-[10px] font-bold shrink-0">3</span>
+                                            <p className="text-sm text-gray-500 font-light">Aguarde alguns segundos para a secagem completa e acabamento perfeito.</p>
+                                        </li>
+                                    </ul>
+                                )}
                             </div>
                         )}
                         {activeTab === 'love' && (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                                <div className="bg-rosa-50/30 p-8 rounded-3xl border border-rosa-100">
-                                    <Heart className="text-rosa-400 mb-4" />
-                                    <h4 className="text-sm font-bold uppercase tracking-widest mb-2">Textura Incomparável</h4>
-                                    <p className="text-xs text-gray-500 font-light leading-relaxed">Sinta o toque aveludado e a leveza que só os produtos Shine Glam oferecem.</p>
-                                </div>
-                                <div className="bg-turquesa/5 p-8 rounded-3xl border border-turquesa/10">
-                                    <ShieldCheck className="text-turquesa-dark mb-4" />
-                                    <h4 className="text-sm font-bold uppercase tracking-widest mb-2">Longa Duração</h4>
-                                    <p className="text-xs text-gray-500 font-light leading-relaxed">Resistente e duradouro, mantém o visual impecável por até 12 horas.</p>
-                                </div>
+                            <div className="space-y-4">
+                                {product.whyLoveIt ? (
+                                    <div className="bg-rosa-50/30 p-8 rounded-3xl border border-rosa-100/50">
+                                        <Heart className="text-rosa-400 mb-4" />
+                                        <p className="text-sm text-gray-500 font-light leading-relaxed whitespace-pre-wrap">
+                                            {product.whyLoveIt}
+                                        </p>
+                                    </div>
+                                ) : (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                        <div className="bg-rosa-50/30 p-8 rounded-3xl border border-rosa-100">
+                                            <Heart className="text-rosa-400 mb-4" />
+                                            <h4 className="text-sm font-bold uppercase tracking-widest mb-2">Textura Incomparável</h4>
+                                            <p className="text-xs text-gray-500 font-light leading-relaxed">Sinta o toque aveludado e a leveza que só os produtos Shine Glam oferecem.</p>
+                                        </div>
+                                        <div className="bg-turquesa/5 p-8 rounded-3xl border border-turquesa/10">
+                                            <ShieldCheck className="text-turquesa-dark mb-4" />
+                                            <h4 className="text-sm font-bold uppercase tracking-widest mb-2">Longa Duração</h4>
+                                            <p className="text-xs text-gray-500 font-light leading-relaxed">Resistente e duradouro, mantém o visual impecável por até 12 horas.</p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         )}
                         {activeTab === 'composition' && (
                             <div className="bg-gray-50 p-8 rounded-3xl border border-gray-100">
-                                <p className="text-[11px] text-gray-400 leading-relaxed font-mono uppercase">
-                                    AQUA, PARAFFINUM LIQUIDUM, CETEARYL ALCOHOL, GLYCERIN, STEARIC ACID, GLYCERYL STEARATE, PEG-100 STEARATE, PHENOXYETHANOL, PARFUM, CARBOMER, TRIETHANOLAMINE, ETHYLHEXYLGLYCERIN, DISODIUM EDTA, LINALOOL, LIMONENE, GERANIOL.
+                                <p className="text-[11px] text-gray-400 leading-relaxed font-mono uppercase whitespace-pre-wrap">
+                                    {product.composition || "AQUA, PARAFFINUM LIQUIDUM, CETEARYL ALCOHOL, GLYCERIN, STEARIC ACID, GLYCERYL STEARATE, PEG-100 STEARATE, PHENOXYETHANOL, PARFUM, CARBOMER, TRIETHANOLAMINE, ETHYLHEXYLGLYCERIN, DISODIUM EDTA, LINALOOL, LIMONENE, GERANIOL."}
                                 </p>
                             </div>
                         )}

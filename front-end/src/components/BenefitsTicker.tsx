@@ -1,25 +1,62 @@
-import { Truck, Tag, Flower, Percent } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { 
+    Truck, Tag, Flower, Percent, Heart, Star, Sparkles, 
+    ShieldCheck, Gift, CreditCard, ShoppingBag, Package, BadgeCheck, Smile 
+} from 'lucide-react';
+import api from '../lib/axios';
 
-const benefits = [
-    { icon: Truck, text: 'Frete grátis a partir de R$ 129,90' },
-    { icon: Tag, text: <>Parcelamento em até 6x sem juros</> },
-    { icon: Flower, text: 'Desconto de 5% via PIX' },
-    { icon: Percent, text: <>Cupom de 1ª compra <span className="underline ml-1">NINAE10</span></> },
-    { icon: Truck, text: 'Frete grátis a partir de R$ 129,90' },
-    { icon: Tag, text: <>Parcelamento em até 6x sem juros</> },
-    { icon: Flower, text: 'Desconto de 5% via PIX' },
-    { icon: Percent, text: <>Cupom de 1ª compra <span className="underline ml-1">NINAE10</span></> },
-    { icon: Truck, text: 'Frete grátis a partir de R$ 129,90' },
-    { icon: Tag, text: <>Parcelamento em até 6x sem juros</> },
-    { icon: Flower, text: 'Desconto de 5% via PIX' },
-    { icon: Percent, text: <>Cupom de 1ª compra <span className="underline ml-1">NINAE10</span></> },
-];
+const iconMap: Record<string, any> = {
+    Truck, Tag, Flower, Percent, Heart, Star, Sparkles, 
+    ShieldCheck, Gift, CreditCard, ShoppingBag, Package, BadgeCheck, Smile
+};
 
 export default function BenefitsTicker() {
+    const [settings, setSettings] = useState({
+        active: true,
+        bgColor: '#fce0e5',
+        text1: 'Frete grátis a partir de R$ 129,90',
+        icon1: 'Truck',
+        text2: 'Parcelamento em até 6x sem juros',
+        icon2: 'Tag',
+        text3: 'Desconto de 5% via PIX',
+        icon3: 'Flower',
+        text4: 'Cupom de 1ª compra NINAE10',
+        icon4: 'Percent',
+    });
+
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await api.get('/settings/appearance');
+                if (res.data?.benefitsTicker) {
+                    setSettings(res.data.benefitsTicker);
+                }
+            } catch (error) {
+                console.error('Failed to fetch benefits ticker settings:', error);
+            }
+        };
+        fetchSettings();
+    }, []);
+
+    if (!settings.active) return null;
+
+    const benefits = [
+        { icon: iconMap[settings.icon1] || Star, text: settings.text1 },
+        { icon: iconMap[settings.icon2] || Star, text: settings.text2 },
+        { icon: iconMap[settings.icon3] || Star, text: settings.text3 },
+        { icon: iconMap[settings.icon4] || Star, text: settings.text4 }
+    ];
+
+    // Create a duplicated array so the marquee animation is seamless
+    const repeatedBenefits = [...benefits, ...benefits, ...benefits];
+
     return (
-        <div className="w-full bg-[#fce0e5] overflow-hidden py-3">
+        <div 
+            className="w-full overflow-hidden py-3 transition-colors duration-300" 
+            style={{ backgroundColor: settings.bgColor || '#fce0e5' }}
+        >
             <div className="flex animate-ticker whitespace-nowrap">
-                {benefits.map((benefit, i) => (
+                {repeatedBenefits.map((benefit, i) => (
                     <div key={i} className="flex items-center gap-2.5 mx-5 flex-shrink-0">
                         <benefit.icon size={13} className="text-[#333]" strokeWidth={2.5} />
                         <span className="text-[11px] font-medium text-[#555] tracking-wide flex items-center pt-0.5">

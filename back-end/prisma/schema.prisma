@@ -17,6 +17,9 @@ model Product {
   price       Decimal  @db.Decimal(10, 2)
   comparePrice Decimal? @db.Decimal(10, 2)
   imageUrl    String
+  howToUse    String?
+  whyLoveIt   String?
+  composition String?
   colors      Json     @default("[]")
   badges      Json     @default("[]")
   sortOrder   Int      @default(0)

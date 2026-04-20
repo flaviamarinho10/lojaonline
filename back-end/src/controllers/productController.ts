@@ -26,7 +26,7 @@ const parsePrice = (value: any): number | null => {
 
 export const getProducts = async (req: Request, res: Response) => {
     try {
-        const { category, featured, sort } = req.query;
+        const { category, featured, sort, search } = req.query;
         const whereClause: any = { active: true };
         
         if (category) {
@@ -42,10 +42,19 @@ export const getProducts = async (req: Request, res: Response) => {
             orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
         }
 
-        const products = await prisma.product.findMany({
+        let products = await prisma.product.findMany({
             where: whereClause,
             orderBy
         });
+
+        if (search && String(search).trim() !== '') {
+            const searchTerm = String(search).trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            products = products.filter(p => {
+                const normalizedName = p.name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                return normalizedName.includes(searchTerm);
+            });
+        }
+
         res.json(products);
     } catch (error: any) {
         log(`Error fetching products: ${error.message}\n${error.stack}`);
@@ -77,7 +86,7 @@ export const getProductById = async (req: Request, res: Response) => {
 export const createProduct = async (req: Request, res: Response) => {
     log(`Creating product with body: ${JSON.stringify(req.body)}`);
     try {
-        const { name, description, price, comparePrice, imageUrl, colors, badges, categoryId, sortOrder, isFeatured } = req.body;
+        const { name, description, price, comparePrice, imageUrl, colors, badges, categoryId, sortOrder, isFeatured, howToUse, whyLoveIt, composition } = req.body;
 
         const numericPrice = parsePrice(price);
         if (numericPrice === null) {
@@ -97,6 +106,9 @@ export const createProduct = async (req: Request, res: Response) => {
                 categoryId: categoryId || null,
                 sortOrder: sortOrder ? parseInt(String(sortOrder)) : 0,
                 isFeatured: isFeatured === true || isFeatured === 'true',
+                howToUse: howToUse || null,
+                whyLoveIt: whyLoveIt || null,
+                composition: composition || null,
                 active: true
             }
         });
@@ -111,9 +123,13 @@ export const createProduct = async (req: Request, res: Response) => {
 export const updateProduct = async (req: Request, res: Response) => {
     const { id } = req.params as { id: string };
     log(`Updating product ${id} with body: ${JSON.stringify(req.body)}`);
-    const { price, comparePrice, categoryId, sortOrder, isFeatured, ...rest } = req.body;
+    const { price, comparePrice, categoryId, sortOrder, isFeatured, howToUse, whyLoveIt, composition, ...rest } = req.body;
     try {
         const data: any = { ...rest };
+
+        if (howToUse !== undefined) data.howToUse = howToUse;
+        if (whyLoveIt !== undefined) data.whyLoveIt = whyLoveIt;
+        if (composition !== undefined) data.composition = composition;
 
         if (price !== undefined) {
             const numericPrice = parsePrice(price);

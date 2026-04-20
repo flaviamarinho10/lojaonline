@@ -1,79 +1,99 @@
 import { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
-import { X, Trash2, Plus, Minus, Loader2, Truck } from 'lucide-react';
-import api from '../lib/axios';
-
-const FREE_SHIPPING_THRESHOLD = 150;
+import { X, Trash2, Plus, Minus, CreditCard, QrCode, MessageCircle } from 'lucide-react';
 
 export default function CartSidebar() {
-    const { items, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, clearCart, total } = useCart();
+    const { items, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, total } = useCart();
+
+    // Form state
+    const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
-    const [isLoading, setIsLoading] = useState(false);
-    const [success, setSuccess] = useState(false);
+    const [endereco, setEndereco] = useState('');
+    const [cep, setCep] = useState('');
+    const [pagamento, setPagamento] = useState<'cartao' | 'pix' | ''>('');
+
+    // UI state
+    const [step, setStep] = useState<'cart' | 'checkout'>('cart');
 
     if (!isCartOpen) return null;
 
     const itemCount = items.reduce((acc, item) => acc + item.quantity, 0);
-    const remaining = Math.max(0, FREE_SHIPPING_THRESHOLD - total);
-    const progress = Math.min(100, (total / FREE_SHIPPING_THRESHOLD) * 100);
 
-    const handleCheckout = async (e: React.FormEvent) => {
-        e.preventDefault();
-        if (!email) return;
+    const formatCurrency = (value: number) =>
+        new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value);
 
-        setIsLoading(true);
-        try {
-            await api.post('/orders', {
-                email,
-                items: items.map(item => ({
-                    productId: item.id,
-                    quantity: item.quantity
-                }))
-            });
+    const formattedTotal = formatCurrency(total);
 
-            setSuccess(true);
-            clearCart();
-            setTimeout(() => {
-                setSuccess(false);
-                setIsCartOpen(false);
-                setEmail('');
-            }, 3000);
-        } catch (error) {
-            console.error('Checkout error:', error);
-            alert('Erro ao finalizar pedido. Tente novamente.');
-        } finally {
-            setIsLoading(false);
-        }
+    const formatCep = (value: string) => {
+        const digits = value.replace(/\D/g, '').slice(0, 8);
+        if (digits.length > 5) return digits.slice(0, 5) + '-' + digits.slice(5);
+        return digits;
     };
 
-    const formattedTotal = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-    }).format(total);
+    const isFormValid = nome.trim() && email.trim() && endereco.trim() && cep.trim() && pagamento;
 
-    const formattedRemaining = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-    }).format(remaining);
+    const handleWhatsApp = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!isFormValid) return;
+
+        const pagamentoLabel = pagamento === 'cartao' ? 'Cartão de Crédito' : 'PIX';
+
+        const produtosTexto = items
+            .map(
+                (item) =>
+                    `• ${item.name} (x${item.quantity}) — ${formatCurrency(item.price * item.quantity)}`
+            )
+            .join('\n');
+
+        const mensagem = `*Novo Pedido - Shine Glam*\n\n` +
+            `*Nome:* ${nome}\n` +
+            `*E-mail:* ${email}\n` +
+            `*Endereço:* ${endereco}\n` +
+            `*CEP:* ${cep}\n` +
+            `*Pagamento:* ${pagamentoLabel}\n\n` +
+            `*Produtos:*\n${produtosTexto}\n\n` +
+            `*Total: ${formattedTotal}*\n\n` +
+            `Aguardo confirmação!`;
+
+        const phone = '5584981407003';
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
+    };
+
+    const handleClose = () => {
+        setIsCartOpen(false);
+        setStep('cart');
+    };
 
     return (
-        <div className="fixed inset-0 z-[60] flex justify-end">
+        <div className="fixed inset-0 z-[200] flex justify-end">
             {/* Backdrop */}
             <div
                 className="absolute inset-0 bg-black/20 transition-opacity"
-                onClick={() => setIsCartOpen(false)}
+                onClick={handleClose}
             />
 
             {/* Drawer */}
-            <div className="relative w-full max-w-[400px] bg-white shadow-[-4px_0_15px_rgba(0,0,0,0.08)] flex flex-col h-full animate-in slide-in-from-right duration-300">
+            <div className="relative w-full max-w-[420px] bg-white shadow-[-4px_0_15px_rgba(0,0,0,0.08)] flex flex-col h-full animate-in slide-in-from-right duration-300">
 
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
-                    <h2 className="text-lg font-semibold text-gray-900">
-                        Carrinho de compras ({itemCount})
-                    </h2>
+                    <div className="flex items-center gap-3">
+                        {step === 'checkout' && (
+                            <button
+                                onClick={() => setStep('cart')}
+                                className="text-gray-400 hover:text-gray-700 transition-colors text-sm font-medium"
+                                aria-label="Voltar ao carrinho"
+                            >
+                                ←
+                            </button>
+                        )}
+                        <h2 className="text-lg font-semibold text-gray-900">
+                            {step === 'cart' ? `Carrinho (${itemCount})` : 'Finalizar Pedido'}
+                        </h2>
+                    </div>
                     <button
-                        onClick={() => setIsCartOpen(false)}
+                        onClick={handleClose}
                         className="text-gray-400 hover:text-gray-700 transition-colors p-1"
                         aria-label="Fechar carrinho"
                     >
@@ -81,56 +101,20 @@ export default function CartSidebar() {
                     </button>
                 </div>
 
-                {/* Shipping Progress Bar */}
-                <div className="px-6 py-4 bg-[#f7f7f7]">
-                    <div className="flex items-center gap-3 mb-2">
-                        {/* Truck icon in circle */}
-                        <div className="flex-shrink-0 w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500">
-                            <Truck size={16} strokeWidth={1.5} />
-                        </div>
-                        {/* Progress bar */}
-                        <div className="flex-1 h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                            <div
-                                className="h-full bg-turquesa rounded-full transition-all duration-500"
-                                style={{ width: `${progress}%` }}
-                            />
-                        </div>
-                    </div>
-                    <p className="text-xs text-gray-500">
-                        {remaining > 0 ? (
-                            <>Compre mais {formattedRemaining} para ganhar <strong className="text-gray-700">Frete grátis!</strong></>
-                        ) : (
-                            <span className="text-turquesa-600 font-semibold">🎉 Parabéns! Você ganhou Frete grátis!</span>
-                        )}
-                    </p>
-                </div>
-
                 {/* Content */}
                 <div className="flex-1 overflow-y-auto">
-                    {success ? (
-                        /* Success State */
-                        <div className="flex flex-col items-center justify-center h-full text-center px-8 space-y-4">
-                            <div className="w-16 h-16 rounded-full bg-turquesa-50 flex items-center justify-center">
-                                <CheckCircle size={32} strokeWidth={1.5} />
-                            </div>
-                            <h3 className="text-xl font-bold text-gray-900">Pedido Confirmado!</h3>
-                            <p className="text-gray-500 text-sm">Obrigada por comprar na Shine Glam.</p>
-                        </div>
-                    ) : items.length === 0 ? (
+                    {items.length === 0 ? (
                         /* Empty State */
                         <div className="flex flex-col items-center justify-center h-full text-center px-8 space-y-5">
-                            {/* Cute basket SVG */}
                             <div className="text-gray-300">
                                 <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M20 30h40l-4 30H24L20 30z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
                                     <path d="M28 30V22a12 12 0 0124 0v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-                                    {/* Cute face */}
                                     <circle cx="34" cy="44" r="2" fill="currentColor" />
                                     <circle cx="46" cy="44" r="2" fill="currentColor" />
                                     <path d="M36 52c2 2 6 2 8 0" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none" />
                                 </svg>
                             </div>
-
                             <div className="space-y-2">
                                 <h3 className="text-xl font-bold text-gray-900">
                                     Seu carrinho está vazio no momento!
@@ -139,15 +123,14 @@ export default function CartSidebar() {
                                     Você pode conferir todos os produtos disponíveis e comprar alguns na loja.
                                 </p>
                             </div>
-
                             <button
-                                onClick={() => setIsCartOpen(false)}
-                                className="w-full max-w-[280px] bg-turquesa hover:bg-turquesa-500 text-white font-semibold py-3.5 rounded-lg transition-all duration-200 active:scale-95 shadow-sm"
+                                onClick={handleClose}
+                                className="w-full max-w-[280px] bg-rosa-500 hover:bg-rosa-600 text-white font-semibold py-3.5 rounded-lg transition-all duration-200 active:scale-95 shadow-sm"
                             >
                                 Continuar comprando
                             </button>
                         </div>
-                    ) : (
+                    ) : step === 'cart' ? (
                         /* Cart Items */
                         <div className="p-4 space-y-4">
                             {items.map((item) => (
@@ -192,63 +175,164 @@ export default function CartSidebar() {
                                                 </button>
                                             </div>
                                             <span className="font-semibold text-sm text-gray-900">
-                                                {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(item.price * item.quantity)}
+                                                {formatCurrency(item.price * item.quantity)}
                                             </span>
                                         </div>
                                     </div>
                                 </div>
                             ))}
                         </div>
+                    ) : (
+                        /* Checkout Form */
+                        <form id="checkout-form" onSubmit={handleWhatsApp} className="p-5 space-y-4">
+                            {/* Resumo compacto */}
+                            <div className="bg-[#fdf2f5] rounded-xl p-4 space-y-2">
+                                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Resumo do Pedido</h4>
+                                {items.map((item) => (
+                                    <div key={item.id} className="flex justify-between items-center text-sm">
+                                        <span className="text-gray-700 truncate pr-2">{item.name} <span className="text-gray-400">x{item.quantity}</span></span>
+                                        <span className="font-semibold text-gray-900 flex-shrink-0">{formatCurrency(item.price * item.quantity)}</span>
+                                    </div>
+                                ))}
+                                <div className="border-t border-rosa-200 pt-2 flex justify-between items-center">
+                                    <span className="font-bold text-gray-900 text-sm">Total</span>
+                                    <span className="font-bold text-lg text-rosa-600">{formattedTotal}</span>
+                                </div>
+                            </div>
+
+                            {/* Dados pessoais */}
+                            <div className="space-y-3">
+                                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Dados Pessoais</h4>
+
+                                <div>
+                                    <label htmlFor="checkout-nome" className="block text-xs font-medium text-gray-600 mb-1">Nome completo</label>
+                                    <input
+                                        id="checkout-nome"
+                                        type="text"
+                                        required
+                                        placeholder="Seu nome completo"
+                                        value={nome}
+                                        onChange={(e) => setNome(e.target.value)}
+                                        className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="checkout-email" className="block text-xs font-medium text-gray-600 mb-1">E-mail</label>
+                                    <input
+                                        id="checkout-email"
+                                        type="email"
+                                        required
+                                        placeholder="seu@email.com"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Endereço */}
+                            <div className="space-y-3">
+                                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Endereço de Entrega</h4>
+
+                                <div>
+                                    <label htmlFor="checkout-endereco" className="block text-xs font-medium text-gray-600 mb-1">Endereço completo</label>
+                                    <input
+                                        id="checkout-endereco"
+                                        type="text"
+                                        required
+                                        placeholder="Rua, número, bairro, cidade - UF"
+                                        value={endereco}
+                                        onChange={(e) => setEndereco(e.target.value)}
+                                        className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
+                                    />
+                                </div>
+
+                                <div>
+                                    <label htmlFor="checkout-cep" className="block text-xs font-medium text-gray-600 mb-1">CEP</label>
+                                    <input
+                                        id="checkout-cep"
+                                        type="text"
+                                        required
+                                        placeholder="00000-000"
+                                        value={cep}
+                                        onChange={(e) => setCep(formatCep(e.target.value))}
+                                        className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
+                                    />
+                                </div>
+                            </div>
+
+                            {/* Pagamento */}
+                            <div className="space-y-3">
+                                <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Forma de Pagamento</h4>
+
+                                <div className="grid grid-cols-2 gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => setPagamento('cartao')}
+                                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 ${
+                                            pagamento === 'cartao'
+                                                ? 'border-rosa-500 bg-rosa-50 shadow-sm'
+                                                : 'border-gray-200 bg-[#f7f7f7] hover:border-gray-300'
+                                        }`}
+                                    >
+                                        <CreditCard size={24} className={pagamento === 'cartao' ? 'text-rosa-500' : 'text-gray-400'} />
+                                        <span className={`text-xs font-semibold ${pagamento === 'cartao' ? 'text-rosa-600' : 'text-gray-600'}`}>
+                                            Cartão
+                                        </span>
+                                    </button>
+
+                                    <button
+                                        type="button"
+                                        onClick={() => setPagamento('pix')}
+                                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 ${
+                                            pagamento === 'pix'
+                                                ? 'border-rosa-500 bg-rosa-50 shadow-sm'
+                                                : 'border-gray-200 bg-[#f7f7f7] hover:border-gray-300'
+                                        }`}
+                                    >
+                                        <QrCode size={24} className={pagamento === 'pix' ? 'text-rosa-500' : 'text-gray-400'} />
+                                        <span className={`text-xs font-semibold ${pagamento === 'pix' ? 'text-rosa-600' : 'text-gray-600'}`}>
+                                            PIX
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     )}
                 </div>
 
-                {/* Footer / Checkout */}
-                {!success && items.length > 0 && (
-                    <div className="p-5 border-t border-gray-100 bg-white space-y-4 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.03)]">
-                        <div className="flex items-center justify-between">
-                            <span className="text-gray-500 text-sm">Subtotal</span>
-                            <span className="text-xl font-bold text-gray-900">{formattedTotal}</span>
-                        </div>
-                        <p className="text-[11px] text-gray-400 text-center">Frete calculado na finalização</p>
-
-                        <form onSubmit={handleCheckout} className="space-y-3">
-                            <input
-                                type="email"
-                                placeholder="Seu e-mail para finalizar"
-                                required
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-turquesa/30 focus:border-turquesa transition-all text-sm"
-                                aria-label="E-mail para checkout"
-                            />
-
+                {/* Footer */}
+                {items.length > 0 && (
+                    <div className="p-5 border-t border-gray-100 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.03)]">
+                        {step === 'cart' ? (
+                            <div className="space-y-3">
+                                <div className="flex items-center justify-between">
+                                    <span className="text-gray-500 text-sm">Subtotal</span>
+                                    <span className="text-xl font-bold text-gray-900">{formattedTotal}</span>
+                                </div>
+                                <p className="text-[11px] text-gray-400 text-center">O frete é calculado via WhatsApp</p>
+                                <button
+                                    onClick={() => setStep('checkout')}
+                                    className="w-full bg-rosa-500 hover:bg-rosa-600 text-white py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] font-semibold text-sm"
+                                >
+                                    Continuar para Checkout
+                                </button>
+                            </div>
+                        ) : (
                             <button
                                 type="submit"
-                                disabled={isLoading}
-                                className="w-full bg-turquesa hover:bg-turquesa-500 text-white py-3.5 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed font-semibold text-sm"
+                                form="checkout-form"
+                                disabled={!isFormValid}
+                                className="w-full bg-[#25D366] hover:bg-[#1fb855] disabled:bg-gray-300 disabled:cursor-not-allowed text-white py-3.5 rounded-lg flex items-center justify-center gap-2.5 transition-all active:scale-[0.98] font-semibold text-sm shadow-sm"
                             >
-                                {isLoading ? (
-                                    <>
-                                        <Loader2 size={16} className="animate-spin" />
-                                        Processando...
-                                    </>
-                                ) : (
-                                    'Finalizar Pedido'
-                                )}
+                                <MessageCircle size={18} />
+                                Finalizar Pedido via WhatsApp
                             </button>
-                        </form>
+                        )}
                     </div>
                 )}
             </div>
         </div>
-    );
-}
-
-function CheckCircle({ size, strokeWidth }: { size: number; strokeWidth: number }) {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={strokeWidth} strokeLinecap="round" strokeLinejoin="round" className="text-turquesa-600">
-            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-            <polyline points="22 4 12 14.01 9 11.01" />
-        </svg>
     );
 }

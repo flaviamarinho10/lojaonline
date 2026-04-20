@@ -2,12 +2,29 @@ import React, { useState, useEffect } from 'react';
 import api from '../lib/axios';
 import { Loader2, Save, Image as ImageIcon, LayoutTemplate, Megaphone } from 'lucide-react';
 
+const AVAILABLE_ICONS = [
+    { id: 'Truck', label: '🚚 Caminhão/Envio' },
+    { id: 'Tag', label: '🏷️ Etiqueta/Tag' },
+    { id: 'Flower', label: '🌸 Flor' },
+    { id: 'Percent', label: '٪ Porcentagem' },
+    { id: 'Heart', label: '❤️ Coração' },
+    { id: 'Star', label: '⭐ Estrela' },
+    { id: 'Sparkles', label: '✨ Brilhos' },
+    { id: 'ShieldCheck', label: '🛡️ Seguro/Protegido' },
+    { id: 'Gift', label: '🎁 Presente' },
+    { id: 'CreditCard', label: '💳 Cartão' },
+    { id: 'ShoppingBag', label: '🛍️ Sacola' },
+    { id: 'Package', label: '📦 Pacote' },
+    { id: 'BadgeCheck', label: '✅ Selo/Verificado' },
+    { id: 'Smile', label: '😊 Sorriso' },
+];
+
 const AdminSettings = () => {
     const [settings, setSettings] = useState({
         topBar: {
             active: true,
-            message: '',
-            bgColor: '#66c2bb'
+            message: '✨ FRETE GRÁTIS BRASIL A PARTIR DE R$ 129,90 ✨',
+            bgColor: '#1a1a1a'
         },
         hero: {
             desktopImage: '',
@@ -21,6 +38,18 @@ const AdminSettings = () => {
             active: true,
             url: '',
             size: 96
+        },
+        benefitsTicker: {
+            active: true,
+            bgColor: '#fce0e5',
+            text1: 'Frete grátis a partir de R$ 129,90',
+            icon1: 'Truck',
+            text2: 'Parcelamento em até 6x sem juros',
+            icon2: 'Tag',
+            text3: 'Desconto de 5% via PIX',
+            icon3: 'Flower',
+            text4: 'Cupom de 1ª compra NINAE10',
+            icon4: 'Percent',
         }
     });
     const [isLoading, setIsLoading] = useState(true);
@@ -36,7 +65,8 @@ const AdminSettings = () => {
                     ...(res.data || {}),
                     topBar: { ...prev.topBar, ...(res.data?.topBar || {}) },
                     hero: { ...prev.hero, ...(res.data?.hero || {}) },
-                    storePhoto: { ...prev.storePhoto, ...(res.data?.storePhoto || {}) }
+                    storePhoto: { ...prev.storePhoto, ...(res.data?.storePhoto || {}) },
+                    benefitsTicker: { ...prev.benefitsTicker, ...(res.data?.benefitsTicker || {}) }
                 }));
             } catch (error) {
                 console.error(error);
@@ -74,6 +104,10 @@ const AdminSettings = () => {
         setSettings(prev => ({ ...prev, storePhoto: { ...prev.storePhoto, [field]: value } }));
     };
 
+    const updateBenefits = (field: string, value: any) => {
+        setSettings(prev => ({ ...prev, benefitsTicker: { ...prev.benefitsTicker, [field]: value } }));
+    };
+
     if (isLoading) {
         return (
             <div className="flex justify-center p-8 text-gray-400">
@@ -85,7 +119,7 @@ const AdminSettings = () => {
     return (
         <div className="space-y-6">
             <h2 className="text-xl font-bold text-gray-800 flex items-center gap-2">
-                <LayoutTemplate className="text-[#66c2bb]" /> Personalizar Loja
+                <LayoutTemplate className="text-[#F472B6]" /> Personalizar Loja
             </h2>
 
             <form onSubmit={handleSave} className="space-y-8">
@@ -102,7 +136,7 @@ const AdminSettings = () => {
                                 onChange={(e) => updateTopBar('active', e.target.checked)}
                                 className="sr-only peer"
                             />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#66c2bb]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#66c2bb]"></div>
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#F472B6]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#F472B6]"></div>
                             <span className="ml-3 text-sm font-medium text-gray-700">Ativa</span>
                         </label>
                     </div>
@@ -113,7 +147,7 @@ const AdminSettings = () => {
                             <input
                                 value={settings.topBar.message}
                                 onChange={(e) => updateTopBar('message', e.target.value)}
-                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
                                 placeholder="Ex: Frete Grátis para todo o Brasil"
                             />
                         </div>
@@ -132,6 +166,122 @@ const AdminSettings = () => {
                     </div>
                 </div>
 
+                {/* Faixa animada de Benefícios */}
+                <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                    <div className="flex items-center justify-between mb-6 border-b border-gray-100 pb-4">
+                        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                            <Megaphone size={20} className="text-gray-400" /> Faixa Animada (Benefícios)
+                        </h3>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={settings.benefitsTicker.active}
+                                onChange={(e) => updateBenefits('active', e.target.checked)}
+                                className="sr-only peer"
+                            />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#F472B6]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#F472B6]"></div>
+                            <span className="ml-3 text-sm font-medium text-gray-700">Ativa</span>
+                        </label>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Mensagem 1</label>
+                                <div className="flex gap-2">
+                                    <select
+                                        value={settings.benefitsTicker.icon1 || 'Star'}
+                                        onChange={(e) => updateBenefits('icon1', e.target.value)}
+                                        className="bg-white border border-gray-200 rounded-lg px-2 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none text-sm w-[60px] md:w-[70px] cursor-pointer"
+                                        title="Escolha um ícone"
+                                    >
+                                        {AVAILABLE_ICONS.map(i => <option key={i.id} value={i.id}>{i.label}</option>)}
+                                    </select>
+                                    <input
+                                        value={settings.benefitsTicker.text1}
+                                        onChange={(e) => updateBenefits('text1', e.target.value)}
+                                        className="flex-1 bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
+                                        placeholder="Ex: Frete grátis..."
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Mensagem 2</label>
+                                <div className="flex gap-2">
+                                    <select
+                                        value={settings.benefitsTicker.icon2 || 'Tag'}
+                                        onChange={(e) => updateBenefits('icon2', e.target.value)}
+                                        className="bg-white border border-gray-200 rounded-lg px-2 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none text-sm w-[60px] md:w-[70px] cursor-pointer"
+                                        title="Escolha um ícone"
+                                    >
+                                        {AVAILABLE_ICONS.map(i => <option key={i.id} value={i.id}>{i.label}</option>)}
+                                    </select>
+                                    <input
+                                        value={settings.benefitsTicker.text2}
+                                        onChange={(e) => updateBenefits('text2', e.target.value)}
+                                        className="flex-1 bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
+                                        placeholder="Ex: Parcelamento em 6x..."
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Mensagem 3</label>
+                                <div className="flex gap-2">
+                                    <select
+                                        value={settings.benefitsTicker.icon3 || 'Flower'}
+                                        onChange={(e) => updateBenefits('icon3', e.target.value)}
+                                        className="bg-white border border-gray-200 rounded-lg px-2 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none text-sm w-[60px] md:w-[70px] cursor-pointer"
+                                        title="Escolha um ícone"
+                                    >
+                                        {AVAILABLE_ICONS.map(i => <option key={i.id} value={i.id}>{i.label}</option>)}
+                                    </select>
+                                    <input
+                                        value={settings.benefitsTicker.text3}
+                                        onChange={(e) => updateBenefits('text3', e.target.value)}
+                                        className="flex-1 bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
+                                        placeholder="Ex: Desconto via PIX..."
+                                    />
+                                </div>
+                            </div>
+                            <div className="space-y-2">
+                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Mensagem 4</label>
+                                <div className="flex gap-2">
+                                    <select
+                                        value={settings.benefitsTicker.icon4 || 'Percent'}
+                                        onChange={(e) => updateBenefits('icon4', e.target.value)}
+                                        className="bg-white border border-gray-200 rounded-lg px-2 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none text-sm w-[60px] md:w-[70px] cursor-pointer"
+                                        title="Escolha um ícone"
+                                    >
+                                        {AVAILABLE_ICONS.map(i => <option key={i.id} value={i.id}>{i.label}</option>)}
+                                    </select>
+                                    <input
+                                        value={settings.benefitsTicker.text4}
+                                        onChange={(e) => updateBenefits('text4', e.target.value)}
+                                        className="flex-1 bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
+                                        placeholder="Ex: Cupom PRIMEIRACOMPRA"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div className="col-span-2 space-y-2">
+                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Cor de Fundo da Faixa</label>
+                            <div className="flex items-center gap-3">
+                                <input
+                                    type="color"
+                                    value={settings.benefitsTicker.bgColor || '#fce0e5'}
+                                    onChange={(e) => updateBenefits('bgColor', e.target.value)}
+                                    className="h-10 w-20 rounded cursor-pointer border border-gray-200"
+                                />
+                                <span className="text-sm text-gray-500 font-mono">{settings.benefitsTicker.bgColor || '#fce0e5'}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Banner Principal */}
                 <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
                     <h3 className="text-lg font-semibold text-gray-800 mb-6 border-b border-gray-100 pb-4 flex items-center gap-2">
@@ -139,64 +289,14 @@ const AdminSettings = () => {
                     </h3>
 
                     <div className="space-y-6">
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Imagem Desktop (URL)</label>
-                                <input
-                                    value={settings.hero.desktopImage}
-                                    onChange={(e) => updateHero('desktopImage', e.target.value)}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
-                                    placeholder="https://..."
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Imagem Mobile (URL - Opcional)</label>
-                                <input
-                                    value={settings.hero.mobileImage}
-                                    onChange={(e) => updateHero('mobileImage', e.target.value)}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
-                                    placeholder="https://..."
-                                />
-                            </div>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Título Principal</label>
-                                <input
-                                    value={settings.hero.title}
-                                    onChange={(e) => updateHero('title', e.target.value)}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm font-bold"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Subtítulo</label>
-                                <input
-                                    value={settings.hero.subtitle}
-                                    onChange={(e) => updateHero('subtitle', e.target.value)}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
-                                />
-                            </div>
-                        </div>
-
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Texto do Botão</label>
-                                <input
-                                    value={settings.hero.buttonText}
-                                    onChange={(e) => updateHero('buttonText', e.target.value)}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
-                                />
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Link do Botão</label>
-                                <input
-                                    value={settings.hero.buttonLink}
-                                    onChange={(e) => updateHero('buttonLink', e.target.value)}
-                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
-                                    placeholder="/colecao-x"
-                                />
-                            </div>
+                        <div className="space-y-2">
+                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Imagem Desktop (URL)</label>
+                            <input
+                                value={settings.hero.desktopImage}
+                                onChange={(e) => updateHero('desktopImage', e.target.value)}
+                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
+                                placeholder="https://..."
+                            />
                         </div>
                     </div>
                 </div>
@@ -207,24 +307,14 @@ const AdminSettings = () => {
                         <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
                             <ImageIcon size={20} className="text-gray-400" /> Foto da Loja (Home)
                         </h3>
-                        <label className="relative inline-flex items-center cursor-pointer">
-                            <input
-                                type="checkbox"
-                                checked={settings.storePhoto?.active ?? true}
-                                onChange={(e) => updateStorePhoto('active', e.target.checked)}
-                                className="sr-only peer"
-                            />
-                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#66c2bb]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#66c2bb]"></div>
-                            <span className="ml-3 text-sm font-medium text-gray-700">Visível</span>
-                        </label>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-6">
                         <div className="space-y-2">
                             <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Imagem da Logo</label>
                             
                             <div className="flex gap-2">
-                                <label className="flex-1 bg-white border border-gray-200 border-dashed hover:bg-gray-50 hover:border-[#66c2bb] transition-all rounded-lg text-sm text-gray-500 font-medium cursor-pointer flex items-center justify-center gap-2 group p-2">
+                                <label className="flex-1 bg-white border border-gray-200 border-dashed hover:bg-gray-50 hover:border-[#F472B6] transition-all rounded-lg text-sm text-gray-500 font-medium cursor-pointer flex items-center justify-center gap-2 group p-2">
                                     <input 
                                         type="file" 
                                         className="hidden" 
@@ -242,7 +332,7 @@ const AdminSettings = () => {
                                             }
                                         }}
                                     />
-                                    <span className="group-hover:text-[#66c2bb] transition-colors">Fazer Upload</span>
+                                    <span className="group-hover:text-[#F472B6] transition-colors">Fazer Upload</span>
                                 </label>
                                 {settings.storePhoto?.url && (
                                     <button 
@@ -258,28 +348,9 @@ const AdminSettings = () => {
                             <input
                                 value={settings.storePhoto?.url || ''}
                                 onChange={(e) => updateStorePhoto('url', e.target.value)}
-                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-xs"
+                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-xs"
                                 placeholder="Ou cole a URL da imagem aqui..."
                             />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide flex justify-between">
-                                <span>Tamanho (px)</span>
-                                <span className="text-[#66c2bb] font-bold">{settings.storePhoto?.size || 96}px</span>
-                            </label>
-                            <input
-                                type="range"
-                                min="48"
-                                max="256"
-                                step="8"
-                                value={settings.storePhoto?.size || 96}
-                                onChange={(e) => updateStorePhoto('size', parseInt(e.target.value))}
-                                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#66c2bb]"
-                            />
-                            <div className="flex justify-between text-[10px] text-gray-400 font-medium">
-                                <span>Pequeno</span>
-                                <span>Grande</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -294,7 +365,7 @@ const AdminSettings = () => {
                     <button
                         type="submit"
                         disabled={isSaving}
-                        className="bg-[#66c2bb] hover:bg-[#55b0a9] text-white font-bold py-3 px-8 rounded-lg flex items-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 text-sm uppercase tracking-wide shadow-md hover:shadow-lg"
+                        className="bg-[#F472B6] hover:bg-[#EC4899] text-white font-bold py-3 px-8 rounded-lg flex items-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 text-sm uppercase tracking-wide shadow-md hover:shadow-lg"
                     >
                         {isSaving ? <Loader2 size={18} className="animate-spin" /> : <Save size={18} />}
                         Salvar Alterações

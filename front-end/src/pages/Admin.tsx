@@ -27,6 +27,9 @@ interface Product {
     sortOrder: number;
     isFeatured: boolean;
     categoryId?: string | null;
+    howToUse?: string | null;
+    whyLoveIt?: string | null;
+    composition?: string | null;
 }
 
 interface Category {
@@ -61,6 +64,9 @@ const Admin: React.FC = () => {
     const [price, setPrice] = useState('');
     const [comparePrice, setComparePrice] = useState('');
     const [desc, setDesc] = useState('');
+    const [howToUse, setHowToUse] = useState('');
+    const [whyLoveIt, setWhyLoveIt] = useState('');
+    const [composition, setComposition] = useState('');
     const [imageUrl, setImageUrl] = useState('');
     const [productColors, setProductColors] = useState<ProductColor[]>([]);
     const [badges, setBadges] = useState<string[]>([]);
@@ -133,7 +139,10 @@ const Admin: React.FC = () => {
                 badges: badges,
                 categoryId: categoryId || null,
                 sortOrder: parseInt(sortOrder) || 0,
-                isFeatured: isFeatured
+                isFeatured: isFeatured,
+                howToUse: howToUse,
+                whyLoveIt: whyLoveIt,
+                composition: composition
             };
 
             if (isEditing) {
@@ -164,6 +173,9 @@ const Admin: React.FC = () => {
         setCategoryId(p.categoryId || '');
         setSortOrder(p.sortOrder?.toString() || '0');
         setIsFeatured(p.isFeatured || false);
+        setHowToUse(p.howToUse || '');
+        setWhyLoveIt(p.whyLoveIt || '');
+        setComposition(p.composition || '');
         setIsEditing(p.id);
     };
 
@@ -189,6 +201,9 @@ const Admin: React.FC = () => {
         setCategoryId('');
         setSortOrder('0');
         setIsFeatured(false);
+        setHowToUse('');
+        setWhyLoveIt('');
+        setComposition('');
         setIsActive(true);
         setIsEditing(null);
     };
@@ -374,7 +389,7 @@ const Admin: React.FC = () => {
                             key={item.key}
                             onClick={() => { setActiveTab(item.key); setSidebarOpen(false); }}
                             className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all text-sm font-medium ${activeTab === item.key
-                                ? 'bg-[#e8f7f6] text-[#66c2bb] border border-[#66c2bb]/20'
+                                ? 'bg-[#FDF2F8] text-[#F472B6] border border-[#F472B6]/20'
                                 : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
                                 }`}
                         >
@@ -425,7 +440,7 @@ const Admin: React.FC = () => {
                                 {/* Form */}
                                 <div className="bg-white border border-gray-100 rounded-xl p-6 h-fit shadow-sm">
                                     <h2 className="text-base font-semibold text-gray-900 mb-5 flex items-center gap-2">
-                                        {isEditing ? <Edit size={18} className="text-[#66c2bb]" /> : <Plus size={18} className="text-[#66c2bb]" />}
+                                        {isEditing ? <Edit size={18} className="text-[#F472B6]" /> : <Plus size={18} className="text-[#F472B6]" />}
                                         {isEditing ? 'Editar Produto' : 'Novo Produto'}
                                     </h2>
 
@@ -437,7 +452,7 @@ const Admin: React.FC = () => {
                                                 value={name}
                                                 onChange={e => setName(e.target.value)}
                                                 required
-                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
                                             />
                                         </div>
 
@@ -451,7 +466,7 @@ const Admin: React.FC = () => {
                                                     value={price}
                                                     onChange={e => setPrice(e.target.value)}
                                                     required
-                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
                                                 />
                                             </div>
                                             <div className="space-y-1.5">
@@ -462,7 +477,7 @@ const Admin: React.FC = () => {
                                                     placeholder="0.00"
                                                     value={comparePrice}
                                                     onChange={e => setComparePrice(e.target.value)}
-                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
                                                 />
                                             </div>
                                         </div>
@@ -476,7 +491,7 @@ const Admin: React.FC = () => {
                                                     placeholder="https://..."
                                                     value={imageUrl}
                                                     onChange={e => setImageUrl(e.target.value)}
-                                                    className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                    className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
                                                 />
                                             </div>
                                         </div>
@@ -487,7 +502,7 @@ const Admin: React.FC = () => {
                                                 <select
                                                     value={categoryId}
                                                     onChange={e => setCategoryId(e.target.value)}
-                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm appearance-none"
+                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm appearance-none"
                                                 >
                                                     <option value="">Opcional</option>
                                                     {categories.map(cat => (
@@ -501,7 +516,7 @@ const Admin: React.FC = () => {
                                                     type="number"
                                                     value={sortOrder}
                                                     onChange={e => setSortOrder(e.target.value)}
-                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
                                                 />
                                             </div>
                                         </div>
@@ -509,11 +524,42 @@ const Admin: React.FC = () => {
                                         <div className="space-y-1.5">
                                             <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Descrição</label>
                                             <textarea
-                                                placeholder="Detalhes do produto..."
+                                                placeholder="Detalhes curtos do produto..."
                                                 value={desc}
                                                 onChange={e => setDesc(e.target.value)}
-                                                rows={3}
-                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all resize-none text-sm"
+                                                rows={2}
+                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all resize-none text-sm"
+                                            />
+                                        </div>
+
+                                        <div className="space-y-1.5 pt-4 border-t border-gray-100">
+                                            <h4 className="text-sm font-semibold text-gray-800 mb-2">Abas do Produto na Loja</h4>
+                                            
+                                            <label className="text-[11px] font-medium text-gray-500 uppercase tracking-wide">Como Usar</label>
+                                            <textarea
+                                                placeholder="Passo a passo, modo de uso..."
+                                                value={howToUse}
+                                                onChange={e => setHowToUse(e.target.value)}
+                                                rows={2}
+                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all resize-none text-xs mb-3"
+                                            />
+
+                                            <label className="text-[11px] font-medium text-gray-500 uppercase tracking-wide">Por Que Você Vai Amar?</label>
+                                            <textarea
+                                                placeholder="Benefícios principais, diferenciais..."
+                                                value={whyLoveIt}
+                                                onChange={e => setWhyLoveIt(e.target.value)}
+                                                rows={2}
+                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all resize-none text-xs mb-3"
+                                            />
+
+                                            <label className="text-[11px] font-medium text-gray-500 uppercase tracking-wide">Composição</label>
+                                            <textarea
+                                                placeholder="Ingredientes, fórmula..."
+                                                value={composition}
+                                                onChange={e => setComposition(e.target.value)}
+                                                rows={2}
+                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all resize-none text-xs"
                                             />
                                         </div>
 
@@ -524,7 +570,7 @@ const Admin: React.FC = () => {
                                                 <button
                                                     type="button"
                                                     onClick={() => setProductColors([...productColors, { name: '', hex: '#d4a89a' }])}
-                                                    className="flex items-center gap-1 text-[11px] font-semibold text-[#66c2bb] hover:text-[#55b0a9] transition-colors"
+                                                    className="flex items-center gap-1 text-[11px] font-semibold text-[#F472B6] hover:text-[#EC4899] transition-colors"
                                                 >
                                                     <Plus size={14} />
                                                     Adicionar Cor
@@ -554,7 +600,7 @@ const Admin: React.FC = () => {
                                                                     updated[idx] = { ...updated[idx], name: e.target.value };
                                                                     setProductColors(updated);
                                                                 }}
-                                                                className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none"
+                                                                className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none"
                                                             />
                                                             <span className="text-[10px] text-gray-400 font-mono w-16 text-center">{color.hex}</span>
                                                             <button
@@ -586,7 +632,7 @@ const Admin: React.FC = () => {
                                                                 }}
                                                                 className="sr-only peer"
                                                             />
-                                                            <div className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 text-gray-600 peer-checked:bg-[#66c2bb] peer-checked:text-white peer-checked:border-[#66c2bb] transition-all select-none">
+                                                            <div className="px-3 py-1.5 rounded-full text-xs font-medium border border-gray-200 text-gray-600 peer-checked:bg-[#F472B6] peer-checked:text-white peer-checked:border-[#F472B6] transition-all select-none">
                                                                 {tag}
                                                             </div>
                                                         </label>
@@ -603,7 +649,7 @@ const Admin: React.FC = () => {
                                                         onChange={(e) => setIsFeatured(e.target.checked)}
                                                         className="sr-only peer"
                                                     />
-                                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#66c2bb]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-400"></div>
+                                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#F472B6]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-pink-400"></div>
                                                     <span className="ml-3 text-sm font-medium text-pink-600">{isFeatured ? 'Sim' : 'Não'}</span>
                                                 </label>
                                             </div>
@@ -617,7 +663,7 @@ const Admin: React.FC = () => {
                                                         onChange={(e) => setIsActive(e.target.checked)}
                                                         className="sr-only peer"
                                                     />
-                                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#66c2bb]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#66c2bb]"></div>
+                                                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#F472B6]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#F472B6]"></div>
                                                     <span className="ml-3 text-sm font-medium text-gray-700">{isActive ? 'Ativo' : 'Rascunho'}</span>
                                                 </label>
                                             </div>
@@ -627,7 +673,7 @@ const Admin: React.FC = () => {
                                             <button
                                                 type="submit"
                                                 disabled={isSaving}
-                                                className="flex-1 bg-[#66c2bb] hover:bg-[#55b0a9] text-white font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 text-sm"
+                                                className="flex-1 bg-[#F472B6] hover:bg-[#EC4899] text-white font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 text-sm"
                                             >
                                                 {isSaving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
                                                 {isEditing ? 'Atualizar' : 'Salvar'}
@@ -669,7 +715,7 @@ const Admin: React.FC = () => {
                                                         <tr>
                                                             <td colSpan={4} className="px-6 py-12 text-center text-gray-400">
                                                                 <div className="flex justify-center items-center gap-2">
-                                                                    <Loader2 className="animate-spin text-[#66c2bb]" /> Carregando...
+                                                                    <Loader2 className="animate-spin text-[#F472B6]" /> Carregando...
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -681,13 +727,13 @@ const Admin: React.FC = () => {
                                                         </tr>
                                                     ) : (
                                                         products.map((product, index) => (
-                                                            <tr key={product.id} className="hover:bg-[#e8f7f6]/30 transition-colors group">
+                                                            <tr key={product.id} className="hover:bg-[#FDF2F8]/30 transition-colors group">
                                                                 <td className="px-6 py-4">
                                                                     <div className="flex flex-col items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
                                                                         <button 
                                                                             onClick={() => handleMoveProduct(index, 'up')}
                                                                             disabled={index === 0}
-                                                                            className="p-1 hover:text-[#66c2bb] disabled:text-gray-200"
+                                                                            className="p-1 hover:text-[#F472B6] disabled:text-gray-200"
                                                                         >
                                                                             <ChevronUp size={14} />
                                                                         </button>
@@ -695,7 +741,7 @@ const Admin: React.FC = () => {
                                                                         <button 
                                                                             onClick={() => handleMoveProduct(index, 'down')}
                                                                             disabled={index === products.length - 1}
-                                                                            className="p-1 hover:text-[#66c2bb] disabled:text-gray-200"
+                                                                            className="p-1 hover:text-[#F472B6] disabled:text-gray-200"
                                                                         >
                                                                             <ChevronDown size={14} />
                                                                         </button>
@@ -772,7 +818,7 @@ const Admin: React.FC = () => {
                                                 value={catName}
                                                 onChange={e => setCatName(e.target.value)}
                                                 required
-                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
                                             />
                                         </div>
 
@@ -786,7 +832,7 @@ const Admin: React.FC = () => {
                                                         placeholder="URL da imagem (ou selecione arquivo abaixo)"
                                                         value={catImageUrl}
                                                         onChange={e => setCatImageUrl(e.target.value)}
-                                                        className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#66c2bb]/30 focus:border-[#66c2bb] outline-none transition-all text-sm"
+                                                        className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
                                                     />
                                                 </div>
                                                 
@@ -801,7 +847,7 @@ const Admin: React.FC = () => {
                                                     type="button"
                                                     onClick={() => catImageInputRef.current?.click()}
                                                     disabled={isUploading}
-                                                    className="w-full h-10 border-2 border-dashed border-gray-200 rounded-lg flex items-center justify-center gap-2 text-sm text-gray-500 hover:border-[#66c2bb] hover:text-[#66c2bb] transition-all bg-gray-50 selection:bg-none"
+                                                    className="w-full h-10 border-2 border-dashed border-gray-200 rounded-lg flex items-center justify-center gap-2 text-sm text-gray-500 hover:border-[#F472B6] hover:text-[#F472B6] transition-all bg-gray-50 selection:bg-none"
                                                 >
                                                     {isUploading ? (
                                                         <Loader2 size={16} className="animate-spin" />
@@ -823,7 +869,7 @@ const Admin: React.FC = () => {
                                                         type="button"
                                                         onClick={() => setCatBgColor(opt.value)}
                                                         className={`w-9 h-9 rounded-full border-2 transition-all ${catBgColor === opt.value
-                                                            ? 'border-[#66c2bb] scale-110 shadow-md'
+                                                            ? 'border-[#F472B6] scale-110 shadow-md'
                                                             : 'border-gray-200 hover:border-gray-300'
                                                             }`}
                                                         style={{ backgroundColor: opt.preview }}
@@ -867,7 +913,7 @@ const Admin: React.FC = () => {
                                             <button
                                                 type="submit"
                                                 disabled={isCatSaving}
-                                                className="w-full bg-[#66c2bb] hover:bg-[#55b0a9] text-white font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed text-sm"
+                                                className="w-full bg-[#F472B6] hover:bg-[#EC4899] text-white font-semibold py-2.5 rounded-lg flex items-center justify-center gap-2 transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed text-sm"
                                             >
                                                 {isCatSaving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
                                                 {editingCatId ? 'Salvar Alterações' : 'Adicionar Categoria'}
@@ -909,7 +955,7 @@ const Admin: React.FC = () => {
                                                         <tr>
                                                             <td colSpan={3} className="px-6 py-12 text-center text-gray-400">
                                                                 <div className="flex justify-center items-center gap-2">
-                                                                    <Loader2 className="animate-spin text-[#66c2bb]" /> Carregando...
+                                                                    <Loader2 className="animate-spin text-[#F472B6]" /> Carregando...
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -921,7 +967,7 @@ const Admin: React.FC = () => {
                                                         </tr>
                                                     ) : (
                                                         categories.map((cat, catIndex) => (
-                                                            <tr key={cat.id} className="hover:bg-[#e8f7f6]/30 transition-colors group">
+                                                            <tr key={cat.id} className="hover:bg-[#FDF2F8]/30 transition-colors group">
                                                                 <td className="px-6 py-3">
                                                                     <div
                                                                         className="h-12 w-12 rounded-full overflow-hidden flex-shrink-0 border border-gray-100"

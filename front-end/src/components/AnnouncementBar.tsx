@@ -1,14 +1,35 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import api from '../lib/axios';
 
 export default function AnnouncementBar() {
     const [visible, setVisible] = useState(true);
+    const [settings, setSettings] = useState({
+        active: true,
+        message: '✨ FRETE GRÁTIS BRASIL A PARTIR DE R$ 129,90 ✨',
+        bgColor: '#1a1a1a'
+    });
 
-    if (!visible) return null;
+    useEffect(() => {
+        const fetchSettings = async () => {
+            try {
+                const res = await api.get('/settings/appearance');
+                if (res.data?.topBar) {
+                    setSettings(res.data.topBar);
+                }
+            } catch (error) {
+                console.error('Failed to fetch announcement bar settings:', error);
+            }
+        };
+        fetchSettings();
+    }, []);
+
+    if (!visible || settings.active === false) return null;
 
     return (
         <div
-            className="w-full bg-[#1a1a1a] text-white py-2 relative z-[110]"
+            className="w-full text-white py-2 relative z-[110] transition-colors duration-300"
+            style={{ backgroundColor: settings.bgColor || '#1a1a1a' }}
             role="banner"
             aria-label="Informações de benefícios"
         >
@@ -18,7 +39,7 @@ export default function AnnouncementBar() {
                 </button>
 
                 <p className="text-[11px] md:text-xs font-semibold tracking-wider uppercase text-center">
-                    ✨ FRETE GRÁTIS BRASIL A PARTIR DE R$ 129,90 ✨
+                    {settings.message || '✨ FRETE GRÁTIS BRASIL A PARTIR DE R$ 129,90 ✨'}
                 </p>
 
                 <button className="text-white/60 hover:text-white transition-colors hidden md:block" aria-label="Próximo">

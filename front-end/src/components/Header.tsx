@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { ShoppingBag, Search, User, Heart, Menu, X, Bell } from 'lucide-react';
+import { ShoppingBag, Search, Menu, X } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../lib/axios';
 
 interface Category {
@@ -16,6 +16,16 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [categories, setCategories] = useState<Category[]>([]);
     const [searchQuery, setSearchQuery] = useState('');
+    const navigate = useNavigate();
+
+    const handleSearch = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (searchQuery.trim()) {
+            navigate(`/?search=${encodeURIComponent(searchQuery)}`);
+        } else {
+            navigate(`/`);
+        }
+    };
 
     const itemCount = items.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -53,7 +63,7 @@ export default function Header() {
                     {/* Center: Search Bar & Nav */}
                     <div className="hidden md:flex flex-1 flex-col mx-4 md:mx-8 max-w-3xl mt-2">
                         {/* Search Bar */}
-                        <div className="w-full flex items-center bg-white rounded-full shadow-sm overflow-hidden mb-4">
+                        <form onSubmit={handleSearch} className="w-full flex items-center bg-white rounded-full shadow-sm overflow-hidden mb-4">
                             <input
                                 type="text"
                                 placeholder="BUSCAR"
@@ -62,12 +72,13 @@ export default function Header() {
                                 className="flex-1 bg-transparent outline-none text-xs text-gray-600 placeholder:text-gray-400 px-6 py-2.5 font-medium"
                             />
                             <button
+                                type="submit"
                                 className="bg-black text-white px-6 py-2.5 rounded-full mr-0.5 hover:bg-gray-800 transition-colors"
                                 aria-label="Buscar"
                             >
                                 <Search size={16} strokeWidth={2.5} />
                             </button>
-                        </div>
+                        </form>
 
                         {/* Navigation Menu */}
                         <nav aria-label="Navegação principal">
@@ -93,21 +104,6 @@ export default function Header() {
                             <Search size={22} strokeWidth={1.5} />
                         </button>
 
-                        {/* Notifications */}
-                        <button className="relative text-[#4a4a4a] hover:text-rosa-500 p-1 transition-colors" aria-label="Notificações">
-                            <Bell size={22} strokeWidth={1.5} />
-                            <span className="absolute top-1 right-1 flex h-2 w-2 items-center justify-center rounded-full bg-red-500 shadow-sm border border-[#fce4ec]"></span>
-                        </button>
-
-                        {/* User */}
-                        <button className="text-[#4a4a4a] hover:text-rosa-500 p-1 transition-colors hidden sm:block" aria-label="Minha conta">
-                            <User size={22} strokeWidth={1.5} />
-                        </button>
-
-                        {/* Wishlist */}
-                        <button className="text-[#4a4a4a] hover:text-rosa-500 p-1 transition-colors hidden sm:block" aria-label="Lista de desejos">
-                            <Heart size={22} strokeWidth={1.5} />
-                        </button>
 
                         {/* Cart */}
                         <button

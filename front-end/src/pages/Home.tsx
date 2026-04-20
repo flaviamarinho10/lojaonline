@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import { Phone, Mail, Instagram, Lock, ShieldCheck, Heart } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import AnnouncementBar from '../components/AnnouncementBar';
 import BenefitsTicker from '../components/BenefitsTicker';
@@ -26,7 +27,6 @@ export default function Home() {
     const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
     const [allProducts, setAllProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
-    const [activeCategory, setActiveCategory] = useState<string | null>(null);
     const [categories, setCategories] = useState<any[]>([]);
     const [appearance, setAppearance] = useState<any>(null);
     const productsRef = useRef<HTMLDivElement>(null);
@@ -34,6 +34,9 @@ export default function Home() {
     const [startX, setStartX] = useState(0);
     const [scrollLeft, setScrollLeft] = useState(0);
     const [dragMoved, setDragMoved] = useState(false);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const querySearch = searchParams.get('search');
+    const activeCategory = searchParams.get('category');
 
     useEffect(() => {
         const fetchHomeData = async () => {
@@ -41,7 +44,11 @@ export default function Home() {
             try {
                 // Featured products (all categories, default order)
                 // Catalog products (filtered by category, manual sort order)
-                const catalogUrl = activeCategory ? `/products?category=${activeCategory}&sort=manual` : '/products?sort=manual';
+                let catalogUrl = activeCategory ? `/products?category=${activeCategory}&sort=manual` : '/products?sort=manual';
+                
+                if (querySearch) {
+                    catalogUrl += `&search=${encodeURIComponent(querySearch)}`;
+                }
                 
                 const [featuredRes, catalogRes, appRes, catRes] = await Promise.all([
                     api.get('/products?featured=true'),
@@ -61,7 +68,7 @@ export default function Home() {
             }
         };
         fetchHomeData();
-    }, [activeCategory]);
+    }, [activeCategory, querySearch]);
 
     const handleMouseDown = (e: React.MouseEvent) => {
         if (!productsRef.current) return;
@@ -105,19 +112,28 @@ export default function Home() {
             <CartSidebar />
 
             {/* Hero Banner */}
-            {!activeCategory && <HeroBanner settings={appearance?.heroBanner} />}
+            {!activeCategory && !querySearch && <HeroBanner settings={appearance?.heroBanner} />}
 
             {/* Benefits Ticker */}
-            {!activeCategory && <BenefitsTicker />}
+            {!activeCategory && !querySearch && <BenefitsTicker />}
             
             {/* Category Carousel (Always visible for easy switching) */}
             <CategoryCarousel
                 activeCategory={activeCategory}
-                onSelectCategory={setActiveCategory}
+                onSelectCategory={(categoryId) => {
+                    const newParams = new URLSearchParams(searchParams);
+                    if (categoryId) {
+                        newParams.set('category', categoryId);
+                        newParams.delete('search'); // optional: clear search if picking a category
+                    } else {
+                        newParams.delete('category');
+                    }
+                    setSearchParams(newParams);
+                }}
             />
 
             {/* Products Section (Featured) */}
-            {!activeCategory && (
+            {!activeCategory && !querySearch && (
                 <section id="produtos" className="py-6 md:py-8 bg-white">
                     <div className="max-w-7xl mx-auto px-4">
                         {/* Section Title */}
@@ -180,7 +196,7 @@ export default function Home() {
             )}
 
             {/* Secondary Pink Bar */}
-            {!activeCategory && <SecondaryPinkBar />}
+            {!activeCategory && !querySearch && <SecondaryPinkBar />}
 
             {/* All Products Grid Section */}
             <section className="py-12 md:py-16 bg-white">
@@ -188,9 +204,11 @@ export default function Home() {
                     {/* Section Title */}
                     <div className="flex flex-col items-center mb-12">
                         <h2 className="text-[18px] md:text-[24px] font-bold text-[#1a1a1a] mb-2 uppercase tracking-[0.1em]">
-                            {activeCategory 
-                                ? categories.find(c => c.id === activeCategory)?.name || 'Produtos'
-                                : 'Todos os Produtos'
+                            {querySearch 
+                                ? `Resultados para "${querySearch}"`
+                                : activeCategory 
+                                    ? categories.find(c => c.id === activeCategory)?.name || 'Produtos'
+                                    : 'Todos os Produtos'
                             }
                         </h2>
                         <div className="w-16 h-1 bg-rosa-400 rounded-full" />
