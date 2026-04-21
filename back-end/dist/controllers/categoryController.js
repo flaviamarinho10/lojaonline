@@ -26,13 +26,14 @@ const getAllCategories = (req, res) => __awaiter(void 0, void 0, void 0, functio
 exports.getAllCategories = getAllCategories;
 const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { name, imageUrl, bgColor, sortOrder } = req.body;
+        const { name, imageUrl, bgColor, sortOrder, active } = req.body;
         const category = yield prisma.category.create({
             data: {
                 name,
                 imageUrl: imageUrl || '',
                 bgColor: bgColor || 'bg-green-100',
                 sortOrder: sortOrder ? Number(sortOrder) : 0,
+                active: active !== undefined ? active : true,
             },
         });
         res.status(201).json(category);
@@ -44,7 +45,7 @@ const createCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
 exports.createCategory = createCategory;
 const updateCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const { name, imageUrl, bgColor, sortOrder } = req.body;
+    const { name, imageUrl, bgColor, sortOrder, active } = req.body;
     try {
         const category = yield prisma.category.update({
             where: { id },
@@ -52,7 +53,8 @@ const updateCategory = (req, res) => __awaiter(void 0, void 0, void 0, function*
                 name,
                 imageUrl: imageUrl !== null && imageUrl !== void 0 ? imageUrl : '',
                 bgColor: bgColor !== null && bgColor !== void 0 ? bgColor : 'bg-green-100',
-                sortOrder: sortOrder ? Number(sortOrder) : 0,
+                sortOrder: sortOrder !== undefined ? Number(sortOrder) : undefined,
+                active: active !== undefined ? active : undefined,
             },
         });
         res.json(category);

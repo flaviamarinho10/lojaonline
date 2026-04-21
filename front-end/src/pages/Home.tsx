@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { Phone, Mail, Instagram, Lock, ShieldCheck, Heart } from 'lucide-react';
+import { Phone, Mail, Instagram } from 'lucide-react';
 import { useSearchParams } from 'react-router-dom';
 import Header from '../components/Header';
 import AnnouncementBar from '../components/AnnouncementBar';
@@ -28,7 +28,7 @@ export default function Home() {
     const [allProducts, setAllProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [categories, setCategories] = useState<any[]>([]);
-    const [appearance, setAppearance] = useState<any>(null);
+
     const productsRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
@@ -50,16 +50,14 @@ export default function Home() {
                     catalogUrl += `&search=${encodeURIComponent(querySearch)}`;
                 }
                 
-                const [featuredRes, catalogRes, appRes, catRes] = await Promise.all([
+                const [featuredRes, catalogRes, catRes] = await Promise.all([
                     api.get('/products?featured=true'),
                     api.get(catalogUrl),
-                    api.get('/settings/appearance'),
                     api.get('/categories')
                 ]);
-                
+
                 setFeaturedProducts(featuredRes.data);
                 setAllProducts(catalogRes.data);
-                setAppearance(appRes.data);
                 setCategories(catRes.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -112,7 +110,7 @@ export default function Home() {
             <CartSidebar />
 
             {/* Hero Banner */}
-            {!activeCategory && !querySearch && <HeroBanner settings={appearance?.heroBanner} />}
+            {!activeCategory && !querySearch && <HeroBanner />}
 
             {/* Benefits Ticker */}
             {!activeCategory && !querySearch && <BenefitsTicker />}

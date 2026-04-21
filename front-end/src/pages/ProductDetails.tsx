@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { 
-    ChevronRight, 
-    Star, 
-    Minus, 
-    Plus, 
-    Share2, 
-    Heart, 
-    ShieldCheck, 
-    Truck, 
-    CreditCard,
+import {
+    ChevronRight,
+    Star,
+    Minus,
+    Plus,
+    Heart,
+    ShieldCheck,
     Eye
 } from 'lucide-react';
 import Header from '../components/Header';
