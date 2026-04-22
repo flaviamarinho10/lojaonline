@@ -77,6 +77,8 @@ const Admin: React.FC = () => {
     const [isEditing, setIsEditing] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
+    const [isProductUploading, setIsProductUploading] = useState(false);
+    const productImageInputRef = useRef<HTMLInputElement>(null);
 
     // Categories state (API-driven)
     const [categories, setCategories] = useState<Category[]>([]);
@@ -332,9 +334,35 @@ const Admin: React.FC = () => {
         if (catImageInputRef.current) catImageInputRef.current.value = '';
     };
 
+    const handleProductImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) {
+            alert('A imagem deve ter no máximo 5MB.');
+            return;
+        }
+        const formData = new FormData();
+        formData.append('image', file);
+        setIsProductUploading(true);
+        try {
+            const res = await api.post('/upload', formData);
+            setImageUrl(res.data.url);
+        } catch (error: any) {
+            const serverError = error.response?.data;
+            alert(`Erro ao enviar imagem: ${serverError?.error || error.message}`);
+        } finally {
+            setIsProductUploading(false);
+            if (productImageInputRef.current) productImageInputRef.current.value = '';
+        }
+    };
+
     const handleCatImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
+        if (file.size > 5 * 1024 * 1024) {
+            alert('A imagem deve ter no máximo 5MB.');
+            return;
+        }
 
         const formData = new FormData();
         formData.append('image', file);
@@ -482,18 +510,47 @@ const Admin: React.FC = () => {
                                             </div>
                                         </div>
 
-                                        {/* Image URL */}
+                                        {/* Image Upload */}
                                         <div className="space-y-1.5">
-                                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Imagem URL</label>
-                                            <div className="relative">
-                                                <ImageIcon size={16} className="absolute left-3 top-3 text-gray-400" />
+                                            <label className="text-xs font-medium text-gray-500 uppercase tracking-wide">Imagem do Produto</label>
+                                            <input
+                                                type="file"
+                                                ref={productImageInputRef}
+                                                onChange={handleProductImageUpload}
+                                                accept="image/*"
+                                                className="hidden"
+                                            />
+                                            <button
+                                                type="button"
+                                                onClick={() => productImageInputRef.current?.click()}
+                                                disabled={isProductUploading}
+                                                className="w-full h-10 border-2 border-dashed border-gray-200 rounded-lg flex items-center justify-center gap-2 text-sm text-gray-500 hover:border-[#F472B6] hover:text-[#F472B6] transition-all bg-gray-50 disabled:opacity-60"
+                                            >
+                                                {isProductUploading ? <Loader2 size={16} className="animate-spin" /> : <Upload size={16} />}
+                                                {isProductUploading ? 'Enviando...' : 'Selecionar Imagem (máx. 5MB)'}
+                                            </button>
+                                            {imageUrl && (
+                                                <div className="flex items-center gap-2 mt-1">
+                                                    <img src={imageUrl} alt="Preview" className="h-12 w-12 object-cover rounded-lg border border-gray-200 flex-shrink-0" />
+                                                    <input
+                                                        placeholder="ou cole a URL aqui..."
+                                                        value={imageUrl}
+                                                        onChange={e => setImageUrl(e.target.value)}
+                                                        className="flex-1 bg-white border border-gray-200 rounded-lg px-3 py-2 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-xs"
+                                                    />
+                                                    <button type="button" onClick={() => setImageUrl('')} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0">
+                                                        <X size={14} />
+                                                    </button>
+                                                </div>
+                                            )}
+                                            {!imageUrl && (
                                                 <input
-                                                    placeholder="https://..."
+                                                    placeholder="ou cole a URL aqui..."
                                                     value={imageUrl}
                                                     onChange={e => setImageUrl(e.target.value)}
-                                                    className="w-full bg-white border border-gray-200 rounded-lg pl-10 pr-4 py-2.5 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-sm"
+                                                    className="w-full bg-white border border-gray-200 rounded-lg px-4 py-2 text-gray-900 placeholder-gray-400 focus:ring-2 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none transition-all text-xs"
                                                 />
-                                            </div>
+                                            )}
                                         </div>
 
                                         <div className="grid grid-cols-2 gap-4">

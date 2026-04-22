@@ -1,60 +1,48 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
+import { supabase, STORAGE_BUCKET } from '../lib/supabase';
 
 const router = Router();
 
-// Ensure uploads directory exists
-const uploadDir = path.join(process.cwd(), 'uploads');
-console.log('Upload directory configured at:', uploadDir);
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Multer storage configuration
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploadDir);
+const upload = multer({
+    storage: multer.memoryStorage(),
+    fileFilter: (_req, file, cb) => {
+        if (file.mimetype.startsWith('image/')) {
+            cb(null, true);
+        } else {
+            cb(new Error('Somente imagens são permitidas!'));
+        }
     },
-    filename: (req, file, cb) => {
-        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-        cb(null, uniqueSuffix + path.extname(file.originalname));
-    }
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
 });
 
-// File filter (images only)
-const fileFilter = (req: any, file: any, cb: any) => {
-    if (file.mimetype.startsWith('image/')) {
-        cb(null, true);
-    } else {
-        cb(new Error('Somente imagens são permitidas!'), false);
-    }
-};
-
-const upload = multer({ 
-    storage, 
-    fileFilter,
-    limits: { fileSize: 20 * 1024 * 1024 } // 20MB limit
-});
-
-// POST /upload
 router.post('/', (req, res, next) => {
-    console.log('Incoming upload request from:', req.ip);
-    upload.single('image')(req, res, (err) => {
+    upload.single('image')(req, res, async (err) => {
         if (err) {
-            console.error('Multer error:', err);
             return res.status(500).json({ error: 'Erro no processamento do arquivo', details: err.message });
         }
         if (!req.file) {
-            console.error('No file in request');
             return res.status(400).json({ error: 'Nenhum arquivo enviado.' });
         }
-        console.log('File uploaded successfully:', req.file.filename);
-        const protocol = req.headers['x-forwarded-proto'] || req.protocol;
-        const host = req.get('host');
-        const fileUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
-        res.json({ url: fileUrl });
+
+        const ext = req.file.originalname.split('.').pop();
+        const filename = `${Date.now()}-${Math.round(Math.random() * 1e9)}.${ext}`;
+
+        const { error: uploadError } = await supabase.storage
+            .from(STORAGE_BUCKET)
+            .upload(filename, req.file.buffer, {
+                contentType: req.file.mimetype,
+                upsert: false,
+            });
+
+        if (uploadError) {
+            console.error('Supabase upload error:', uploadError);
+            return res.status(500).json({ error: 'Erro ao enviar imagem para o storage', details: uploadError.message });
+        }
+
+        const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(filename);
+
+        res.json({ url: data.publicUrl });
     });
 });
 
