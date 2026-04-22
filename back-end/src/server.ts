@@ -13,8 +13,21 @@ const PORT = process.env.PORT || 3333;
 
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ limit: '20mb', extended: true }));
+const allowedOrigins = [
+    'http://localhost:5173',
+    ...(process.env.FRONTEND_URL
+        ? [process.env.FRONTEND_URL.replace(/\/$/, '')]
+        : []),
+];
+
 app.use(cors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin.replace(/\/$/, ''))) {
+            callback(null, true);
+        } else {
+            callback(new Error(`CORS: origem não permitida: ${origin}`));
+        }
+    },
     credentials: true
 }));
 
