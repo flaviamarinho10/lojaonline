@@ -528,3 +528,2683 @@ Validation Error Count: 1
 [2026-04-09T00:17:07.310Z] Updating product a950ba58-81ef-4bba-9235-00942bc8ea7d with body: {"sortOrder":5}
 [2026-04-09T00:17:07.312Z] Updating product c3b6e9f8-429f-4a41-af2f-776310f0b159 with body: {"sortOrder":4}
 [2026-04-20T18:58:11.433Z] Updating product c3b6e9f8-429f-4a41-af2f-776310f0b159 with body: {"name":"Iluminador fenty diamond bomb","description":"bonito","price":279.9,"comparePrice":null,"imageUrl":"https://www.sephora.com.br/dw/image/v2/BFJC_PRD/on/demandware.static/-/Sites-masterCatalog_Sephora/pt_BR/dwda84b433/images/hi-res-BR/fb3006_silo_dia_bomb_open_300_how_many_carots_1000px.jpg?sw=1200&sh=1200&sm=fit","active":true,"colors":[],"badges":[],"categoryId":null,"sortOrder":4,"isFeatured":true,"howToUse":"Use os dedos para uma aplicação concentrada ou um pincel fofo para um brilho difuso nas maçãs do rosto, olhos e corpo","whyLoveIt":"Sua fórmula única em uma mistura de pó com gel proporciona uma textura sedosa e aveludada","composition":"Borosilicato de Sódio e Cálcio / Borosilicato de Titânio e Cálcio: Responsáveis pelo reflexo intenso e brilho cristalino.\nPolimetilsilsesquioxano: Cria a textura leve e aveludada.\nFeniltrimeticona e Diisoestearil Malato: Agentes que conferem textura cremosa e ajudam a fixar na pele.\nMica e Óxido de Estanho: Aumentam a luminosidade e o brilho 3D.\nDimeticona/Vinil Dimeticona Crosspolymer: Proporciona uma aplicação suave."}
+[2026-04-23T11:42:50.223Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:50.225Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:50.235Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:50.237Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:52.006Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:52.008Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:52.015Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:52.018Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:53.035Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:53.036Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:53.044Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:42:53.045Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:43:02.197Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:43:02.202Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:43:02.213Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:43:02.216Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:45:59.148Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:45:59.150Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:45:59.159Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:45:59.160Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:46:35.230Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:46:35.232Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:46:35.247Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:46:35.248Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:46:51.181Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:19.047Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:19.051Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:19.069Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:19.073Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:26.191Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:26.193Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:26.201Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:26.203Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:26.547Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:26.549Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:26.559Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:55:26.561Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:56:05.049Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:56:05.050Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:56:05.057Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:56:05.058Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`
+
+Please make sure your database server is running at `db.eosaelvbfqpkcvjdvwhl.supabase.co:5432`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:57:35.340Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:57:35.342Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:57:37.014Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:57:37.016Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:58:08.565Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:58:08.567Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:58:10.254Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T11:58:10.256Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:00:00.714Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:02:13.515Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:02:13.518Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:02:15.074Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:02:15.078Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:17.631Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:17.632Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:19.155Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:19.156Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: Tenant or user not found
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.763Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.765Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.766Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.767Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.768Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.769Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.769Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.771Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.773Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.775Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.777Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.778Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:29.779Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:31.991Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:31.992Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.152Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.153Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.154Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.155Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.157Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.158Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.160Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.161Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.162Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.163Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.164Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.166Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.167Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:53.169Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:55.165Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: (ECIRCUITBREAKER) too many authentication failures, new connections are temporarily blocked
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: (ECIRCUITBREAKER) too many authentication failures, new connections are temporarily blocked
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:16:55.166Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: (ECIRCUITBREAKER) too many authentication failures, new connections are temporarily blocked
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Error querying the database: FATAL: (ECIRCUITBREAKER) too many authentication failures, new connections are temporarily blocked
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:24:47.391Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:24:47.393Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:24:49.538Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:24:49.539Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:26:51.403Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:26:51.404Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:26:56.414Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:26:56.415Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Can't reach database server at `aws-1-us-east-1.pooler.supabase.com:6543`
+
+Please make sure your database server is running at `aws-1-us-east-1.pooler.supabase.com:6543`.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:32:58.347Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:32:58.349Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:33:00.517Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:33:00.519Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:35:13.726Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:36:01.108Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:36:01.109Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:36:03.286Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)
+[2026-04-23T12:36:03.287Z] Error fetching products: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+PrismaClientInitializationError: 
+Invalid `prisma.product.findMany()` invocation in
+C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\src\controllers\productController.ts:45:45
+
+  42     orderBy = [{ sortOrder: 'asc' }, { createdAt: 'desc' }];
+  43 }
+  44 
+→ 45 let products = await prisma.product.findMany(
+Authentication failed against database server, the provided database credentials for `postgres` are not valid.
+
+Please make sure to provide valid database credentials for the database server at the configured address.
+    at ei.handleRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:242:13)
+    at ei.handleAndLogRequestError (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:174:12)
+    at ei.request (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\RequestHandler.ts:143:12)
+    at async a (C:\Users\Flavi\Documents\GitHub\lojaonline\back-end\node_modules\@prisma\client\src\runtime\getPrismaClient.ts:833:24)

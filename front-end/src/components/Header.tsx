@@ -43,19 +43,19 @@ export default function Header() {
 
     return (
         <header className="w-full bg-[#fce4ec] relative z-[100]">
-            <div className="max-w-7xl mx-auto px-4 md:px-8 pt-5 pb-3 md:pt-4 md:pb-2">
+            <div className="max-w-7xl mx-auto px-4 md:px-8 pt-4 pb-2 md:pt-4 md:pb-2">
                 <div className="flex items-center md:items-start justify-between gap-4 md:gap-8">
-                    
+
                     {/* Left: Logo */}
                     <Link
                         to="/"
-                        className="flex-shrink-0 flex flex-col justify-center mt-1"
+                        className="flex-shrink-0 flex flex-col justify-center"
                         aria-label="Ir para página inicial"
                     >
-                        <h1 className="text-[42px] md:text-5xl font-black tracking-tighter text-[#4a4a4a] leading-none mb-0.5" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                        <h1 className="text-[32px] md:text-5xl font-black tracking-tighter text-[#4a4a4a] leading-none" style={{ fontFamily: "'Montserrat', sans-serif" }}>
                             shine.
                         </h1>
-                        <span className="text-xs md:text-xs text-[#4a4a4a] uppercase tracking-widest pl-1 font-medium">
+                        <span className="text-[10px] md:text-xs text-[#4a4a4a] uppercase tracking-[0.3em] pl-0.5 font-medium">
                             glam
                         </span>
                     </Link>
@@ -98,10 +98,10 @@ export default function Header() {
                     </div>
 
                     {/* Right: Actions */}
-                    <div className="flex items-center gap-4 sm:gap-4 flex-shrink-0 md:mt-3">
+                    <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0 md:mt-3">
                         {/* Search (Mobile) */}
                         <button className="md:hidden text-[#4a4a4a] p-1" aria-label="Pesquisar">
-                            <Search size={24} strokeWidth={1.5} />
+                            <Search size={22} strokeWidth={1.5} />
                         </button>
 
 
@@ -112,8 +112,8 @@ export default function Header() {
                             onClick={() => setIsCartOpen(true)}
                             aria-label={`Carrinho com ${itemCount} itens`}
                         >
-                            <ShoppingBag size={24} className="md:w-[22px] md:h-[22px]" strokeWidth={1.5} />
-                            <span className="absolute -top-1.5 -right-1.5 flex h-[18px] w-[18px] md:h-4 md:w-4 items-center justify-center rounded-full bg-black text-[9px] font-bold text-white">
+                            <ShoppingBag size={22} className="md:w-[22px] md:h-[22px]" strokeWidth={1.5} />
+                            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-rosa-600 text-[9px] font-bold text-white shadow-sm">
                                 {itemCount}
                             </span>
                         </button>
@@ -124,7 +124,7 @@ export default function Header() {
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
                         >
-                            {mobileMenuOpen ? <X size={26} strokeWidth={1.5} /> : <Menu size={26} strokeWidth={1.5} />}
+                            {mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
                         </button>
                     </div>
                 </div>

@@ -1,0 +1,10 @@
+﻿[dotenv@17.3.1] injecting env (4) from .env -- tip: ÔÜÖ´©Å  specify custom .env file path with { path: '/custom/path/.env' }
+Products Debug:
+- L├ípis De Olho Eyeliner 10: Featured=true, Active=true
+- Bella Femme M├íscara De C├¡lios : Featured=true, Active=true
+- Dior Addict: Featured=true, Active=true
+- base payout: Featured=true, Active=true
+- po: Featured=false, Active=true
+- Paleta Dior Backstage: Featured=true, Active=true
+- Gloss Boca Rosa: Featured=true, Active=true
+- Blush Really: Featured=true, Active=true

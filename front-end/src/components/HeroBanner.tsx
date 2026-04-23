@@ -13,7 +13,11 @@ const banners = [
     }
 ];
 
-export default function HeroBanner() {
+interface HeroBannerProps {
+    settings?: any;
+}
+
+export default function HeroBanner({ settings: _settings }: HeroBannerProps) {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
     const [startX, setStartX] = useState(0);
@@ -80,12 +84,12 @@ export default function HeroBanner() {
     }, [isAutoPlaying, currentIndex, nextSlide]);
 
     return (
-        <section 
+        <section
             ref={containerRef}
             className="relative w-full overflow-hidden group select-none"
         >
             {/* Banners */}
-            <div 
+            <div
                 className={`relative w-full bg-gray-100 ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
                 onMouseDown={handleMouseDown}
                 onMouseMove={handleMouseMove}
@@ -104,11 +108,10 @@ export default function HeroBanner() {
                         src={banner.url}
                         alt={banner.alt}
                         draggable="false"
-                        className={`w-full h-auto transition-opacity duration-1000 ease-in-out ${
-                            index === currentIndex 
-                                ? 'relative opacity-100 z-10' 
-                                : 'absolute top-0 left-0 opacity-0 z-0'
-                        }`}
+                        className={`w-full h-auto transition-opacity duration-1000 ease-in-out ${index === currentIndex
+                            ? 'relative opacity-100 z-10'
+                            : 'absolute top-0 left-0 opacity-0 z-0'
+                            }`}
                     />
                 ))}
             </div>
@@ -119,11 +122,10 @@ export default function HeroBanner() {
                     <button
                         key={index}
                         onClick={() => goToSlide(index)}
-                        className={`w-1.5 md:w-2 h-1.5 md:h-2 rounded-full transition-all duration-300 ${
-                            index === currentIndex 
-                                ? 'bg-white w-4 md:w-6' 
-                                : 'bg-white/40 hover:bg-white/60'
-                        }`}
+                        className={`w-1.5 md:w-2 h-1.5 md:h-2 rounded-full transition-all duration-300 ${index === currentIndex
+                            ? 'bg-white w-4 md:w-6'
+                            : 'bg-white/40 hover:bg-white/60'
+                            }`}
                         aria-label={`Ir para o banner ${index + 1}`}
                     />
                 ))}
