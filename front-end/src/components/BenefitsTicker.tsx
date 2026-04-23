@@ -16,13 +16,13 @@ export default function BenefitsTicker() {
         return cached ? JSON.parse(cached) : {
             active: true,
             bgColor: '#fce0e5',
-            text1: 'Frete grátis a partir de R$ 129,90',
+            text1: '',
             icon1: 'Truck',
-            text2: 'Parcelamento em até 6x sem juros',
+            text2: '',
             icon2: 'Tag',
-            text3: 'Desconto de 5% via PIX',
+            text3: '',
             icon3: 'Flower',
-            text4: 'Cupom de 1ª compra NINAE10',
+            text4: '',
             icon4: 'Percent',
         };
     });

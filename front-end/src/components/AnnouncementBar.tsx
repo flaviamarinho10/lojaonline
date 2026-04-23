@@ -8,7 +8,7 @@ export default function AnnouncementBar() {
         const cached = localStorage.getItem('shine_announcement_settings');
         return cached ? JSON.parse(cached) : {
             active: true,
-            message: '✨ FRETE GRÁTIS BRASIL A PARTIR DE R$ 129,90 ✨',
+            message: '', // Vazio enquanto carrega pela primeira vez
             bgColor: '#1a1a1a'
         };
     });

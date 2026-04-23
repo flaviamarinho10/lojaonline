@@ -14,7 +14,10 @@ interface Category {
 export default function Header() {
     const { items, setIsCartOpen } = useCart();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [categories, setCategories] = useState<Category[]>([]);
+    const [categories, setCategories] = useState<Category[]>(() => {
+        const cached = localStorage.getItem('shine_categories');
+        return cached ? JSON.parse(cached) : [];
+    });
     const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
@@ -34,6 +37,7 @@ export default function Header() {
             try {
                 const res = await api.get('/categories');
                 setCategories(res.data);
+                localStorage.setItem('shine_categories', JSON.stringify(res.data));
             } catch (error) {
                 console.error('Error fetching categories for header:', error);
             }
