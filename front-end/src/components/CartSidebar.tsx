@@ -40,8 +40,10 @@ export default function CartSidebar() {
 
         const produtosTexto = items
             .map(
-                (item) =>
-                    `• ${item.name} (x${item.quantity}) — ${formatCurrency(item.price * item.quantity)}`
+                (item) => {
+                    const corTexto = item.color ? ` [Cor: ${item.color}]` : '';
+                    return `• ${item.name}${corTexto} (x${item.quantity}) — ${formatCurrency(item.price * item.quantity)}`;
+                }
             )
             .join('\n');
 
@@ -133,8 +135,10 @@ export default function CartSidebar() {
                     ) : step === 'cart' ? (
                         /* Cart Items */
                         <div className="p-4 space-y-4">
-                            {items.map((item) => (
-                                <div key={item.id} className="flex gap-4 bg-[#f9f9f9] p-3 rounded-xl">
+                            {items.map((item) => {
+                                const cartKey = item.color ? `${item.id}__${item.color}` : item.id;
+                                return (
+                                <div key={cartKey} className="flex gap-4 bg-[#f9f9f9] p-3 rounded-xl">
                                     <div className="h-20 w-16 bg-white rounded-lg overflow-hidden flex-shrink-0">
                                         <img
                                             src={item.imageUrl}
@@ -145,9 +149,14 @@ export default function CartSidebar() {
 
                                     <div className="flex-1 flex flex-col justify-between py-0.5">
                                         <div className="flex justify-between items-start gap-2">
-                                            <h3 className="text-sm font-medium text-gray-900 leading-tight">{item.name}</h3>
+                                            <div>
+                                                <h3 className="text-sm font-medium text-gray-900 leading-tight">{item.name}</h3>
+                                                {item.color && (
+                                                    <span className="text-[11px] text-gray-400 font-medium">Cor: {item.color}</span>
+                                                )}
+                                            </div>
                                             <button
-                                                onClick={() => removeFromCart(item.id)}
+                                                onClick={() => removeFromCart(cartKey)}
                                                 className="text-gray-300 hover:text-red-400 transition-colors"
                                                 aria-label={`Remover ${item.name}`}
                                             >
@@ -158,7 +167,7 @@ export default function CartSidebar() {
                                         <div className="flex items-end justify-between mt-1.5">
                                             <div className="flex items-center border border-gray-200 rounded-lg bg-white">
                                                 <button
-                                                    onClick={() => updateQuantity(item.id, 'decrease')}
+                                                    onClick={() => updateQuantity(cartKey, 'decrease')}
                                                     className="px-2 py-1 text-gray-400 hover:text-gray-900 disabled:opacity-30"
                                                     disabled={item.quantity <= 1}
                                                     aria-label="Diminuir quantidade"
@@ -167,7 +176,7 @@ export default function CartSidebar() {
                                                 </button>
                                                 <span className="text-xs font-semibold w-5 text-center text-gray-900">{item.quantity}</span>
                                                 <button
-                                                    onClick={() => updateQuantity(item.id, 'increase')}
+                                                    onClick={() => updateQuantity(cartKey, 'increase')}
                                                     className="px-2 py-1 text-gray-400 hover:text-gray-900"
                                                     aria-label="Aumentar quantidade"
                                                 >
@@ -180,7 +189,8 @@ export default function CartSidebar() {
                                         </div>
                                     </div>
                                 </div>
-                            ))}
+                                );
+                            })}
                         </div>
                     ) : (
                         /* Checkout Form */
@@ -188,12 +198,17 @@ export default function CartSidebar() {
                             {/* Resumo compacto */}
                             <div className="bg-[#fdf2f5] rounded-xl p-4 space-y-2">
                                 <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Resumo do Pedido</h4>
-                                {items.map((item) => (
-                                    <div key={item.id} className="flex justify-between items-center text-sm">
-                                        <span className="text-gray-700 truncate pr-2">{item.name} <span className="text-gray-400">x{item.quantity}</span></span>
+                                {items.map((item) => {
+                                    const cartKey = item.color ? `${item.id}__${item.color}` : item.id;
+                                    return (
+                                    <div key={cartKey} className="flex justify-between items-center text-sm">
+                                        <span className="text-gray-700 truncate pr-2">
+                                            {item.name}{item.color ? ` (${item.color})` : ''} <span className="text-gray-400">x{item.quantity}</span>
+                                        </span>
                                         <span className="font-semibold text-gray-900 flex-shrink-0">{formatCurrency(item.price * item.quantity)}</span>
                                     </div>
-                                ))}
+                                    );
+                                })}
                                 <div className="border-t border-rosa-200 pt-2 flex justify-between items-center">
                                     <span className="font-bold text-gray-900 text-sm">Total</span>
                                     <span className="font-bold text-lg text-rosa-600">{formattedTotal}</span>

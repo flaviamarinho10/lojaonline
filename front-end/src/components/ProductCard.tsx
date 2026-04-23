@@ -42,7 +42,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             name: product.name,
             price: Number(product.price),
             imageUrl: product.imageUrl,
-        });
+        }, 1, e);
     };
 
     const formattedPrice = new Intl.NumberFormat('pt-BR', {

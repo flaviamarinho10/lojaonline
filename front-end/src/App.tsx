@@ -6,12 +6,14 @@ import ProductDetails from './pages/ProductDetails'
 import Admin from './pages/Admin'
 import Login from './pages/Login'
 import ProtectedRoute from './components/ProtectedRoute'
+import FlyToCart from './components/FlyToCart'
 
 function App() {
   return (
     <BrowserRouter>
       <CartProvider>
         <AuthProvider>
+          <FlyToCart />
           <Routes>
             {/* Public Store */}
             <Route path="/" element={<Home />} />

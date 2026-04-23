@@ -10,7 +10,8 @@ import {
     ShieldCheck, 
     Truck, 
     CreditCard,
-    Eye
+    Eye,
+    ArrowLeft
 } from 'lucide-react';
 import Header from '../components/Header';
 import AnnouncementBar from '../components/AnnouncementBar';
@@ -97,14 +98,15 @@ export default function ProductDetails() {
         return url;
     };
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (e: React.MouseEvent) => {
         if (!product) return;
         addToCart({
             id: product.id,
             name: product.name,
             price: Number(product.price),
             imageUrl: product.imageUrl,
-        }, quantity);
+            color: selectedColor?.name,
+        }, quantity, e);
     };
 
     if (loading) {
@@ -170,7 +172,17 @@ export default function ProductDetails() {
             <Header />
             <CartSidebar />
             
-            <main className="max-w-7xl mx-auto px-4 pt-6 pb-20">
+            <main className="max-w-7xl mx-auto px-4 pt-4 pb-20">
+                {/* Back Button */}
+                <button
+                    onClick={() => navigate(-1)}
+                    className="flex items-center gap-1.5 text-gray-400 hover:text-gray-900 transition-colors mb-4 group"
+                    aria-label="Voltar"
+                >
+                    <ArrowLeft size={18} className="group-hover:-translate-x-0.5 transition-transform" />
+                    <span className="text-[11px] font-medium uppercase tracking-widest">Voltar</span>
+                </button>
+
                 {/* Breadcrumbs */}
                 <nav className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-gray-400 mb-8 overflow-x-auto no-scrollbar whitespace-nowrap">
                     <span className="cursor-pointer hover:text-rosa-400 transition-colors" onClick={() => navigate('/')}>Home</span>
