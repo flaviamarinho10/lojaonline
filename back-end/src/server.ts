@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 3333;
 app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ limit: '20mb', extended: true }));
 app.use(cors({
-    origin: process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : 'http://localhost:5173',
+    origin: (origin, callback) => callback(null, true),
     credentials: true
 }));
 
