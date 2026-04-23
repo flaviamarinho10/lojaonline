@@ -1,4 +1,4 @@
-# ✨ Flavia Beauty - E-commerce de Alto Padrão
+# ✨ Shine Glam - E-commerce de Alto Padrão
 
 Um sistema de comércio eletrônico Full Stack desenvolvido para o nicho de beleza e maquiagem de luxo. O projeto combina uma interface visualmente deslumbrante e sofisticada (inspirada em grandes marcas do setor) com um back-end robusto para gestão total da loja.
 
