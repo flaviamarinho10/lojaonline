@@ -63,7 +63,12 @@ const Store: React.FC = () => {
                             <p className="text-sm text-muted-foreground line-clamp-2">{product.description}</p>
                         </CardContent>
                         <CardFooter>
-                            <Button className="w-full font-semibold" onClick={() => addToCart({ ...product, quantity: 1, image: product.imageUrl })}>
+                            <Button className="w-full font-semibold" onClick={(e) => addToCart({
+                                id: product.id,
+                                name: product.name,
+                                price: Number(product.price),
+                                imageUrl: product.imageUrl
+                            }, 1, e)}>
                                 Add to Cart
                             </Button>
                         </CardFooter>

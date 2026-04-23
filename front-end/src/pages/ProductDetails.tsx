@@ -1,15 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { 
-    ChevronRight, 
-    Star, 
-    Minus, 
-    Plus, 
-    Share2, 
-    Heart, 
-    ShieldCheck, 
-    Truck, 
-    CreditCard,
+import {
+    ChevronRight,
+    Star,
+    Minus,
+    Plus,
+    Heart,
+    ShieldCheck,
     Eye,
     ArrowLeft
 } from 'lucide-react';
@@ -53,7 +50,7 @@ export default function ProductDetails() {
 
     useEffect(() => {
         if (!product) return;
-        
+
         // Base viewers calc based on ID so it's consistentish per product
         const baseViewers = Math.floor(product.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 25) + 8;
         setViewers(baseViewers);
@@ -134,7 +131,7 @@ export default function ProductDetails() {
         return (
             <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
                 <h2 className="text-2xl font-bold mb-4">Produto não encontrado</h2>
-                <button 
+                <button
                     onClick={() => navigate('/')}
                     className="bg-black text-white px-6 py-2 rounded-full"
                 >
@@ -171,7 +168,7 @@ export default function ProductDetails() {
             <AnnouncementBar />
             <Header />
             <CartSidebar />
-            
+
             <main className="max-w-7xl mx-auto px-4 pt-4 pb-20">
                 {/* Back Button */}
                 <button
@@ -198,12 +195,12 @@ export default function ProductDetails() {
 
                         {/* Main Image */}
                         <div className="relative group flex-1 bg-gray-50 rounded-3xl overflow-hidden flex items-center justify-center min-h-[400px] md:min-h-[500px]">
-                            <img 
-                                src={formatImageUrl(product.imageUrl)} 
-                                alt={product.name} 
+                            <img
+                                src={formatImageUrl(product.imageUrl)}
+                                alt={product.name}
                                 className="w-full h-full object-contain p-8 transition-transform duration-700 group-hover:scale-105"
                             />
-                            
+
                             {/* Badges */}
                             <div className="absolute top-6 left-6 flex flex-col gap-2">
                                 {product.badges?.map((badge, i) => (
@@ -223,7 +220,7 @@ export default function ProductDetails() {
                             <h1 className="text-2xl md:text-3xl font-light text-gray-900 leading-tight uppercase tracking-wide mb-3">
                                 {product.name}
                             </h1>
-                            
+
                             {/* Rating */}
                             <div className="flex items-center gap-1.5 mb-6">
                                 <div className="flex text-yellow-400">
@@ -258,14 +255,13 @@ export default function ProductDetails() {
                                         <button
                                             key={i}
                                             onClick={() => setSelectedColor(color)}
-                                            className={`group relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
-                                                selectedColor?.name === color.name 
-                                                    ? 'ring-2 ring-black ring-offset-2' 
+                                            className={`group relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${selectedColor?.name === color.name
+                                                    ? 'ring-2 ring-black ring-offset-2'
                                                     : 'hover:ring-1 hover:ring-gray-300 hover:ring-offset-2'
-                                            }`}
+                                                }`}
                                         >
-                                            <div 
-                                                className="w-full h-full rounded-full border border-gray-100 shadow-inner" 
+                                            <div
+                                                className="w-full h-full rounded-full border border-gray-100 shadow-inner"
                                                 style={{ backgroundColor: color.hex }}
                                             />
                                             <span className="absolute -top-10 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-[9px] px-2 py-1 rounded whitespace-nowrap z-10">
@@ -280,21 +276,21 @@ export default function ProductDetails() {
                         {/* Quantity & Add to Cart */}
                         <div className="flex flex-col sm:flex-row gap-4 mb-8">
                             <div className="flex items-center justify-between border border-gray-200 rounded-full px-4 py-3 min-w-[130px] bg-white">
-                                <button 
+                                <button
                                     onClick={() => setQuantity(prev => Math.max(1, prev - 1))}
                                     className="text-gray-400 hover:text-black transition-colors"
                                 >
                                     <Minus size={18} />
                                 </button>
                                 <span className="text-sm font-bold w-8 text-center">{quantity}</span>
-                                <button 
+                                <button
                                     onClick={() => setQuantity(prev => prev + 1)}
                                     className="text-gray-400 hover:text-black transition-colors"
                                 >
                                     <Plus size={18} />
                                 </button>
                             </div>
-                            <button 
+                            <button
                                 onClick={handleAddToCart}
                                 className="flex-1 bg-black text-white rounded-full py-4 px-8 font-bold uppercase tracking-[0.2em] text-[12px] hover:bg-gray-800 transition-all shadow-xl hover:shadow-black/20 active:scale-[0.98]"
                             >
@@ -321,9 +317,8 @@ export default function ProductDetails() {
                             <button
                                 key={tab.id}
                                 onClick={() => setActiveTab(tab.id)}
-                                className={`px-8 pb-4 text-[11px] font-bold uppercase tracking-[0.2em] transition-all relative min-w-fit whitespace-nowrap ${
-                                    activeTab === tab.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'
-                                }`}
+                                className={`px-8 pb-4 text-[11px] font-bold uppercase tracking-[0.2em] transition-all relative min-w-fit whitespace-nowrap ${activeTab === tab.id ? 'text-black' : 'text-gray-400 hover:text-gray-600'
+                                    }`}
                             >
                                 {tab.label}
                                 {activeTab === tab.id && (
