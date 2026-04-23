@@ -1,6 +1,6 @@
 # ✨ Shine Glam - E-commerce Premium
 
-Um sistema de comércio eletrônico Full Stack de alto padrão, desenvolvido para o nicho de beleza e cosméticos de luxo. Unindo uma interface visualmente impactante com uma infraestrutura moderna e performática.
+Um sistema de comércio eletrônico Full Stack de alto padrão, desenvolvido para o nicho de beleza. Unindo uma interface visualmente impactante com uma infraestrutura moderna e performática.
 
 ---
 
@@ -74,8 +74,8 @@ npm run dev
 
 ## 🔐 Acesso Administrativo
 - **Rota:** `/admin`
-- **Credenciais Padrão:** Definidas via Seed no Prisma (`admin@flaviabeauty.com` / `admin123`).
+- **Credenciais Padrão:** Definidas via Seed no Prisma (`admin@shineglam.com` / `admin123`).
 
 ---
-Desenvolvido com ❤️ para **Shine Glam**.
+Desenvolvido com ❤️ **Shine Glam**.
 
