@@ -24,11 +24,26 @@ interface Product {
 
 
 export default function Home() {
-    const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
-    const [allProducts, setAllProducts] = useState<Product[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [categories, setCategories] = useState<any[]>([]);
-    const [appearance, setAppearance] = useState<any>(null);
+    const [featuredProducts, setFeaturedProducts] = useState<Product[]>(() => {
+        const cached = localStorage.getItem('shine_featured_products');
+        return cached ? JSON.parse(cached) : [];
+    });
+    const [allProducts, setAllProducts] = useState<Product[]>(() => {
+        const cached = localStorage.getItem('shine_all_products');
+        return cached ? JSON.parse(cached) : [];
+    });
+    const [loading, setLoading] = useState(() => {
+        return !localStorage.getItem('shine_featured_products') || !localStorage.getItem('shine_appearance');
+    });
+    const [categories, setCategories] = useState<any[]>(() => {
+        const cached = localStorage.getItem('shine_categories');
+        return cached ? JSON.parse(cached) : [];
+    });
+    const [appearance, setAppearance] = useState<any>(() => {
+        const cached = localStorage.getItem('shine_appearance');
+        return cached ? JSON.parse(cached) : null;
+    });
+
     const productsRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
@@ -40,9 +55,8 @@ export default function Home() {
 
     useEffect(() => {
         const fetchHomeData = async () => {
-            setLoading(true);
             try {
-                // Featured products (all categories, default order)
+                // If we have cached data, don't show full loading overlay (skeletons will still show if lists are empty)
                 // Catalog products (filtered by category, manual sort order)
                 let catalogUrl = activeCategory ? `/products?category=${activeCategory}&sort=manual` : '/products?sort=manual';
 
@@ -61,6 +75,12 @@ export default function Home() {
                 setAllProducts(catalogRes.data);
                 setAppearance(appRes.data);
                 setCategories(catRes.data);
+
+                // Update cache
+                localStorage.setItem('shine_featured_products', JSON.stringify(featuredRes.data));
+                localStorage.setItem('shine_all_products', JSON.stringify(catalogRes.data));
+                localStorage.setItem('shine_appearance', JSON.stringify(appRes.data));
+                localStorage.setItem('shine_categories', JSON.stringify(catRes.data));
             } catch (error) {
                 console.error('Error fetching data:', error);
             } finally {

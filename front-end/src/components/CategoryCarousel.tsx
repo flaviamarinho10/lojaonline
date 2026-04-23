@@ -15,8 +15,11 @@ interface CategoryCarouselProps {
 }
 
 export default function CategoryGrid({ onSelectCategory, activeCategory }: CategoryCarouselProps) {
-    const [categories, setCategories] = useState<Category[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [categories, setCategories] = useState<Category[]>(() => {
+        const cached = localStorage.getItem('shine_categories');
+        return cached ? JSON.parse(cached) : [];
+    });
+    const [loading, setLoading] = useState(() => !localStorage.getItem('shine_categories'));
     const scrollRef = useRef<HTMLDivElement>(null);
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
@@ -33,6 +36,7 @@ export default function CategoryGrid({ onSelectCategory, activeCategory }: Categ
             try {
                 const res = await api.get('/categories');
                 setCategories(res.data);
+                localStorage.setItem('shine_categories', JSON.stringify(res.data));
             } catch (error) {
                 console.error('Error fetching categories:', error);
             } finally {

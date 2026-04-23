@@ -41,11 +41,11 @@ export default function CartSidebar() {
         const produtosTexto = items
             .map(
                 (item) => {
-                    const corTexto = item.color ? ` [Cor: ${item.color}]` : '';
-                    return `• ${item.name}${corTexto} (x${item.quantity}) — ${formatCurrency(item.price * item.quantity)}`;
+                    const corTexto = item.color ? `\n    └ Cor: ${item.color}` : '';
+                    return `• ${item.name} (x${item.quantity})${corTexto}\n    Valor: ${formatCurrency(item.price * item.quantity)}`;
                 }
             )
-            .join('\n');
+            .join('\n\n');
 
         const mensagem = `*Novo Pedido - Shine Glam*\n\n` +
             `*Nome:* ${nome}\n` +
@@ -138,57 +138,60 @@ export default function CartSidebar() {
                             {items.map((item) => {
                                 const cartKey = item.color ? `${item.id}__${item.color}` : item.id;
                                 return (
-                                <div key={cartKey} className="flex gap-4 bg-[#f9f9f9] p-3 rounded-xl">
-                                    <div className="h-20 w-16 bg-white rounded-lg overflow-hidden flex-shrink-0">
-                                        <img
-                                            src={item.imageUrl}
-                                            alt={item.name}
-                                            className="h-full w-full object-cover"
-                                        />
-                                    </div>
-
-                                    <div className="flex-1 flex flex-col justify-between py-0.5">
-                                        <div className="flex justify-between items-start gap-2">
-                                            <div>
-                                                <h3 className="text-sm font-medium text-gray-900 leading-tight">{item.name}</h3>
-                                                {item.color && (
-                                                    <span className="text-[11px] text-gray-400 font-medium">Cor: {item.color}</span>
-                                                )}
-                                            </div>
-                                            <button
-                                                onClick={() => removeFromCart(cartKey)}
-                                                className="text-gray-300 hover:text-red-400 transition-colors"
-                                                aria-label={`Remover ${item.name}`}
-                                            >
-                                                <Trash2 size={14} />
-                                            </button>
+                                    <div key={cartKey} className="flex gap-4 bg-[#f9f9f9] p-3 rounded-xl">
+                                        <div className="h-20 w-16 bg-white rounded-lg overflow-hidden flex-shrink-0">
+                                            <img
+                                                src={item.imageUrl}
+                                                alt={item.name}
+                                                className="h-full w-full object-cover"
+                                            />
                                         </div>
 
-                                        <div className="flex items-end justify-between mt-1.5">
-                                            <div className="flex items-center border border-gray-200 rounded-lg bg-white">
+                                        <div className="flex-1 flex flex-col justify-between py-0.5">
+                                            <div className="flex justify-between items-start gap-2">
+                                                <div>
+                                                    <h3 className="text-sm font-bold text-gray-900 leading-tight">{item.name}</h3>
+                                                    {item.color && (
+                                                        <div className="flex items-center gap-1.5 mt-0.5">
+                                                            <div className="w-2 h-2 rounded-full bg-rosa-400" />
+                                                            <span className="text-[11px] text-rosa-500 font-bold uppercase tracking-wider">Cor: {item.color}</span>
+                                                        </div>
+                                                    )}
+                                                </div>
                                                 <button
-                                                    onClick={() => updateQuantity(cartKey, 'decrease')}
-                                                    className="px-2 py-1 text-gray-400 hover:text-gray-900 disabled:opacity-30"
-                                                    disabled={item.quantity <= 1}
-                                                    aria-label="Diminuir quantidade"
+                                                    onClick={() => removeFromCart(cartKey)}
+                                                    className="text-gray-300 hover:text-red-400 transition-colors"
+                                                    aria-label={`Remover ${item.name}`}
                                                 >
-                                                    <Minus size={12} />
-                                                </button>
-                                                <span className="text-xs font-semibold w-5 text-center text-gray-900">{item.quantity}</span>
-                                                <button
-                                                    onClick={() => updateQuantity(cartKey, 'increase')}
-                                                    className="px-2 py-1 text-gray-400 hover:text-gray-900"
-                                                    aria-label="Aumentar quantidade"
-                                                >
-                                                    <Plus size={12} />
+                                                    <Trash2 size={14} />
                                                 </button>
                                             </div>
-                                            <span className="font-semibold text-sm text-gray-900">
-                                                {formatCurrency(item.price * item.quantity)}
-                                            </span>
+
+                                            <div className="flex items-end justify-between mt-1.5">
+                                                <div className="flex items-center border border-gray-200 rounded-lg bg-white">
+                                                    <button
+                                                        onClick={() => updateQuantity(cartKey, 'decrease')}
+                                                        className="px-2 py-1 text-gray-400 hover:text-gray-900 disabled:opacity-30"
+                                                        disabled={item.quantity <= 1}
+                                                        aria-label="Diminuir quantidade"
+                                                    >
+                                                        <Minus size={12} />
+                                                    </button>
+                                                    <span className="text-xs font-semibold w-5 text-center text-gray-900">{item.quantity}</span>
+                                                    <button
+                                                        onClick={() => updateQuantity(cartKey, 'increase')}
+                                                        className="px-2 py-1 text-gray-400 hover:text-gray-900"
+                                                        aria-label="Aumentar quantidade"
+                                                    >
+                                                        <Plus size={12} />
+                                                    </button>
+                                                </div>
+                                                <span className="font-semibold text-sm text-gray-900">
+                                                    {formatCurrency(item.price * item.quantity)}
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 );
                             })}
                         </div>
@@ -201,12 +204,17 @@ export default function CartSidebar() {
                                 {items.map((item) => {
                                     const cartKey = item.color ? `${item.id}__${item.color}` : item.id;
                                     return (
-                                    <div key={cartKey} className="flex justify-between items-center text-sm">
-                                        <span className="text-gray-700 truncate pr-2">
-                                            {item.name}{item.color ? ` (${item.color})` : ''} <span className="text-gray-400">x{item.quantity}</span>
-                                        </span>
-                                        <span className="font-semibold text-gray-900 flex-shrink-0">{formatCurrency(item.price * item.quantity)}</span>
-                                    </div>
+                                        <div key={cartKey} className="flex flex-col text-sm">
+                                            <div className="flex justify-between items-center">
+                                                <span className="text-gray-900 font-medium">
+                                                    {item.name} <span className="text-gray-400 font-normal">x{item.quantity}</span>
+                                                </span>
+                                                <span className="font-bold text-gray-900 flex-shrink-0">{formatCurrency(item.price * item.quantity)}</span>
+                                            </div>
+                                            {item.color && (
+                                                <span className="text-[10px] text-rosa-400 font-bold uppercase tracking-widest mt-0.5">Cor selecionada: {item.color}</span>
+                                            )}
+                                        </div>
                                     );
                                 })}
                                 <div className="border-t border-rosa-200 pt-2 flex justify-between items-center">
@@ -285,11 +293,10 @@ export default function CartSidebar() {
                                     <button
                                         type="button"
                                         onClick={() => setPagamento('cartao')}
-                                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 ${
-                                            pagamento === 'cartao'
-                                                ? 'border-rosa-500 bg-rosa-50 shadow-sm'
-                                                : 'border-gray-200 bg-[#f7f7f7] hover:border-gray-300'
-                                        }`}
+                                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 ${pagamento === 'cartao'
+                                            ? 'border-rosa-500 bg-rosa-50 shadow-sm'
+                                            : 'border-gray-200 bg-[#f7f7f7] hover:border-gray-300'
+                                            }`}
                                     >
                                         <CreditCard size={24} className={pagamento === 'cartao' ? 'text-rosa-500' : 'text-gray-400'} />
                                         <span className={`text-xs font-semibold ${pagamento === 'cartao' ? 'text-rosa-600' : 'text-gray-600'}`}>
@@ -300,11 +307,10 @@ export default function CartSidebar() {
                                     <button
                                         type="button"
                                         onClick={() => setPagamento('pix')}
-                                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 ${
-                                            pagamento === 'pix'
-                                                ? 'border-rosa-500 bg-rosa-50 shadow-sm'
-                                                : 'border-gray-200 bg-[#f7f7f7] hover:border-gray-300'
-                                        }`}
+                                        className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all duration-200 ${pagamento === 'pix'
+                                            ? 'border-rosa-500 bg-rosa-50 shadow-sm'
+                                            : 'border-gray-200 bg-[#f7f7f7] hover:border-gray-300'
+                                            }`}
                                     >
                                         <QrCode size={24} className={pagamento === 'pix' ? 'text-rosa-500' : 'text-gray-400'} />
                                         <span className={`text-xs font-semibold ${pagamento === 'pix' ? 'text-rosa-600' : 'text-gray-600'}`}>

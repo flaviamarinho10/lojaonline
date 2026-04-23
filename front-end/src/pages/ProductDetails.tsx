@@ -256,8 +256,8 @@ export default function ProductDetails() {
                                             key={i}
                                             onClick={() => setSelectedColor(color)}
                                             className={`group relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${selectedColor?.name === color.name
-                                                    ? 'ring-2 ring-black ring-offset-2'
-                                                    : 'hover:ring-1 hover:ring-gray-300 hover:ring-offset-2'
+                                                ? 'ring-2 ring-black ring-offset-2'
+                                                : 'hover:ring-1 hover:ring-gray-300 hover:ring-offset-2'
                                                 }`}
                                         >
                                             <div

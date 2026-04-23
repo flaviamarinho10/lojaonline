@@ -4,10 +4,13 @@ import api from '../lib/axios';
 
 export default function AnnouncementBar() {
     const [visible, setVisible] = useState(true);
-    const [settings, setSettings] = useState({
-        active: true,
-        message: '✨ FRETE GRÁTIS BRASIL A PARTIR DE R$ 129,90 ✨',
-        bgColor: '#1a1a1a'
+    const [settings, setSettings] = useState(() => {
+        const cached = localStorage.getItem('shine_announcement_settings');
+        return cached ? JSON.parse(cached) : {
+            active: true,
+            message: '✨ FRETE GRÁTIS BRASIL A PARTIR DE R$ 129,90 ✨',
+            bgColor: '#1a1a1a'
+        };
     });
 
     useEffect(() => {
@@ -15,7 +18,9 @@ export default function AnnouncementBar() {
             try {
                 const res = await api.get('/settings/appearance');
                 if (res.data?.topBar) {
-                    setSettings(res.data.topBar);
+                    const newSettings = res.data.topBar;
+                    setSettings(newSettings);
+                    localStorage.setItem('shine_announcement_settings', JSON.stringify(newSettings));
                 }
             } catch (error) {
                 console.error('Failed to fetch announcement bar settings:', error);

@@ -1,27 +1,30 @@
 import { useState, useEffect } from 'react';
-import { 
-    Truck, Tag, Flower, Percent, Heart, Star, Sparkles, 
-    ShieldCheck, Gift, CreditCard, ShoppingBag, Package, BadgeCheck, Smile 
+import {
+    Truck, Tag, Flower, Percent, Heart, Star, Sparkles,
+    ShieldCheck, Gift, CreditCard, ShoppingBag, Package, BadgeCheck, Smile
 } from 'lucide-react';
 import api from '../lib/axios';
 
 const iconMap: Record<string, any> = {
-    Truck, Tag, Flower, Percent, Heart, Star, Sparkles, 
+    Truck, Tag, Flower, Percent, Heart, Star, Sparkles,
     ShieldCheck, Gift, CreditCard, ShoppingBag, Package, BadgeCheck, Smile
 };
 
 export default function BenefitsTicker() {
-    const [settings, setSettings] = useState({
-        active: true,
-        bgColor: '#fce0e5',
-        text1: 'Frete grátis a partir de R$ 129,90',
-        icon1: 'Truck',
-        text2: 'Parcelamento em até 6x sem juros',
-        icon2: 'Tag',
-        text3: 'Desconto de 5% via PIX',
-        icon3: 'Flower',
-        text4: 'Cupom de 1ª compra NINAE10',
-        icon4: 'Percent',
+    const [settings, setSettings] = useState(() => {
+        const cached = localStorage.getItem('shine_benefits_settings');
+        return cached ? JSON.parse(cached) : {
+            active: true,
+            bgColor: '#fce0e5',
+            text1: 'Frete grátis a partir de R$ 129,90',
+            icon1: 'Truck',
+            text2: 'Parcelamento em até 6x sem juros',
+            icon2: 'Tag',
+            text3: 'Desconto de 5% via PIX',
+            icon3: 'Flower',
+            text4: 'Cupom de 1ª compra NINAE10',
+            icon4: 'Percent',
+        };
     });
 
     useEffect(() => {
@@ -29,7 +32,9 @@ export default function BenefitsTicker() {
             try {
                 const res = await api.get('/settings/appearance');
                 if (res.data?.benefitsTicker) {
-                    setSettings(res.data.benefitsTicker);
+                    const newSettings = res.data.benefitsTicker;
+                    setSettings(newSettings);
+                    localStorage.setItem('shine_benefits_settings', JSON.stringify(newSettings));
                 }
             } catch (error) {
                 console.error('Failed to fetch benefits ticker settings:', error);
@@ -51,8 +56,8 @@ export default function BenefitsTicker() {
     const repeatedBenefits = [...benefits, ...benefits, ...benefits];
 
     return (
-        <div 
-            className="w-full overflow-hidden py-3 transition-colors duration-300" 
+        <div
+            className="w-full overflow-hidden py-3 transition-colors duration-300"
             style={{ backgroundColor: settings.bgColor || '#fce0e5' }}
         >
             <div className="flex animate-ticker whitespace-nowrap">
