@@ -1,4 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import api from '../lib/axios';
 
 interface Category {
@@ -17,6 +18,15 @@ export default function CategoryGrid({ onSelectCategory, activeCategory }: Categ
     const [categories, setCategories] = useState<Category[]>([]);
     const [loading, setLoading] = useState(true);
     const scrollRef = useRef<HTMLDivElement>(null);
+    const [canScrollLeft, setCanScrollLeft] = useState(false);
+    const [canScrollRight, setCanScrollRight] = useState(false);
+
+    const checkScroll = useCallback(() => {
+        const el = scrollRef.current;
+        if (!el) return;
+        setCanScrollLeft(el.scrollLeft > 10);
+        setCanScrollRight(el.scrollLeft < el.scrollWidth - el.clientWidth - 10);
+    }, []);
 
     useEffect(() => {
         const fetchCategories = async () => {
@@ -31,6 +41,31 @@ export default function CategoryGrid({ onSelectCategory, activeCategory }: Categ
         };
         fetchCategories();
     }, []);
+
+    useEffect(() => {
+        const el = scrollRef.current;
+        if (!el || loading) return;
+
+        const timer = setTimeout(checkScroll, 100);
+        el.addEventListener('scroll', checkScroll, { passive: true });
+        window.addEventListener('resize', checkScroll);
+
+        return () => {
+            clearTimeout(timer);
+            el.removeEventListener('scroll', checkScroll);
+            window.removeEventListener('resize', checkScroll);
+        };
+    }, [categories, loading, checkScroll]);
+
+    const scroll = (direction: 'left' | 'right') => {
+        const el = scrollRef.current;
+        if (!el) return;
+        const scrollAmount = direction === 'left' ? -300 : 300;
+        el.scrollBy({
+            left: scrollAmount,
+            behavior: 'smooth',
+        });
+    };
 
     if (loading) {
         return (
@@ -96,27 +131,52 @@ export default function CategoryGrid({ onSelectCategory, activeCategory }: Categ
     return (
         <section className="py-6 md:py-12 bg-white" aria-label="Compre por Categoria">
             <div className="max-w-7xl mx-auto px-4">
-                {/* Title row */}
-                <div className="flex items-center justify-center mb-6 md:mb-10">
-                    <h2 className="text-center text-[15px] md:text-[18px] font-bold text-[#1a1a1a] uppercase tracking-widest">
-                        Compre por Categoria
-                    </h2>
-                </div>
-
-                {/* Mobile: Horizontal Carousel */}
-                <div className="md:hidden">
-                    <div
-                        ref={scrollRef}
-                        className="flex gap-4 overflow-x-auto no-scrollbar scroll-smooth px-1 pb-2"
+                {/* MOBILE ONLY: Reference design (Arrows + Focused Title) */}
+                <div className="md:hidden flex items-center justify-between mb-8 max-w-2xl mx-auto px-2 gap-4">
+                    <button
+                        onClick={() => scroll('left')}
+                        className={`w-12 h-12 rounded-full border-[2.5px] flex items-center justify-center transition-all flex-shrink-0 ${canScrollLeft
+                            ? 'border-rosa-400 text-rosa-500 active:scale-90'
+                            : 'border-gray-100 text-gray-200 cursor-default'
+                            }`}
+                        aria-label="Categorias anteriores"
                     >
-                        {filteredCategories.map((cat) => (
-                            <CategoryButton key={cat.id} cat={cat} />
-                        ))}
-                    </div>
+                        <ChevronLeft size={22} strokeWidth={3} />
+                    </button>
+
+                    <h2 className="text-center text-[18px] font-black text-[#1a1a1a] uppercase tracking-[0.15em] leading-tight flex-1">
+                        Compre por<br /> Categoria
+                    </h2>
+
+                    <button
+                        onClick={() => scroll('right')}
+                        className={`w-12 h-12 rounded-full border-[2.5px] flex items-center justify-center transition-all flex-shrink-0 ${canScrollRight
+                            ? 'border-rosa-400 text-rosa-500 active:scale-90'
+                            : 'border-gray-100 text-gray-200 cursor-default'
+                            }`}
+                        aria-label="Próximas categorias"
+                    >
+                        <ChevronRight size={22} strokeWidth={3} />
+                    </button>
                 </div>
 
-                {/* Desktop: Flex row (unchanged) */}
-                <div className="hidden md:flex flex-nowrap justify-center gap-x-8">
+                {/* DESKTOP ONLY: Simple Static Title */}
+                <h2 className="hidden md:block text-center text-[22px] font-bold text-[#1a1a1a] uppercase tracking-widest mb-10">
+                    Compre por Categoria
+                </h2>
+
+                {/* MOBILE: Horizontal Carousel */}
+                <div
+                    ref={scrollRef}
+                    className="md:hidden flex gap-4 overflow-x-auto no-scrollbar scroll-smooth px-1 pb-4"
+                >
+                    {filteredCategories.map((cat) => (
+                        <CategoryButton key={cat.id} cat={cat} />
+                    ))}
+                </div>
+
+                {/* DESKTOP: Single Line Row (No Arrows) */}
+                <div className="hidden md:flex flex-nowrap justify-start md:justify-center gap-x-4 lg:gap-x-8 overflow-x-auto no-scrollbar px-8 py-2">
                     {filteredCategories.map((cat) => (
                         <CategoryButton key={cat.id} cat={cat} />
                     ))}
