@@ -1,23 +1,21 @@
-# ✨ Shine Glam - E-commerce de Alto Padrão
+# ✨ Shine Glam - E-commerce Premium
 
-Um sistema de comércio eletrônico Full Stack desenvolvido para o nicho de beleza e maquiagem de luxo. O projeto combina uma interface visualmente deslumbrante e sofisticada (inspirada em grandes marcas do setor) com um back-end robusto para gestão total da loja.
+Um sistema de comércio eletrônico Full Stack de alto padrão, desenvolvido para o nicho de beleza e cosméticos de luxo. Unindo uma interface visualmente impactante com uma infraestrutura moderna e performática.
 
 ---
 
-## � Visão Geral e Funcionalidades
+## 🚀 Novidades e Diferenciais
 
-### 🛍️ Vitrine do Cliente (Front-end)
-- **Design Ultra-Luxuoso:** Interface focada em conversão com estética premium. Utiliza fundos em tons creme, texturas de seda e mármore, e detalhes em *Rose Gold* metálico.
-- **Banner Dinâmico:** O "Hero Banner" principal da loja consome uma imagem configurável via API, permitindo atualizações de campanha em tempo real.
-- **Catálogo Elegante:** Exibição de produtos com tipografia mista (Serifada clássica e Sans-serif moderna) para um visual editorial.
-- **Carrinho de Compras (Slide-over):** Gerenciamento de estado global (Context API) para adicionar itens, alterar quantidades e calcular o total suavemente.
-- **Checkout Simplificado:** Fluxo de finalização de pedido rápido e sem atrito.
+### ⚡ Performance Instantânea
+- **Cache Local (LocalStorage):** Implementamos um sistema de persistência que salva configurações, banners e categorias no navegador do cliente. O site carrega **instantaneamente** com os dados da última visita, eliminando atrasos visuais enquanto o servidor desperta.
 
-### 🔒 Painel Administrativo (Back-end & Admin)
-- **Autenticação Segura:** Proteção de rotas via JWT e senhas com hash (Bcrypt).
-- **Gestão de Configurações (Store Settings):** Painel para o administrador alterar a URL da imagem do banner principal da loja sem precisar tocar no código.
-- **CRUD de Produtos:** Controle total sobre o catálogo (Cadastro, Edição, Inativação e Exclusão de maquiagens/cosméticos).
-- **Gestão de Pedidos:** Visualização das compras dos clientes e atualização de status de entrega/pagamento.
+### 🛍️ Experiência de Compra Refinada
+- **Seleção de Variações:** Suporte completo para produtos com diferentes cores. Cada variação é tratada como um item único no carrinho, facilitando a escolha do cliente.
+- **Checkout via WhatsApp:** Integração direta que envia o pedido formatado para o vendedor, incluindo detalhes de quantidade, preço e as **cores selecionadas**, agilizando a separação no estoque.
+
+### 🔒 Gestão Total (Admin)
+- **Painel de Controle:** Gestão completa de produtos, categorias e pedidos.
+- **Personalização Dinâmica:** Altere banners, mensagens da barra de anúncios e carrossel de benefícios em tempo real sem mexer no código.
 
 ---
 
@@ -26,70 +24,58 @@ Um sistema de comércio eletrônico Full Stack desenvolvido para o nicho de bele
 | Camada | Tecnologias Principais |
 | :--- | :--- |
 | **Front-end** | React, Vite, TypeScript |
-| **Estilização** | Tailwind CSS (Tema Customizado Luxo), Lucide React |
-| **Gerenciamento de Estado**| React Context API |
+| **Estilização** | Tailwind CSS (Design System Premium), Lucide React |
+| **Performance** | LocalStorage Caching Strategy |
 | **Back-end** | Node.js, Express, TypeScript |
-| **Banco de Dados** | PostgreSQL, Prisma ORM |
-| **Segurança** | Bcryptjs, JWT |
+| **Banco de Dados** | PostgreSQL (Supabase), Prisma ORM |
+| **Deploy** | Vercel (Front) & Render (Back) |
 
 ---
 
-## ⚙️ Como rodar o projeto localmente
+## ⚙️ Configuração do Ambiente
 
 ### Pré-requisitos
-Certifique-se de ter o **Node.js** e o **PostgreSQL** instalados.
+- **Node.js** (v18+)
+- **PostgreSQL** (ou conta no Supabase)
 
-### 1. Configurando o Back-end
-Abra o terminal, navegue até a pasta do back-end e instale as dependências:
-
+### 1. Back-end
 ```bash
 cd back-end
 npm install
 ```
-
-Crie um arquivo `.env` na raiz da pasta `back-end` e adicione suas credenciais:
-
+Configure o `.env`:
 ```env
-DATABASE_URL="postgresql://SEU_USUARIO:SUA_SENHA@localhost:5432/flavia_beauty?schema=public"
-JWT_SECRET="sua_chave_jwt_super_segura"
+DATABASE_URL="postgresql://USUARIO:SENHA@aws-0-us-east-1.pooler.supabase.com:6543/postgres?pgbouncer=true"
+JWT_SECRET="sua_chave_segura"
 PORT=3333
 ```
-
-Rode a migração para criar as tabelas (Produtos, Pedidos, Usuários e Configurações) e o script de seed para criar o admin inicial e o banner padrão:
-
-```bash
-npx prisma migrate dev
-npx prisma db seed
-```
-
-Inicie a API:
+*Dica: Use a porta 6543 (Pooler) se estiver usando Supabase para evitar erros de conexão.*
 
 ```bash
+npx prisma migrate deploy
 npm run dev
 ```
-*(A API estará rodando em http://localhost:3333)*
 
-### 2. Configurando o Front-end
-Abra um novo terminal, navegue até a pasta do front-end e instale as dependências:
-
+### 2. Front-end
 ```bash
 cd front-end
 npm install
 ```
-
-Inicie a aplicação React:
+Configure o `.env`:
+```env
+VITE_API_URL="https://seu-backend-no-render.com"
+```
 
 ```bash
 npm run dev
 ```
-*(A aplicação estará rodando em http://localhost:5173)*
 
 ---
 
-## 🔐 Acesso Administrativo Padrão
+## 🔐 Acesso Administrativo
+- **Rota:** `/admin`
+- **Credenciais Padrão:** Definidas via Seed no Prisma (`admin@flaviabeauty.com` / `admin123`).
 
-Após rodar o script de Seed do Prisma, utilize as credenciais abaixo para acessar a rota `/admin`:
-
-- **E-mail:** `admin@flaviabeauty.com`
-- **Senha:** `admin123`
+---
+Desenvolvido com ❤️ para **Shine Glam**.
 
