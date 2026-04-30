@@ -8,12 +8,19 @@ export default function CartSidebar() {
     // Form state
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
-    const [endereco, setEndereco] = useState('');
     const [cep, setCep] = useState('');
+    const [rua, setRua] = useState('');
+    const [numero, setNumero] = useState('');
+    const [complemento, setComplemento] = useState('');
+    const [bairro, setBairro] = useState('');
+    const [cidade, setCidade] = useState('');
+    const [uf, setUf] = useState('');
     const [pagamento, setPagamento] = useState<'cartao' | 'pix' | ''>('');
-
+    
     // UI state
     const [step, setStep] = useState<'cart' | 'checkout'>('cart');
+    const [cepLoading, setCepLoading] = useState(false);
+    const [manualAddress, setManualAddress] = useState(false);
 
     if (!isCartOpen) return null;
 
@@ -30,7 +37,31 @@ export default function CartSidebar() {
         return digits;
     };
 
-    const isFormValid = nome.trim() && email.trim() && endereco.trim() && cep.trim() && pagamento;
+    const isFormValid = nome.trim() && email.trim() && (manualAddress ? rua.trim() && numero.trim() : cep.replace(/\D/g, '').length === 8) && pagamento;
+
+    const handleCepChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const val = formatCep(e.target.value);
+        setCep(val);
+        const digits = val.replace(/\D/g, '');
+        if (digits.length === 8) {
+            setCepLoading(true);
+            try {
+                const res = await fetch(`https://viacep.com.br/ws/${digits}/json/`);
+                const data = await res.json();
+                if (!data.erro) {
+                    setRua(data.logradouro || '');
+                    setBairro(data.bairro || '');
+                    setCidade(data.localidade || '');
+                    setUf(data.uf || '');
+                    setManualAddress(true); // Abre os campos de endereço
+                }
+            } catch (err) {
+                console.error(err);
+            } finally {
+                setCepLoading(false);
+            }
+        }
+    };
 
     const handleWhatsApp = (e: React.FormEvent) => {
         e.preventDefault();
@@ -48,11 +79,14 @@ export default function CartSidebar() {
             )
             .join('\n\n');
 
+        const enderecoFinal = manualAddress
+            ? `${rua}, ${numero}${complemento ? ` - ${complemento}` : ''}${bairro ? ` - ${bairro}` : ''}${cidade ? ` - ${cidade}/${uf}` : ''}${cep ? ` (CEP: ${cep})` : ''}`
+            : `CEP: ${cep}`;
+
         const mensagem = `*Novo Pedido - Shine Glam*\n\n` +
             `*Nome:* ${nome}\n` +
             `*E-mail:* ${email}\n` +
-            `*Endereço:* ${endereco}\n` +
-            `*CEP:* ${cep}\n` +
+            `*Endereço:* ${enderecoFinal}\n` +
             `*Pagamento:* ${pagamentoLabel}\n\n` +
             `*Produtos:*\n${produtosTexto}\n\n` +
             `*Total: ${formattedTotal}*\n\n` +
@@ -283,30 +317,75 @@ export default function CartSidebar() {
                                 <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Endereço de Entrega</h4>
 
                                 <div>
-                                    <label htmlFor="checkout-endereco" className="block text-xs font-medium text-gray-600 mb-1">Endereço completo</label>
-                                    <input
-                                        id="checkout-endereco"
-                                        type="text"
-                                        required
-                                        placeholder="Rua, número, bairro, cidade - UF"
-                                        value={endereco}
-                                        onChange={(e) => setEndereco(e.target.value)}
-                                        className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
-                                    />
+                                    <label htmlFor="checkout-cep" className="block text-xs font-medium text-gray-600 mb-1">CEP {manualAddress && <span className="text-gray-400 font-normal">(Opcional)</span>}</label>
+                                    <div className="relative">
+                                        <input
+                                            id="checkout-cep"
+                                            type="text"
+                                            required={!manualAddress}
+                                            placeholder="00000-000"
+                                            value={cep}
+                                            onChange={handleCepChange}
+                                            className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
+                                        />
+                                        {cepLoading && (
+                                            <div className="absolute right-3 top-2.5">
+                                                <div className="w-5 h-5 border-2 border-rosa-500 border-t-transparent rounded-full animate-spin"></div>
+                                            </div>
+                                        )}
+                                    </div>
+                                    {!manualAddress && (
+                                        <button 
+                                            type="button" 
+                                            onClick={() => setManualAddress(true)}
+                                            className="text-[10px] text-gray-400 underline mt-1.5 hover:text-rosa-500 transition-colors"
+                                        >
+                                            Não sei meu cep
+                                        </button>
+                                    )}
                                 </div>
 
-                                <div>
-                                    <label htmlFor="checkout-cep" className="block text-xs font-medium text-gray-600 mb-1">CEP</label>
-                                    <input
-                                        id="checkout-cep"
-                                        type="text"
-                                        required
-                                        placeholder="00000-000"
-                                        value={cep}
-                                        onChange={(e) => setCep(formatCep(e.target.value))}
-                                        className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
-                                    />
-                                </div>
+                                {manualAddress && (
+                                    <div className="space-y-3 animate-in fade-in duration-300">
+                                        <div>
+                                            <label htmlFor="checkout-rua" className="block text-xs font-medium text-gray-600 mb-1">Rua / Logradouro</label>
+                                            <input
+                                                id="checkout-rua"
+                                                type="text"
+                                                required
+                                                placeholder="Ex: Rua das Flores"
+                                                value={rua}
+                                                onChange={(e) => setRua(e.target.value)}
+                                                className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-2 gap-3">
+                                            <div>
+                                                <label htmlFor="checkout-numero" className="block text-xs font-medium text-gray-600 mb-1">Número</label>
+                                                <input
+                                                    id="checkout-numero"
+                                                    type="text"
+                                                    required
+                                                    placeholder="Ex: 123"
+                                                    value={numero}
+                                                    onChange={(e) => setNumero(e.target.value)}
+                                                    className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
+                                                />
+                                            </div>
+                                            <div>
+                                                <label htmlFor="checkout-complemento" className="block text-xs font-medium text-gray-600 mb-1">Complemento</label>
+                                                <input
+                                                    id="checkout-complemento"
+                                                    type="text"
+                                                    placeholder="Apto, Bloco (Opcional)"
+                                                    value={complemento}
+                                                    onChange={(e) => setComplemento(e.target.value)}
+                                                    className="w-full bg-[#f7f7f7] border border-gray-200 rounded-lg px-4 py-2.5 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-rosa-500/30 focus:border-rosa-500 transition-all text-sm"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
 
                             {/* Pagamento */}
