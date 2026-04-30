@@ -270,88 +270,23 @@ export default function Home() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-white pt-14 pb-6 border-t border-gray-100">
+            <footer className="bg-white pt-10 pb-6 border-t border-gray-100">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
-
-                        {/* Column 1: Newsletter / Social */}
-                        <div className="space-y-5">
-                            <h4 className="text-sm font-bold uppercase tracking-[0.1em] text-gray-900 italic">Redes Sociais</h4>
-                            <p className="text-xs text-gray-500 leading-relaxed">
-                                Acompanhe todas as nossas novidades diárias e lançamentos exclusivos através das nossas redes oficiais.
-                            </p>
-                            <div className="pt-2">
-                                <p className="text-xs font-bold uppercase tracking-[0.1em] text-gray-600 mb-3 italic">
-                                    Nos siga nas redes sociais
-                                </p>
-                                <div className="flex gap-3">
-                                    <a href="#" className="w-8 h-8 border border-gray-300 text-gray-600 rounded flex items-center justify-center hover:bg-rosa-400 hover:border-rosa-400 hover:text-white transition-all" aria-label="Instagram">
-                                        <Instagram size={14} />
-                                    </a>
-                                    <a href="#" className="w-8 h-8 border border-gray-300 text-gray-600 rounded flex items-center justify-center hover:bg-rosa-400 hover:border-rosa-400 hover:text-white transition-all" aria-label="Facebook">
-                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
-                                    </a>
-                                    <a href="#" className="w-8 h-8 border border-gray-300 text-gray-600 rounded flex items-center justify-center hover:bg-rosa-400 hover:border-rosa-400 hover:text-white transition-all" aria-label="TikTok">
-                                        <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1 0-5.78 2.92 2.92 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.57 6.33 6.33 0 0 0 9.37 22a6.33 6.33 0 0 0 6.38-6.22V9.4a8.16 8.16 0 0 0 4.84 1.58V7.53a4.78 4.78 0 0 1-1-.84z" /></svg>
-                                    </a>
-                                </div>
-                            </div>
+                    
+                    {/* Contact & Social */}
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10">
+                        <div className="flex items-center gap-2 text-sm text-gray-600 font-medium hover:text-rosa-500 transition-colors cursor-pointer">
+                            <Phone size={18} className="text-rosa-400" />
+                            <span>84981407003</span>
                         </div>
-
-                        {/* Column 2: Client */}
-                        <div className="space-y-4">
-                            <h4 className="text-sm font-bold uppercase tracking-[0.1em] text-gray-900 italic">Cliente</h4>
-                            <ul className="space-y-2.5">
-                                <li><a href="#" className="text-xs text-gray-500 hover:text-rosa-500 transition-colors">Minha Conta</a></li>
-                                <li><a href="#" className="text-xs text-gray-500 hover:text-rosa-500 transition-colors">Meus Pedidos</a></li>
-                            </ul>
+                        <div className="flex items-center gap-2 text-sm text-gray-600 font-medium hover:text-rosa-500 transition-colors cursor-pointer">
+                            <Mail size={18} className="text-rosa-400" />
+                            <span>flavinhareginaom@gmail.com</span>
                         </div>
-
-                        {/* Column 3: Institutional */}
-                        <div className="space-y-4">
-                            <h4 className="text-sm font-bold uppercase tracking-[0.1em] text-gray-900 italic">Institucional</h4>
-                            <ul className="space-y-2.5">
-                                <li><a href="#" className="text-xs text-gray-500 hover:text-rosa-500 transition-colors">Quem Somos</a></li>
-                                <li><a href="#" className="text-xs text-gray-500 hover:text-rosa-500 transition-colors">Seja um Lojista</a></li>
-                            </ul>
-                        </div>
-
-                        {/* Column 4: Help */}
-                        <div className="space-y-4">
-                            <h4 className="text-sm font-bold uppercase tracking-[0.1em] text-gray-900 italic">Ajuda</h4>
-                            <ul className="space-y-2.5">
-                                <li><a href="#" className="text-xs text-gray-500 hover:text-rosa-500 transition-colors">Fale Conosco</a></li>
-                                <li><a href="#" className="text-xs text-gray-500 hover:text-rosa-500 transition-colors">Política de Privacidade</a></li>
-                                <li><a href="#" className="text-xs text-gray-500 hover:text-rosa-500 transition-colors">Trocas e Devoluções</a></li>
-                                <li><a href="#" className="text-xs text-gray-500 hover:text-rosa-500 transition-colors">Perguntas Frequentes</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    {/* Payment Methods & Security */}
-                    <div className="border-t border-rosa-200/50 mt-10 pt-8">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                            {/* Contact */}
-                            <div className="flex items-center gap-4 text-xs text-gray-500">
-                                <div className="flex items-center gap-2">
-                                    <Phone size={14} className="text-rosa-400" />
-                                    <span>84981407003</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Mail size={14} className="text-rosa-400" />
-                                    <span>flavinhareginaom@gmail.com</span>
-                                </div>
-                            </div>
-
-                            {/* Payment Icons */}
-                            <div className="flex flex-wrap gap-2 justify-center">
-                                {['VISA', 'MC', 'AMEX', 'Elo', 'PIX', 'Boleto'].map((brand, i) => (
-                                    <div key={i} className="bg-white border border-gray-200 rounded px-3 py-1.5 text-[9px] font-bold text-gray-500 uppercase tracking-wider shadow-sm min-w-[48px] text-center">
-                                        {brand}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
+                        <a href="https://instagram.com/shineglaam" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm text-gray-600 font-medium hover:text-rosa-500 transition-colors" aria-label="Instagram">
+                            <Instagram size={18} className="text-rosa-400" />
+                            <span>@shineglaam</span>
+                        </a>
                     </div>
 
                     {/* Copyright */}
