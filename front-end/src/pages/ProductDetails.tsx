@@ -45,27 +45,9 @@ export default function ProductDetails() {
     const [quantity, setQuantity] = useState(1);
     const [selectedColor, setSelectedColor] = useState<ProductColor | null>(null);
     const [activeTab, setActiveTab] = useState('description');
-    const [viewers, setViewers] = useState(12);
     const { addToCart } = useCart();
 
-    useEffect(() => {
-        if (!product) return;
 
-        // Base viewers calc based on ID so it's consistentish per product
-        const baseViewers = Math.floor(product.id.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0) % 25) + 8;
-        setViewers(baseViewers);
-
-        // Fluctuate every few seconds
-        const interval = setInterval(() => {
-            setViewers(prev => {
-                const change = Math.floor(Math.random() * 5) - 2; // -2 to +2
-                const newViewers = prev + change;
-                return newViewers < 5 ? 5 : (newViewers > 45 ? 45 : newViewers);
-            });
-        }, 6000);
-
-        return () => clearInterval(interval);
-    }, [product]);
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -321,15 +303,7 @@ export default function ProductDetails() {
                             </button>
                         </div>
 
-                        {/* Social Proof */}
-                        <div className="bg-gray-50/50 rounded-2xl p-4 flex items-center gap-3 mb-10 border border-gray-100">
-                            <div className="w-8 h-8 bg-rosa-50 rounded-full flex items-center justify-center text-rosa-400">
-                                <Eye size={16} />
-                            </div>
-                            <p className="text-[11px] text-gray-500 font-medium">
-                                <span className="text-gray-900 font-bold">{viewers} clientes</span> estão visualizando este produto agora
-                            </p>
-                        </div>
+
                     </div>
                 </div>
 
