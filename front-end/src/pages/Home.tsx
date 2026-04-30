@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Phone, Mail, Instagram } from 'lucide-react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, Link, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
 import AnnouncementBar from '../components/AnnouncementBar';
 import BenefitsTicker from '../components/BenefitsTicker';
@@ -50,6 +50,8 @@ export default function Home() {
     const [scrollLeft, setScrollLeft] = useState(0);
     const [dragMoved, setDragMoved] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
+    const location = useLocation();
+    const isProductsPage = location.pathname === '/produtos';
     const querySearch = searchParams.get('search');
     const activeCategory = searchParams.get('category');
 
@@ -132,10 +134,10 @@ export default function Home() {
             <CartSidebar />
 
             {/* Hero Banner */}
-            {!activeCategory && !querySearch && <HeroBanner settings={appearance?.heroBanner} />}
+            {!isProductsPage && !activeCategory && !querySearch && <HeroBanner settings={appearance?.heroBanner} />}
 
             {/* Benefits Ticker */}
-            {!activeCategory && !querySearch && <BenefitsTicker />}
+            {!isProductsPage && !activeCategory && !querySearch && <BenefitsTicker />}
 
             {/* Category Carousel (Always visible for easy switching) */}
             <CategoryCarousel
@@ -153,7 +155,7 @@ export default function Home() {
             />
 
             {/* Products Section (Featured) */}
-            {!activeCategory && !querySearch && (
+            {!isProductsPage && !activeCategory && !querySearch && appearance?.bestSellers?.active !== false && (
                 <section id="produtos" className="py-6 md:py-8 bg-white">
                     <div className="max-w-7xl mx-auto px-4">
                         {/* Section Title */}
@@ -215,7 +217,7 @@ export default function Home() {
             )}
 
             {/* Secondary Pink Bar */}
-            {!activeCategory && !querySearch && <SecondaryPinkBar />}
+            {!isProductsPage && !activeCategory && !querySearch && <SecondaryPinkBar />}
 
             {/* All Products Grid Section */}
             <section className="py-12 md:py-16 bg-white">
@@ -247,9 +249,21 @@ export default function Home() {
                         </div>
                     ) : (
                         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-4 gap-y-12 md:gap-x-6">
-                            {allProducts.map((product) => (
+                            {(isProductsPage || activeCategory || querySearch ? allProducts : allProducts.slice(0, 10)).map((product) => (
                                 <ProductCard key={product.id} product={product} />
                             ))}
+                        </div>
+                    )}
+
+                    {/* Ver Todos Button */}
+                    {!isProductsPage && !activeCategory && !querySearch && allProducts.length > 10 && (
+                        <div className="mt-14 flex justify-center">
+                            <Link 
+                                to="/produtos" 
+                                className="border-2 border-black text-black font-bold text-[11px] uppercase tracking-widest py-3.5 px-8 hover:bg-black hover:text-white transition-colors duration-300 rounded-full"
+                            >
+                                Ver todos os produtos
+                            </Link>
                         </div>
                     )}
                 </div>

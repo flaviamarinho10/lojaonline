@@ -17,6 +17,7 @@ function App() {
           <Routes>
             {/* Public Store */}
             <Route path="/" element={<Home />} />
+            <Route path="/produtos" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetails />} />
 
             {/* Admin Routes */}

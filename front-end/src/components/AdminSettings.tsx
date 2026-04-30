@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import api from '../lib/axios';
-import { Loader2, Save, Image as ImageIcon, LayoutTemplate, Megaphone } from 'lucide-react';
+import { Loader2, Save, Image as ImageIcon, LayoutTemplate, Megaphone, Star } from 'lucide-react';
 
 const AVAILABLE_ICONS = [
     { id: 'Truck', label: '🚚 Caminhão/Envio' },
@@ -50,6 +50,9 @@ const AdminSettings = () => {
             icon3: 'Flower',
             text4: 'Cupom de 1ª compra NINAE10',
             icon4: 'Percent',
+        },
+        bestSellers: {
+            active: true
         }
     });
     const [isLoading, setIsLoading] = useState(true);
@@ -66,7 +69,8 @@ const AdminSettings = () => {
                     topBar: { ...prev.topBar, ...(res.data?.topBar || {}) },
                     hero: { ...prev.hero, ...(res.data?.hero || {}) },
                     storePhoto: { ...prev.storePhoto, ...(res.data?.storePhoto || {}) },
-                    benefitsTicker: { ...prev.benefitsTicker, ...(res.data?.benefitsTicker || {}) }
+                    benefitsTicker: { ...prev.benefitsTicker, ...(res.data?.benefitsTicker || {}) },
+                    bestSellers: { ...prev.bestSellers, ...(res.data?.bestSellers || {}) }
                 }));
             } catch (error) {
                 console.error(error);
@@ -106,6 +110,10 @@ const AdminSettings = () => {
 
     const updateBenefits = (field: string, value: any) => {
         setSettings(prev => ({ ...prev, benefitsTicker: { ...prev.benefitsTicker, [field]: value } }));
+    };
+
+    const updateBestSellers = (field: string, value: any) => {
+        setSettings(prev => ({ ...prev, bestSellers: { ...prev.bestSellers, [field]: value } }));
     };
 
     if (isLoading) {
@@ -353,6 +361,26 @@ const AdminSettings = () => {
                             />
                         </div>
                     </div>
+                </div>
+
+                {/* Seção Mais Vendidos */}
+                <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+                    <div className="flex items-center justify-between mb-2">
+                        <h3 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                            <Star size={20} className="text-gray-400" /> Mais Vendidos (Destaques)
+                        </h3>
+                        <label className="relative inline-flex items-center cursor-pointer">
+                            <input
+                                type="checkbox"
+                                checked={settings.bestSellers.active}
+                                onChange={(e) => updateBestSellers('active', e.target.checked)}
+                                className="sr-only peer"
+                            />
+                            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-[#F472B6]/20 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#F472B6]"></div>
+                            <span className="ml-3 text-sm font-medium text-gray-700">Visível na Home</span>
+                        </label>
+                    </div>
+                    <p className="text-sm text-gray-500">Exibe a faixa de produtos marcados como destaque na página inicial.</p>
                 </div>
 
                 {message && (

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
-import { X, Trash2, Plus, Minus, CreditCard, QrCode, MessageCircle } from 'lucide-react';
+import { X, Trash2, Plus, Minus, CreditCard, QrCode, MessageCircle, ArrowLeft } from 'lucide-react';
 
 export default function CartSidebar() {
     const { items, isCartOpen, setIsCartOpen, removeFromCart, updateQuantity, total } = useCart();
@@ -82,13 +82,21 @@ export default function CartSidebar() {
                 {/* Header */}
                 <div className="flex items-center justify-between px-6 py-5 border-b border-gray-100">
                     <div className="flex items-center gap-3">
-                        {step === 'checkout' && (
+                        {step === 'cart' ? (
+                            <button
+                                onClick={handleClose}
+                                className="md:hidden text-gray-400 hover:text-gray-700 transition-colors p-1"
+                                aria-label="Voltar"
+                            >
+                                <ArrowLeft size={20} strokeWidth={1.5} />
+                            </button>
+                        ) : (
                             <button
                                 onClick={() => setStep('cart')}
-                                className="text-gray-400 hover:text-gray-700 transition-colors text-sm font-medium"
+                                className="text-gray-400 hover:text-gray-700 transition-colors p-1"
                                 aria-label="Voltar ao carrinho"
                             >
-                                ←
+                                <ArrowLeft size={20} strokeWidth={1.5} />
                             </button>
                         )}
                         <h2 className="text-lg font-semibold text-gray-900">
