@@ -43,7 +43,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         if (hasColors) {
             // Product has color variations — navigate to product page to select
-            navigate(`/product/${product.id}`);
+            const encodedId = btoa(product.id);
+            navigate(`/product/${encodedId}`);
             return;
         }
 
@@ -76,8 +77,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
     const isSoldOut = product.badges?.includes('Esgotado');
 
+    const encodedId = btoa(product.id);
+
     return (
-        <Link to={`/product/${product.id}`} className="group flex-shrink-0 w-[160px] md:w-[240px] flex flex-col cursor-pointer bg-transparent no-underline decoration-transparent">
+        <Link to={`/product/${encodedId}`} className="group flex-shrink-0 w-[160px] md:w-[240px] flex flex-col cursor-pointer bg-transparent no-underline decoration-transparent">
             {/* Image Container */}
             <div className={`relative aspect-square overflow-hidden flex items-center justify-center transition-all duration-300 ${isSoldOut ? 'opacity-60' : ''}`}>
                 <img

@@ -71,7 +71,16 @@ export default function ProductDetails() {
         const fetchProduct = async () => {
             setLoading(true);
             try {
-                const response = await api.get(`/products/${id}`);
+                let decodedId = id;
+                try {
+                    const decoded = atob(id!);
+                    if (decoded.length === 36) { // basic UUID check
+                        decodedId = decoded;
+                    }
+                } catch (e) {
+                    // ignore if not base64
+                }
+                const response = await api.get(`/products/${decodedId}`);
                 setProduct(response.data);
                 if (response.data.colors && response.data.colors.length > 0) {
                     setSelectedColor(response.data.colors[0]);
