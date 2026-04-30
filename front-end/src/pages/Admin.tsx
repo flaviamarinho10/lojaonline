@@ -126,6 +126,13 @@ const Admin: React.FC = () => {
     // ── Product handlers ──
     const handleCreateOrUpdate = async (e: React.FormEvent) => {
         e.preventDefault();
+
+        // Validate color names
+        if (productColors.length > 0 && productColors.some(c => !c.name.trim())) {
+            alert('Preencha o nome de todas as cores antes de salvar.');
+            return;
+        }
+
         setIsSaving(true);
         try {
             const payload = {
@@ -580,7 +587,7 @@ const Admin: React.FC = () => {
                                             {productColors.length > 0 && (
                                                 <div className="space-y-2">
                                                     {productColors.map((color, idx) => (
-                                                        <div key={idx} className="flex items-center gap-2 bg-gray-50 rounded-lg p-2">
+                                                        <div key={idx} className={`flex items-center gap-2 rounded-lg p-2.5 border transition-all ${!color.name.trim() ? 'bg-red-50/50 border-red-200' : 'bg-gray-50 border-transparent'}`}>
                                                             <input
                                                                 type="color"
                                                                 value={color.hex}
@@ -592,16 +599,21 @@ const Admin: React.FC = () => {
                                                                 className="w-8 h-8 rounded-md border border-gray-200 cursor-pointer flex-shrink-0"
                                                                 style={{ padding: 0 }}
                                                             />
-                                                            <input
-                                                                placeholder="Nome da cor (ex: Bege Claro)"
-                                                                value={color.name}
-                                                                onChange={(e) => {
-                                                                    const updated = [...productColors];
-                                                                    updated[idx] = { ...updated[idx], name: e.target.value };
-                                                                    setProductColors(updated);
-                                                                }}
-                                                                className="flex-1 bg-white border border-gray-200 rounded-md px-3 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none"
-                                                            />
+                                                            <div className="flex-1 flex flex-col gap-1">
+                                                                <input
+                                                                    placeholder="Nome obrigatório (ex: Rosa Claro)"
+                                                                    value={color.name}
+                                                                    onChange={(e) => {
+                                                                        const updated = [...productColors];
+                                                                        updated[idx] = { ...updated[idx], name: e.target.value };
+                                                                        setProductColors(updated);
+                                                                    }}
+                                                                    className={`w-full bg-white border rounded-md px-3 py-1.5 text-sm text-gray-900 placeholder-gray-400 focus:ring-1 focus:ring-[#F472B6]/30 focus:border-[#F472B6] outline-none ${!color.name.trim() ? 'border-red-300' : 'border-gray-200'}`}
+                                                                />
+                                                                {!color.name.trim() && (
+                                                                    <span className="text-[10px] text-red-400 font-medium">⚠ Preencha o nome da cor</span>
+                                                                )}
+                                                            </div>
                                                             <span className="text-[10px] text-gray-400 font-mono w-16 text-center">{color.hex}</span>
                                                             <button
                                                                 type="button"

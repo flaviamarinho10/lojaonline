@@ -103,6 +103,7 @@ export default function ProductDetails() {
             price: Number(product.price),
             imageUrl: product.imageUrl,
             color: selectedColor?.name,
+            colorHex: selectedColor?.hex,
         }, quantity, e);
     };
 
@@ -246,29 +247,42 @@ export default function ProductDetails() {
                             <div className="mb-10">
                                 <div className="flex justify-between items-center mb-4">
                                     <span className="text-[11px] font-bold uppercase tracking-widest text-gray-900">
-                                        Cor: <span className="text-gray-400 font-normal ml-1">{selectedColor?.name}</span>
+                                        Cor: <span className="text-rosa-400 font-semibold ml-1">{selectedColor?.name || selectedColor?.hex}</span>
                                     </span>
                                     <button className="text-[10px] text-gray-400 underline hover:text-rosa-400 transition-colors uppercase tracking-widest">Guia de Cores</button>
                                 </div>
-                                <div className="flex flex-wrap gap-4">
-                                    {product.colors.map((color, i) => (
-                                        <button
-                                            key={i}
-                                            onClick={() => setSelectedColor(color)}
-                                            className={`group relative w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${selectedColor?.name === color.name
-                                                ? 'ring-2 ring-black ring-offset-2'
-                                                : 'hover:ring-1 hover:ring-gray-300 hover:ring-offset-2'
-                                                }`}
-                                        >
-                                            <div
-                                                className="w-full h-full rounded-full border border-gray-100 shadow-inner"
-                                                style={{ backgroundColor: color.hex }}
-                                            />
-                                            <span className="absolute -top-10 scale-0 group-hover:scale-100 transition-transform bg-black text-white text-[9px] px-2 py-1 rounded whitespace-nowrap z-10">
-                                                {color.name}
-                                            </span>
-                                        </button>
-                                    ))}
+                                <div className="flex flex-wrap gap-3">
+                                    {product.colors.map((color, i) => {
+                                        const isSelected = selectedColor?.hex === color.hex;
+                                        return (
+                                            <button
+                                                key={i}
+                                                onClick={() => setSelectedColor(color)}
+                                                className={`group relative flex flex-col items-center gap-1.5 transition-all duration-300`}
+                                            >
+                                                <div className={`relative w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${isSelected
+                                                    ? 'ring-2 ring-black ring-offset-3 scale-110'
+                                                    : 'hover:ring-1 hover:ring-gray-300 hover:ring-offset-2 hover:scale-105'
+                                                    }`}
+                                                >
+                                                    <div
+                                                        className="w-full h-full rounded-full border border-gray-100 shadow-inner"
+                                                        style={{ backgroundColor: color.hex }}
+                                                    />
+                                                    {isSelected && (
+                                                        <div className="absolute inset-0 flex items-center justify-center">
+                                                            <svg className="w-5 h-5 drop-shadow-md" viewBox="0 0 20 20" fill="none">
+                                                                <path d="M6 10l3 3 5-6" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                                                            </svg>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <span className={`text-[9px] font-medium transition-colors max-w-[60px] truncate ${isSelected ? 'text-gray-900 font-bold' : 'text-gray-400 group-hover:text-gray-600'}`}>
+                                                    {color.name || color.hex}
+                                                </span>
+                                            </button>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         )}

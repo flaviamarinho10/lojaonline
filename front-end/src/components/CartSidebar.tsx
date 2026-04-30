@@ -41,7 +41,8 @@ export default function CartSidebar() {
         const produtosTexto = items
             .map(
                 (item) => {
-                    const corTexto = item.color ? `\n    └ Cor: ${item.color}` : '';
+                    const corLabel = item.color || item.colorHex;
+                    const corTexto = corLabel ? `\n    └ Cor: ${corLabel}` : '';
                     return `• ${item.name} (x${item.quantity})${corTexto}\n    Valor: ${formatCurrency(item.price * item.quantity)}`;
                 }
             )
@@ -136,7 +137,8 @@ export default function CartSidebar() {
                         /* Cart Items */
                         <div className="p-4 space-y-4">
                             {items.map((item) => {
-                                const cartKey = item.color ? `${item.id}__${item.color}` : item.id;
+                                const colorId = item.color || item.colorHex;
+                                const cartKey = colorId ? `${item.id}__${colorId}` : item.id;
                                 return (
                                     <div key={cartKey} className="flex gap-4 bg-[#f9f9f9] p-3 rounded-xl">
                                         <div className="h-20 w-16 bg-white rounded-lg overflow-hidden flex-shrink-0">
@@ -151,10 +153,15 @@ export default function CartSidebar() {
                                             <div className="flex justify-between items-start gap-2">
                                                 <div>
                                                     <h3 className="text-sm font-bold text-gray-900 leading-tight">{item.name}</h3>
-                                                    {item.color && (
+                                                    {(item.color || item.colorHex) && (
                                                         <div className="flex items-center gap-1.5 mt-0.5">
-                                                            <div className="w-2 h-2 rounded-full bg-rosa-400" />
-                                                            <span className="text-[11px] text-rosa-500 font-bold uppercase tracking-wider">Cor: {item.color}</span>
+                                                            <div
+                                                                className="w-3 h-3 rounded-full border border-gray-200 shadow-inner"
+                                                                style={{ backgroundColor: item.colorHex || '#e879a0' }}
+                                                            />
+                                                            {item.color && (
+                                                                <span className="text-[11px] text-gray-500 font-medium">{item.color}</span>
+                                                            )}
                                                         </div>
                                                     )}
                                                 </div>
@@ -202,7 +209,8 @@ export default function CartSidebar() {
                             <div className="bg-[#fdf2f5] rounded-xl p-4 space-y-2">
                                 <h4 className="text-xs font-bold text-gray-500 uppercase tracking-wider">Resumo do Pedido</h4>
                                 {items.map((item) => {
-                                    const cartKey = item.color ? `${item.id}__${item.color}` : item.id;
+                                    const colorId = item.color || item.colorHex;
+                                    const cartKey = colorId ? `${item.id}__${colorId}` : item.id;
                                     return (
                                         <div key={cartKey} className="flex flex-col text-sm">
                                             <div className="flex justify-between items-center">
@@ -211,8 +219,16 @@ export default function CartSidebar() {
                                                 </span>
                                                 <span className="font-bold text-gray-900 flex-shrink-0">{formatCurrency(item.price * item.quantity)}</span>
                                             </div>
-                                            {item.color && (
-                                                <span className="text-[10px] text-rosa-400 font-bold uppercase tracking-widest mt-0.5">Cor selecionada: {item.color}</span>
+                                            {(item.color || item.colorHex) && (
+                                                <div className="flex items-center gap-1.5 mt-0.5">
+                                                    <div
+                                                        className="w-2.5 h-2.5 rounded-full border border-gray-200 shadow-inner"
+                                                        style={{ backgroundColor: item.colorHex || '#e879a0' }}
+                                                    />
+                                                    {item.color && (
+                                                        <span className="text-[10px] text-gray-500 font-medium">{item.color}</span>
+                                                    )}
+                                                </div>
                                             )}
                                         </div>
                                     );

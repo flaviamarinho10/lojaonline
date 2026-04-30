@@ -1,6 +1,6 @@
 import { useCart } from '../contexts/CartContext';
 import { Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 interface ProductColor {
     name: string;
@@ -24,6 +24,9 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
     const { addToCart } = useCart();
+    const navigate = useNavigate();
+
+    const hasColors = product.colors && product.colors.length > 0;
 
     const formatImageUrl = (url: string | undefined) => {
         if (!url) return "https://placehold.co/200x200/ffe4e6/be185d?text=Produto";
@@ -37,6 +40,13 @@ export default function ProductCard({ product }: ProductCardProps) {
     const handleAddToCart = (e: React.MouseEvent) => {
         e.preventDefault();
         e.stopPropagation();
+
+        if (hasColors) {
+            // Product has color variations — navigate to product page to select
+            navigate(`/product/${product.id}`);
+            return;
+        }
+
         addToCart({
             id: product.id,
             name: product.name,
@@ -105,6 +115,23 @@ export default function ProductCard({ product }: ProductCardProps) {
                     ))}
                 </div>
 
+                {/* Color Swatches Preview */}
+                {hasColors && (
+                    <div className="flex items-center gap-1 mb-2">
+                        {product.colors!.slice(0, 5).map((color, i) => (
+                            <div
+                                key={i}
+                                className="w-3 h-3 rounded-full border border-gray-200 shadow-inner"
+                                style={{ backgroundColor: color.hex }}
+                                title={color.name || color.hex}
+                            />
+                        ))}
+                        {product.colors!.length > 5 && (
+                            <span className="text-[8px] text-gray-400 font-medium">+{product.colors!.length - 5}</span>
+                        )}
+                    </div>
+                )}
+
                 {/* Prices */}
                 <div className="flex flex-col items-center gap-0.5 mb-3">
                     <div className="flex items-center gap-1.5">
@@ -132,7 +159,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                     onClick={handleAddToCart}
                     className="w-full max-w-[125px] md:max-w-[180px] bg-black text-white text-[10px] font-bold uppercase tracking-[0.15em] py-2.5 px-3 rounded-full transition-all duration-300 hover:bg-rosa-500 hover:shadow-md hover:translate-y-[-1px] active:scale-[0.98] mt-auto"
                 >
-                    Adicionar
+                    {hasColors ? 'Ver Opções' : 'Adicionar'}
                 </button>
 
             </div>

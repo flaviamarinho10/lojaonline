@@ -7,6 +7,7 @@ export interface CartItem {
     quantity: number;
     imageUrl: string;
     color?: string;
+    colorHex?: string;
 }
 
 interface CartContextType {
@@ -22,8 +23,11 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// Generate a unique cart key from product id + color
-const getCartKey = (id: string, color?: string) => color ? `${id}__${color}` : id;
+// Generate a unique cart key from product id + color (name or hex as fallback)
+const getCartKey = (id: string, color?: string, colorHex?: string) => {
+    const colorId = color || colorHex;
+    return colorId ? `${id}__${colorId}` : id;
+};
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [items, setItems] = useState<CartItem[]>([]);
@@ -31,12 +35,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     const [notification, setNotification] = useState<string | null>(null);
 
     const addToCart = (newItem: Omit<CartItem, 'quantity'>, quantity = 1, event?: React.MouseEvent) => {
-        const cartKey = getCartKey(newItem.id, newItem.color);
+        const cartKey = getCartKey(newItem.id, newItem.color, newItem.colorHex);
         setItems((prev) => {
-            const existing = prev.find((i) => getCartKey(i.id, i.color) === cartKey);
+            const existing = prev.find((i) => getCartKey(i.id, i.color, i.colorHex) === cartKey);
             if (existing) {
                 return prev.map((i) =>
-                    getCartKey(i.id, i.color) === cartKey ? { ...i, quantity: i.quantity + quantity } : i
+                    getCartKey(i.id, i.color, i.colorHex) === cartKey ? { ...i, quantity: i.quantity + quantity } : i
                 );
             }
             return [...prev, { ...newItem, quantity }];
@@ -65,12 +69,12 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     };
 
     const removeFromCart = (cartKey: string) => {
-        setItems((prev) => prev.filter((i) => getCartKey(i.id, i.color) !== cartKey));
+        setItems((prev) => prev.filter((i) => getCartKey(i.id, i.color, i.colorHex) !== cartKey));
     };
 
     const updateQuantity = (cartKey: string, type: 'increase' | 'decrease') => {
         setItems((prev) => prev.map((item) => {
-            if (getCartKey(item.id, item.color) === cartKey) {
+            if (getCartKey(item.id, item.color, item.colorHex) === cartKey) {
                 const newQuantity = type === 'increase' ? item.quantity + 1 : item.quantity - 1;
                 return { ...item, quantity: Math.max(1, newQuantity) };
             }
