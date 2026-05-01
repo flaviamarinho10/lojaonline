@@ -7,7 +7,6 @@ import {
     Plus,
     Heart,
     ShieldCheck,
-    Eye,
     ArrowLeft
 } from 'lucide-react';
 import Header from '../components/Header';
