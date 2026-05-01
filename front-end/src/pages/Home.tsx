@@ -134,10 +134,10 @@ export default function Home() {
             <CartSidebar />
 
             {/* Hero Banner */}
-            {!isProductsPage && !activeCategory && !querySearch && <HeroBanner settings={appearance?.heroBanner} />}
+            {!isProductsPage && !querySearch && <HeroBanner settings={appearance?.heroBanner} />}
 
             {/* Benefits Ticker */}
-            {!isProductsPage && !activeCategory && !querySearch && <BenefitsTicker />}
+            {!isProductsPage && !querySearch && <BenefitsTicker />}
 
             {/* Category Carousel (Always visible for easy switching) */}
             <CategoryCarousel
@@ -217,7 +217,7 @@ export default function Home() {
             )}
 
             {/* Secondary Pink Bar */}
-            {!isProductsPage && !activeCategory && !querySearch && <SecondaryPinkBar />}
+            {!isProductsPage && !querySearch && <SecondaryPinkBar />}
 
             {/* All Products Grid Section */}
             <section className="py-12 md:py-16 bg-white">
@@ -256,7 +256,7 @@ export default function Home() {
                     )}
 
                     {/* Ver Todos Button */}
-                    {!isProductsPage && !activeCategory && !querySearch && allProducts.length > 10 && (
+                    {!isProductsPage && !querySearch && allProducts.length > 10 && (
                         <div className="mt-14 flex justify-center">
                             <Link 
                                 to="/produtos" 
