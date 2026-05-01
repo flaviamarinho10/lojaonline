@@ -26,6 +26,10 @@ export default function ProductCard({ product }: ProductCardProps) {
     const { addToCart } = useCart();
     const navigate = useNavigate();
 
+    const generateSlug = (name: string) => {
+        return name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    };
+
     const hasColors = product.colors && product.colors.length > 0;
 
     const formatImageUrl = (url: string | undefined) => {
@@ -43,8 +47,8 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         if (hasColors) {
             // Product has color variations — navigate to product page to select
-            const encodedId = btoa(product.id);
-            navigate(`/product/${encodedId}`);
+            const slug = generateSlug(product.name);
+            navigate(`/product/${slug}`);
             return;
         }
 
@@ -77,10 +81,10 @@ export default function ProductCard({ product }: ProductCardProps) {
 
     const isSoldOut = product.badges?.includes('Esgotado');
 
-    const encodedId = btoa(product.id);
+    const slug = generateSlug(product.name);
 
     return (
-        <Link to={`/product/${encodedId}`} className="group flex-shrink-0 w-[160px] md:w-[240px] flex flex-col cursor-pointer bg-transparent no-underline decoration-transparent">
+        <Link to={`/product/${slug}`} className="group flex-shrink-0 w-[160px] md:w-[240px] flex flex-col cursor-pointer bg-transparent no-underline decoration-transparent">
             {/* Image Container */}
             <div className={`relative aspect-square overflow-hidden flex items-center justify-center transition-all duration-300 ${isSoldOut ? 'opacity-60' : ''}`}>
                 <img

@@ -46,25 +46,58 @@ export default function ProductDetails() {
     const [activeTab, setActiveTab] = useState('description');
     const { addToCart } = useCart();
 
+    const generateSlug = (name: string) => {
+        return name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+    };
+
 
 
     useEffect(() => {
         const fetchProduct = async () => {
             setLoading(true);
             try {
-                let decodedId = id;
-                try {
-                    const decoded = atob(id!);
-                    if (decoded.length === 36) { // basic UUID check
-                        decodedId = decoded;
+                // Check if id is a UUID
+                const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id!);
+                
+                if (isUUID) {
+                    const response = await api.get(`/products/${id}`);
+                    setProduct(response.data);
+                    if (response.data.colors && response.data.colors.length > 0) {
+                        setSelectedColor(response.data.colors[0]);
                     }
-                } catch (e) {
-                    // ignore if not base64
-                }
-                const response = await api.get(`/products/${decodedId}`);
-                setProduct(response.data);
-                if (response.data.colors && response.data.colors.length > 0) {
-                    setSelectedColor(response.data.colors[0]);
+                } else {
+                    // Try legacy base64
+                    let decodedId = null;
+                    try {
+                        const decoded = atob(id!);
+                        if (/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(decoded)) {
+                            decodedId = decoded;
+                        }
+                    } catch (e) {
+                        // ignore
+                    }
+
+                    if (decodedId) {
+                        const response = await api.get(`/products/${decodedId}`);
+                        setProduct(response.data);
+                        if (response.data.colors && response.data.colors.length > 0) {
+                            setSelectedColor(response.data.colors[0]);
+                        }
+                    } else {
+                        // Handle slug
+                        const response = await api.get('/products');
+                        const products = response.data;
+                        const foundProduct = products.find((p: any) => generateSlug(p.name) === id);
+                        
+                        if (foundProduct) {
+                            setProduct(foundProduct);
+                            if (foundProduct.colors && foundProduct.colors.length > 0) {
+                                setSelectedColor(foundProduct.colors[0]);
+                            }
+                        } else {
+                            setProduct(null);
+                        }
+                    }
                 }
             } catch (error) {
                 console.error('Error fetching product:', error);
