@@ -7,7 +7,7 @@ Um sistema de comércio eletrônico Full Stack de alto padrão, desenvolvido par
 ## 🚀 Novidades e Diferenciais
 
 ### ⚡ Performance Instantânea
-- **Cache Local (LocalStorage):** Implementamos um sistema de persistência que salva configurações, banners e categorias no navegador do cliente. O site carrega **instantaneamente** com os dados da última visita, eliminando atrasos visuais enquanto o servidor desperta.
+- **Cache Local (LocalStorage):** Implementamos um sistema de persistência que salva configurações, banners e categorias no navegador do cliente. O site carrega **instantaneamente** com os dados da última visita, eliminando atrasos visuais enquanto o servidor desperta
 
 ### 🛍️ Experiência de Compra Refinada
 - **Seleção de Variações:** Suporte completo para produtos com diferentes cores. Cada variação é tratada como um item único no carrinho, facilitando a escolha do cliente.
