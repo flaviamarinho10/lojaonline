@@ -1,6 +1,6 @@
 # ✨ Shine Glam - E-commerce Premium
 
-Um sistema de comércio eletrônico Full Stack de alto padrão, desenvolvido para o nicho de beleza. Unindo uma interface visualmente impactante com uma infraestrutura moderna e performática.
+Um sistema de comércio eletrônico Full Stack de alto padrão, desenvolvido para o nicho de beleza. Unindo uma interface visualmente impactante com uma infraestrutura moderna e performática
 
 ---
 
