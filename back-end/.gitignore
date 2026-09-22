@@ -6,3 +6,8 @@ node_modules
 
 # Logs locais de depuração
 debug_error.log
+
+# Saídas de scripts de teste
+*.log
+out*.txt
+check_output*.txt
