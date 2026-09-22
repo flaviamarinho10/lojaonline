@@ -1,8 +1,8 @@
 {
   "name": "back-end",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "API da loja Shine Glam",
+  "main": "dist/server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/server.ts",
