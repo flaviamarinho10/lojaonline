@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import {
     Truck, Tag, Flower, Percent, Heart, Star, Sparkles,
-    ShieldCheck, Gift, CreditCard, ShoppingBag, Package, BadgeCheck, Smile
+    ShieldCheck, Gift, CreditCard, ShoppingBag, Package, BadgeCheck, Smile,
+    type LucideIcon
 } from 'lucide-react';
 import api from '../lib/axios';
 
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, LucideIcon> = {
     Truck, Tag, Flower, Percent, Heart, Star, Sparkles,
     ShieldCheck, Gift, CreditCard, ShoppingBag, Package, BadgeCheck, Smile
 };
