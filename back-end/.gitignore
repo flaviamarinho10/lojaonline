@@ -11,3 +11,9 @@ debug_error.log
 *.log
 out*.txt
 check_output*.txt
+
+# Scripts locais de depuração
+tmp_*.js
+test.js
+check_featured.js
+uploads/test.txt
