@@ -1,6 +1,12 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-const banners = [
+interface Banner {
+    id: string | number;
+    url: string;
+    alt: string;
+}
+
+const banners: Banner[] = [
     {
         id: 1,
         url: "/Banner/Gemini_Generated_Image_3mg85p3mg85p3mg8.png",
@@ -14,11 +20,11 @@ const banners = [
 ];
 
 interface HeroBannerProps {
-    settings?: any;
+    settings?: { banners?: Banner[] } | null;
 }
 
 export default function HeroBanner({ settings }: HeroBannerProps) {
-    const bannersToDisplay = settings?.banners?.length > 0 ? settings.banners : banners;
+    const bannersToDisplay = settings?.banners?.length ? settings.banners : banners;
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAutoPlaying, setIsAutoPlaying] = useState(true);
     const [startX, setStartX] = useState(0);
@@ -73,7 +79,7 @@ export default function HeroBanner({ settings }: HeroBannerProps) {
     };
 
     useEffect(() => {
-        let interval: any;
+        let interval: ReturnType<typeof setInterval> | undefined;
         if (isAutoPlaying) {
             // Give more time to the first banner (highlight)
             const duration = currentIndex === 0 ? 8000 : 4000;
@@ -103,7 +109,7 @@ export default function HeroBanner({ settings }: HeroBannerProps) {
                     }
                 }}
             >
-                {bannersToDisplay.map((banner: any, index: number) => (
+                {bannersToDisplay.map((banner, index) => (
                     <img
                         key={banner.id}
                         src={banner.url}
@@ -119,7 +125,7 @@ export default function HeroBanner({ settings }: HeroBannerProps) {
 
             {/* Pagination Dots */}
             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
-                {bannersToDisplay.map((_: any, index: number) => (
+                {bannersToDisplay.map((_, index) => (
                     <button
                         key={index}
                         onClick={() => goToSlide(index)}
