@@ -27,7 +27,7 @@ const Login = () => {
             const response = await api.post('/auth/login', { email, password });
             login(response.data.token, response.data.user);
             navigate('/admin');
-        } catch (err) {
+        } catch {
             setError('Credenciais inválidas. Verifique seu e-mail e senha.');
         } finally {
             setIsLoading(false);
