@@ -3,3 +3,6 @@ node_modules
 .env
 
 /src/generated/prisma
+
+# Logs locais de depuração
+debug_error.log
