@@ -101,7 +101,13 @@ export default function ProductCard({ product }: ProductCardProps) {
                         </span>
                     )}
                     {product.badges?.filter(b => b !== 'Esgotado').map(badge => (
-                        <span key={badge} className="bg-gray-200 text-gray-700 text-[8px] font-medium tracking-wide px-1.5 py-0.5 rounded-sm">
+                        <span
+                            key={badge}
+                            className={`text-[8px] font-bold tracking-wide px-2 py-1 rounded-full uppercase shadow-sm ${badge === 'Lançamento'
+                                ? 'bg-turquesa-400 text-white'
+                                : 'bg-gray-200 text-gray-700'
+                                }`}
+                        >
                             {badge}
                         </span>
                     ))}
