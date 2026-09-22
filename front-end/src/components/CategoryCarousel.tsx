@@ -14,6 +14,15 @@ interface CategoryCarouselProps {
     activeCategory?: string | null;
 }
 
+const formatImageUrl = (url: string | undefined) => {
+    if (!url) return undefined;
+    const driveMatch = url.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+    if (driveMatch && driveMatch[1]) {
+        return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+    }
+    return url;
+};
+
 export default function CategoryGrid({ onSelectCategory, activeCategory }: CategoryCarouselProps) {
     const [categories, setCategories] = useState<Category[]>(() => {
         const cached = localStorage.getItem('shine_categories');
@@ -110,7 +119,7 @@ export default function CategoryGrid({ onSelectCategory, activeCategory }: Categ
             >
                 {cat.imageUrl ? (
                     <img
-                        src={cat.imageUrl}
+                        src={formatImageUrl(cat.imageUrl)}
                         alt={cat.name}
                         className="w-full h-full object-cover"
                         onError={(e) => {
