@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type ComponentProps } from 'react';
 import { Phone, Mail, Instagram, Truck, QrCode, CreditCard, MessageCircle } from 'lucide-react';
 import { useSearchParams, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
@@ -24,6 +24,13 @@ interface Product {
     colors?: { name: string; hex: string }[];
     categoryId?: string;
 }
+
+interface Category {
+    id: string;
+    name: string;
+}
+
+type AppearanceSettings = ComponentProps<typeof HeroBanner>['settings'];
 
 const benefits = [
     { icon: Truck, title: 'Frete Grátis', text: 'em compras acima de R$ 180' },
@@ -54,11 +61,11 @@ export default function Home() {
     const [loading, setLoading] = useState(() => {
         return !localStorage.getItem('shine_featured_products') || !localStorage.getItem('shine_appearance');
     });
-    const [categories, setCategories] = useState<any[]>(() => {
+    const [categories, setCategories] = useState<Category[]>(() => {
         const cached = localStorage.getItem('shine_categories');
         return cached ? JSON.parse(cached) : [];
     });
-    const [appearance, setAppearance] = useState<any>(() => {
+    const [appearance, setAppearance] = useState<AppearanceSettings>(() => {
         const cached = localStorage.getItem('shine_appearance');
         return cached ? JSON.parse(cached) : null;
     });
